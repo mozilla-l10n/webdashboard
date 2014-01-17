@@ -20,7 +20,7 @@ if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
 }
 
 // get lang files status from langchecker
-$lang_files = Utils::getJsonArray(LANG_CHECKER . "?locale={$locale}&json");
+$lang_files = Json::fetch(LANG_CHECKER . "?locale={$locale}&json");
 
 // all opened bugs for a locale in the mozilla.org/l10n component
 $bugzilla_query = 'https://bugzilla.mozilla.org/buglist.cgi?'
