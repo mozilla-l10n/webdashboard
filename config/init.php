@@ -10,7 +10,7 @@ date_default_timezone_set('Europe/Paris');
 require_once __DIR__ . '/../vendor/autoload.php';
 
 define('CACHE', __DIR__ . '/../cache/');
-const DEBUG = true;
+const DEBUG = false;
 const LANG_CHECKER = 'http://l10n.mozilla-community.org/~pascalc/langchecker/';
 
 // For debugging

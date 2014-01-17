@@ -105,45 +105,43 @@
 
 </head>
 <body class="sand">
-<div id="outer-wrapper">
-    <div id="wrapper">
+    <div id="outer-wrapper">
+        <div id="wrapper">
+            <header id="masthead">
+                <a id="tabzilla" href="//www.mozilla.org/" class="tabzilla-closed">Mozilla</a>
+                <nav role="navigation" id="nav-main">
+                    <ol>
+                        <li><a href="//www.mozilla.org/mission/">Mission</a></li>
+                        <li><a href="//www.mozilla.org/about/">About</a></li>
+                        <li><a href="//www.mozilla.org/projects/">Projects</a></li>
+                        <li><a href="//www.mozilla.org/contribute/">Get Involved</a></li>
+                    </ol>
+                </nav>
+            <h2><a href="./"><img alt="mozilla" src="./assets/images/sandstone_theme/header-mozilla-stone.png"> Web Localization Dashboard</a></h2>
+            </header>
 
-    <header id="masthead">
-        <a id="tabzilla" href="//www.mozilla.org/" class="tabzilla-closed">Mozilla</a>
+            <article id="main-content">
+        <?=$content?>
+            </article>
+        </div>
 
-        <nav role="navigation" id="nav-main">
-        <ol>
-            <li><a href="//www.mozilla.org/mission/">Mission</a></li>
-            <li><a href="//www.mozilla.org/about/">About</a></li>
-            <li><a href="//www.mozilla.org/projects/">Projects</a></li>
-            <li><a href="//www.mozilla.org/contribute/">Get Involved</a></li>
-        </ol>
-        </nav>
+        <footer id="colophon">
+          <div class="row">
+              <div class="footer-logo">
+                  <a href="http://mozilla.org"><img src="./assets/images/sandstone_theme/footer-mozilla.png" alt="mozilla"></a>
+              </div>
 
-    <h2><a href="./"><img alt="mozilla" src="./assets/images/sandstone_theme/header-mozilla-stone.png"> Web Localization Dashboard</a></h2>
+              <div class="footer-license">
+                  <p>Except where otherwise <a href="http://www.mozilla.org/en-US/about/legal.html#site">noted</a>, content on this site is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.</p>
+              </div>
 
-
-    </header>
-        <article id="main-content">
-<?=$content?>
-      </article>
-
+              <ul class="footer-nav">
+                <li><a href="/privacy/">Privacy Policy</a></li>
+                <li><a href="http://mozilla.org/about/legal.html">Legal Notices</a></li>
+              </ul>
+          </div>
+         </footer>
     </div>
-    <footer id="colophon">
-      <div class="row">
-          <div class="footer-logo">
-              <a href="http://mozilla.org"><img src="./assets/images/sandstone_theme/footer-mozilla.png" alt="mozilla"></a>
-          </div>
-
-          <div class="footer-license">
-              <p>Except where otherwise <a href="http://www.mozilla.org/en-US/about/legal.html#site">noted</a>, content on this site is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.</p>
-          </div>
-
-          <ul class="footer-nav">
-            <li><a href="/privacy/">Privacy Policy</a></li>
-            <li><a href="http://mozilla.org/about/legal.html">Legal Notices</a></li>
-          </ul>
-      </div>
 <script src="//mozorg.cdn.mozilla.net/en-US/tabzilla/tabzilla.js"></script>
 </body>
 </html>
