@@ -144,5 +144,6 @@
             <li><a href="http://mozilla.org/about/legal.html">Legal Notices</a></li>
           </ul>
       </div>
+<script src="//mozorg.cdn.mozilla.net/en-US/tabzilla/tabzilla.js"></script>
 </body>
 </html>
