@@ -40,7 +40,7 @@ $bugzilla_query = 'https://bugzilla.mozilla.org/buglist.cgi?'
 
 
 // cache in a local cache folder if possible
-$csv = Utils::cacheUrl($bugzilla_query . '&ctype=csv');
+$csv = Utils::cacheUrl($bugzilla_query . '&ctype=csv', 15*60);
 
 // generate all the bugs
 $bugs = Utils::getBugsFromCSV($csv);
