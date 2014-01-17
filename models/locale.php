@@ -49,22 +49,31 @@ foreach ($bugs as $k => $v) {
     $rss_data[] = [$k, "https://bugzilla.mozilla.org/show_bug.cgi?id={$k}", $v];
 }
 
+// d($lang_files);
 // RSS feed  data
+$total_missing_strings = 0;
+$link = LANG_CHECKER .'?locale=' . $locale;
+
 foreach ($lang_files as $site => $tablo) {
     foreach ($tablo as $file => $details) {
-        if ($details['identical'] + $details['missing'] > 0) {
-            $message = 'You have ' . ($details['identical'] + $details['missing'])
-                     . ' strings untranslated in ' . $file;
-            $link = LANG_CHECKER .'?locale=' . $locale;
+        $count = $details['identical'] + $details['missing'];
+        if ($count > 0) {
+            $message = "You have $count strings untranslated in $file";
             $status = (isset($details['critical']) && $details['critical'])
-                      ? 'Priority file: '
-                      : 'Nice to have: ';
+                      ? 'Priority file'
+                      : 'Nice to have';
             $rss_data[] = array($status, $link, $message);
+            $total_missing_strings += $count;
         }
     }
 }
 
-// d($rss_data); die;
+if ($total_missing_strings >0) {
+    array_unshift(
+        $rss_data,
+        ['Total', $link, "You need to translate $total_missing_strings strings."]
+    );
+}
 
 // Prepare a RSS feed
 $rss = new Feed($rss_data);
