@@ -20,3 +20,6 @@ if (DEBUG) {
 } else {
     \kint::enabled(false);
 }
+
+// this is the default template, views can define a different one
+$template = 'default.php';

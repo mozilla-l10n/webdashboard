@@ -12,8 +12,8 @@ include __DIR__ . '/../data/locales.php';
 
 // Check that this is a valid locale code called via GET
 if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
-    $content = '<p>Wrong locale code</p>';
-    include __DIR__ . '/../views/error.html';
+    $content = '<h2>Wrong locale code</h2>';
+    include __DIR__ . '/../views/error.php';
     return;
 } else {
     $locale = $_GET['locale'];

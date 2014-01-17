@@ -1,7 +1,5 @@
 <?php
 
-$template = 'default.php';
-
 $content = '<div id="locales"><ul>';
 
 foreach ($locales as $locale) {

@@ -104,7 +104,7 @@ if we ask for an rss page, we just pass the $rss object created
 in the model that contains the data we want to the object renderer
  */
 if (!isset($_GET['rss'])) {
-    include __DIR__ . '/../templates/default.php';
+    include __DIR__ . '/../templates/' . $template;
 } else {
     print $rss->buildRSS();
 }
