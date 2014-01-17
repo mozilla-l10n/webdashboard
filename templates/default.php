@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Mozilla Web localization Dashboard</title>
     <link href="./assets/css/sandstone.css"  rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link href="//www.mozilla.org/tabzilla/media/css/tabzilla.css" rel="stylesheet">
+    <link href="//mozorg.cdn.mozilla.net/media/css/tabzilla-min.css" rel="stylesheet">
     <link rel="icon" href="./assets/images/mozilla-l10n.png" type="image/png">
 
     <style>
