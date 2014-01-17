@@ -11,10 +11,12 @@ $locale = $_GET['locale'];
 include __DIR__ . '/../data/locales.php';
 
 // Check that this is a valid locale code called via GET
-if (!in_array($locale, $locales)) {
+if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
     $content = '<p>Wrong locale code</p>';
     include __DIR__ . '/../views/error.html';
     return;
+} else {
+    $locale = $_GET['locale'];
 }
 
 // get lang files status from langchecker

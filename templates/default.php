@@ -30,7 +30,7 @@
             border-collapse: collapse;
             margin-bottom: 1em;
             background-color: rgba(255,255,255,0.4);
-            min-width: 600px;
+            min-width: 650px;
         }
 
         #main-content table th {
@@ -54,7 +54,7 @@
         .feed {
             background-color: rgba(255,255,255,0.4);
             height: 48px;
-            width:600px;
+            width:650px;
             border-radius:5px;
             line-height:48px
         }

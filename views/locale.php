@@ -73,10 +73,10 @@ foreach ($lang_files as $site => $tablo) {
     $lang_files_status .= "</table>";
 
 }
-$lang_files_status .= "<p><em>Reminder: Your staging site for www.mozilla.org is
-                       <a href=\"https://www-dev.allizom.org/{$locale}/firefox/\">
-                       http://www-dev.allizom.org/{$locale}/firefox/
-                       </a></em></p>";
+$lang_files_status .= "<p><small>Reminder: Your staging site for mozilla.org/{$locale}/ is
+                       <a href=\"https://www-dev.allizom.org/{$locale}\">
+                       www-dev.allizom.org/{$locale}/
+                       </a></small></p>";
 ob_start();
 echo '<h2>Bugs opened on mozilla.org for your locale:</h2>';
 echo '<ul>';
@@ -96,10 +96,13 @@ echo '</ul>';
 $bugs_status = ob_get_contents();
 ob_end_clean();
 
-
+// build the content based on the various blocks we just created
 $content = $rss_status . $lang_files_status . $bugs_status;
 
-
+/*
+if we ask for an rss page, we just pass the $rss object created
+in the model that contains the data we want to the object renderer
+ */
 if (!isset($_GET['rss'])) {
     include __DIR__ . '/../templates/default.php';
 } else {
