@@ -1,2 +1,9 @@
 Version 1.0 (2014-01-17)
-*  initial release of the code replacing the old code
+*  initial rewrite of the web dashboard with these features:
+  * simple MVC framework, no routing yet to preserve old urls using GET parameters
+  * home page listing all locales
+  * locale page summarizing langchecker data
+  * active www.mozilla.org bugs for a locale fetched from Bugzilla
+  * per locale rss feed with status of lang files + opened bugs
+  * json feed of count of opened bugs for all locales for the product dashboard
+  * Templates using sandstone design + tabzilla
