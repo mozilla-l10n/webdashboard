@@ -3,7 +3,7 @@ namespace Webdashboard;
 
 $rss_status = <<<RSS
 <p class="feed">
-    <a href="?locale={$locale}&amp;rss=1">
+    <a href="?locale={$locale}&amp;rss">
     <img src="./assets/images/icon-rss-48x48.png" alt="rss"/>
     Subscribe to the RSS feed for your locale!
     </a>
