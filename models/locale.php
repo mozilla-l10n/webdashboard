@@ -22,33 +22,52 @@ if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
 // get lang files status from langchecker
 $lang_files = Json::fetch(LANG_CHECKER . "?locale={$locale}&json");
 
-// all opened bugs for a locale in the mozilla.org/l10n component
-$bugzilla_query = 'https://bugzilla.mozilla.org/buglist.cgi?'
-                . 'f1=cf_locale'
-                . '&o1=equals'
-                . '&query_format=advanced'
-                . '&v1=' . urlencode(Utils::getBugzillaLocaleField($locale))
-                . '&o2=equals'
-                . '&f2=component'
-                . '&v2=L10N'
-                . '&bug_status=UNCONFIRMED'
-                . '&bug_status=NEW'
-                . '&bug_status=ASSIGNED'
-                . '&bug_status=REOPENED'
-                . '&classification=Other'
-                . '&product=www.mozilla.org';
+// all open bugs for a locale in the mozilla.org/l10n component
+$bugzilla_query_mozillaorg = 'https://bugzilla.mozilla.org/buglist.cgi?'
+                           . 'f1=cf_locale'
+                           . '&o1=equals'
+                           . '&query_format=advanced'
+                           . '&v1=' . urlencode(Utils::getBugzillaLocaleField($locale))
+                           . '&o2=equals'
+                           . '&f2=component'
+                           . '&v2=L10N'
+                           . '&bug_status=UNCONFIRMED'
+                           . '&bug_status=NEW'
+                           . '&bug_status=ASSIGNED'
+                           . '&bug_status=REOPENED'
+                           . '&classification=Other'
+                           . '&product=www.mozilla.org';
+
+// all open bugs for a locale in the Mozilla Localization/locale component, with "webdashboard" in the whiteboard
+$bugzilla_query_l10ncomponent = 'https://bugzilla.mozilla.org/buglist.cgi?'
+                              . '&query_format=advanced'
+                              . '&status_whiteboard_type=allwordssubstr'
+                              . '&status_whiteboard=webdashboard'
+                              . '&bug_status=UNCONFIRMED'
+                              . '&bug_status=NEW'
+                              . '&bug_status=ASSIGNED'
+                              . '&bug_status=REOPENED'
+                              . '&component=' . urlencode(Utils::getBugzillaLocaleField($locale))
+                              . '&classification=Client%20Software'
+                              . '&product=Mozilla%20Localizations';
 
 
 // cache in a local cache folder if possible
-$csv = Utils::cacheUrl($bugzilla_query . '&ctype=csv', 15*60);
+$csv_mozillaorg = Utils::cacheUrl($bugzilla_query_mozillaorg . '&ctype=csv', 15*60);
+$csv_l10ncomponent = Utils::cacheUrl($bugzilla_query_l10ncomponent . '&ctype=csv', 15*60);
 
 // generate all the bugs
-$bugs = Utils::getBugsFromCSV($csv);
+$bugs_mozillaorg = Utils::getBugsFromCSV($csv_mozillaorg);
+$bugs_l10ncomponent = Utils::getBugsFromCSV($csv_l10ncomponent);
+
+$bugs = $bugs_mozillaorg + $bugs_l10ncomponent;
 
 $rss_data = [];
 
-foreach ($bugs as $k => $v) {
-    $rss_data[] = [$k, "https://bugzilla.mozilla.org/show_bug.cgi?id={$k}", $v];
+if (count($bugs) > 0) {
+    foreach ($bugs as $k => $v) {
+        $rss_data[] = [$k, "https://bugzilla.mozilla.org/show_bug.cgi?id={$k}", $v];
+    }
 }
 
 // d($lang_files);
