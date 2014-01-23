@@ -78,19 +78,17 @@ $lang_files_status .= "<p><small>Reminder: Your staging site for mozilla.org/{$l
                        www-dev.allizom.org/{$locale}/
                        </a></small></p>";
 ob_start();
-echo '<h2>Bugs opened on mozilla.org for your locale:</h2>';
+echo '<h2>Open bugs for your locale:</h2>';
 echo '<ul>';
-foreach ($bugs as $bug_number => $bug_title) {
-    if (!empty($bug_number)) {
-        echo '<li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id='
-             . $bug_number
-             . '">'
-             . $bug_number
-             . ': '
-             . $bug_title
-             . '</a></li>';
+
+if (count($bugs) > 0) {
+    foreach ($bugs as $bug_number => $bug_title) {
+        echo "<li><a href='https://bugzilla.mozilla.org/show_bug.cgi?id={$bug_number}'>{$bug_number}: {$bug_title}</a></li>";
     }
+} else {
+    echo '<li>No bugs. Good job!</li>';
 }
+
 echo '</ul>';
 
 $bugs_status = ob_get_contents();
