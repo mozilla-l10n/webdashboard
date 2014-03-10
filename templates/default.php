@@ -2,107 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mozilla Web localization Dashboard</title>
-    <link href="./assets/css/sandstone.css"  rel="stylesheet">
+    <link href="./assets/css/sandstone.css" rel="stylesheet">
+    <link href="./assets/css/webdashboard.css" rel="stylesheet">
     <link href="//mozorg.cdn.mozilla.net/media/css/tabzilla-min.css" rel="stylesheet">
     <link rel="icon" href="./assets/images/mozilla-l10n.png" type="image/png">
-
-    <style>
-        #wrapper {
-            min-height: 800px;
-        }
-
-        #masthead h2 {
-            padding-top: 90px
-        }
-
-        h2 small {
-            font-size:60%; font-style:italic;
-        }
-
-        div#locales {
-            -moz-column-count: 5;
-            width: 100%;
-        }
-
-        #main-content table {
-            text-align:center;
-            border-collapse: collapse;
-            margin-bottom: 1em;
-            background-color: rgba(255,255,255,0.4);
-            min-width: 650px;
-        }
-
-        #main-content table th {
-            text-align:left;
-        }
-
-        #main-content table th.col2 {
-            text-align:center;
-        }
-
-        #main-content table .col1 {
-            width: 400px;
-        }
-
-        #main-content table td,
-        #main-content table th {
-            border:1px solid lightgray;
-            padding: 1px 10px;
-        }
-
-        .feed {
-            background-color: rgba(255,255,255,0.4);
-            height: 48px;
-            width:650px;
-            border-radius:5px;
-            line-height:48px
-        }
-
-        .feed:hover {
-            background-color: rgba(255,255,255,0.8);
-        }
-
-        .feed a {
-            display:block;
-            width:100%;
-            height:100%;
-        }
-
-        .feed a img{
-            float: left;
-            margin-right: 5px;
-        }
-
-        #locale {
-            font-size: 80px;
-            float:right;
-            font-weight: bold;
-            border:1px solid lightgray;
-            height:92px;
-            line-height:88px;
-            min-width:150px;
-            padding:4px;
-            text-align:center;
-            margin-top: -50px;
-            background: rgba(255,255,255, 0.4);
-        }
-
-        .bugbox1 {
-            background: rgba(255,255,255, 0.4);
-            margin-bottom:1em
-        }
-
-        .bugbox1 .bugdesc {
-            font-weight:bold;
-        }
-
-        .hideme {
-            display:none;
-        }
-
-    </style>
-
 </head>
 <body class="sand">
     <div id="outer-wrapper">
