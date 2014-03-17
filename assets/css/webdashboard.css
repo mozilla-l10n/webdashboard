@@ -95,6 +95,36 @@ div#locales {
     display: none;
 }
 
+table.webprojects td {
+    text-align: left;
+}
+
+table.webprojects td.perc {
+    text-align: right;
+}
+
+table.webprojects td.status {
+    min-width: 300px;
+}
+
+span.wp_status {
+    display: inline-block;
+    height: 20px;
+    float: left;
+}
+
+span.wp_trans {
+    background-color: #28910D;
+}
+
+span.wp_fuzzy {
+    background-color: #FCCA00;
+}
+
+span.wp_untrans {
+    background-color: #FF0000;
+}
+
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
     #wrapper {
         width: 90%;

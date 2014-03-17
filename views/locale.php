@@ -94,8 +94,51 @@ echo '</ul>';
 $bugs_status = ob_get_contents();
 ob_end_clean();
 
+ob_start();
+
+$weblocale = $locale;
+if ($locale == 'es-ES') {
+    // Use 'es' instead of 'es-ES' for webprojects
+    $weblocale = 'es';
+}
+echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
+if (count($webprojects) > 0) {
+    echo "
+<table class='webprojects'>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>%</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>\n";
+    foreach ($webprojects[$weblocale] as $webproject) {
+        $status_row = function() use ($webproject) {
+            $untrans_width = floor($webproject['untranslated']/$webproject['total']*100);
+            $fuzzy_width = floor($webproject['fuzzy']/$webproject['total']*100);
+            $trans_width = 100 - $fuzzy_width - $untrans_width;
+            $row = "<span class='wp_status wp_trans' title='{$webproject['translated']} translated strings' style='width: {$trans_width}%;'></span>";
+            $row .= "<span class='wp_status wp_untrans' title='{$webproject['untranslated']} untranslated strings'  style='width: {$untrans_width}%;'></span>";
+            $row .= "<span class='wp_status wp_fuzzy' title='{$webproject['fuzzy']} fuzzy strings' style='width: {$fuzzy_width}%;'></span>";
+            return $row;
+        };
+
+        echo "    <tr>\n";
+        echo "      <td>{$webproject['name']}</td>\n";
+        echo "      <td class='perc'>{$webproject['percentage']}</td>\n";
+        echo "      <td class='status'>" . $status_row() . "</td>\n";
+        echo "</tr>\n";
+    }
+    echo "  </tbody>\n</table>\n";
+} else {
+    echo '<p>Data not available.</p>';
+}
+$webprojects_status = ob_get_contents();
+ob_end_clean();
+
 // build the content based on the various blocks we just created
-$content = $rss_status . $lang_files_status . $bugs_status;
+$content = $rss_status . $lang_files_status . $bugs_status . $webprojects_status;
 
 /*
 if we ask for an rss page, we just pass the $rss object created
