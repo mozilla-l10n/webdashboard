@@ -70,6 +70,9 @@ if (count($bugs) > 0) {
     }
 }
 
+// Read status of external web projects, cache cleaned every hour.
+$webprojects = Json::fetch(Utils::cacheUrl(WEBPROJECTS_JSON, 60*60));
+
 // d($lang_files);
 // RSS feed  data
 $total_missing_strings = 0;

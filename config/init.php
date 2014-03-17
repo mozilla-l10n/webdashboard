@@ -1,5 +1,6 @@
 <?php
 namespace Webdashboard;
+
 // We always work with UTF8 encoding
 mb_internal_encoding('UTF-8');
 
@@ -12,6 +13,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 define('CACHE', __DIR__ . '/../cache/');
 const DEBUG = false;
 const LANG_CHECKER = 'http://l10n.mozilla-community.org/~pascalc/langchecker/';
+const WEBPROJECTS_JSON = 'http://l10n.mozilla-community.org/~flod/webstatus/webstatus.json';
 
 // For debugging
 if (DEBUG) {
