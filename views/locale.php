@@ -103,6 +103,12 @@ if ($locale == 'es-ES') {
 }
 echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
 if (count($webprojects[$weblocale]) > 0) {
+    // Generate list of products for this locale and sort them by name
+    $available_products = [];
+    foreach (array_keys($webprojects[$weblocale]) as $product_code) {
+        $available_products[$product_code] = $webprojects[$weblocale][$product_code]['name'];
+    }
+    asort($available_products);
     echo "
 <table class='webprojects'>
   <thead>
@@ -113,7 +119,8 @@ if (count($webprojects[$weblocale]) > 0) {
     </tr>
   </thead>
   <tbody>\n";
-    foreach ($webprojects[$weblocale] as $webproject) {
+    foreach ($available_products as $product_code => $product_name) {
+        $webproject = $webprojects[$weblocale][$product_code];
         $status_row = function() use ($webproject) {
             $untrans_width = floor($webproject['untranslated']/$webproject['total']*100);
             $fuzzy_width = floor($webproject['fuzzy']/$webproject['total']*100);
