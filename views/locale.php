@@ -98,11 +98,11 @@ ob_start();
 
 $weblocale = $locale;
 if ($locale == 'es-ES') {
-    // Use 'es' instead of 'es-ES' for webprojects
+    // Use 'es' instead of 'es-ES' for web projects
     $weblocale = 'es';
 }
 echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
-if (count($webprojects) > 0) {
+if (count($webprojects[$weblocale]) > 0) {
     echo "
 <table class='webprojects'>
   <thead>
@@ -132,7 +132,7 @@ if (count($webprojects) > 0) {
     }
     echo "  </tbody>\n</table>\n";
 } else {
-    echo '<p>Data not available.</p>';
+    echo '<p>There are no web projects available for this locale.</p>';
 }
 $webprojects_status = ob_get_contents();
 ob_end_clean();
