@@ -10,10 +10,17 @@ date_default_timezone_set('Europe/Paris');
 // Autoloading of classes (both /vendor and /classes)
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$settings_filename = __DIR__ . '/settings.inc.php';
+if (file_exists($settings_filename)) {
+	require $settings_filename;
+} else {
+	echo "<h1>Error: missing config file</h1>";
+	echo "<p>Config file is missing: <code>{$settings_filename}</code></p>";
+	echo "<p>Rename <strong>config/settings.inc.php.ini</strong> as <strong>config/settings.inc.php</strong> to get started.</p>";
+	exit;
+}
+
 define('CACHE', __DIR__ . '/../cache/');
-const DEBUG = false;
-const LANG_CHECKER = 'http://l10n.mozilla-community.org/~pascalc/langchecker/';
-const WEBPROJECTS_JSON = 'http://l10n.mozilla-community.org/~flod/webstatus/webstatus.json';
 
 // For debugging
 if (DEBUG) {
