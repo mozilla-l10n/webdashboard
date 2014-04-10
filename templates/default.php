@@ -8,6 +8,7 @@
     <link href="./assets/css/webdashboard.css" rel="stylesheet">
     <link href="//mozorg.cdn.mozilla.net/media/css/tabzilla-min.css" rel="stylesheet">
     <link rel="icon" href="./assets/images/mozilla-l10n.png" type="image/png">
+    <?=$links?>
 </head>
 <body class="sand">
     <div id="outer-wrapper">
