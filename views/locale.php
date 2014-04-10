@@ -34,9 +34,9 @@ foreach ($lang_files as $site => $tablo) {
                         <th class=\"clickme \"><a href=\"". LANG_CHECKER . "?locale=$locale#$file\">$file</a></th>";
 
         if ($details['identical'] == 0) {
-            $rows .= "     <td class=\"col2\">$details[identical]</td>";
+            $rows .= "     <td class=\"col\">$details[identical]</td>";
         } else {
-            $rows .= "     <td class=\"col2\"><a href=\"". LANG_CHECKER . "?locale=$locale#$file\">$details[identical]</a></td>";
+            $rows .= "     <td class=\"col\"><a href=\"". LANG_CHECKER . "?locale=$locale#$file\">$details[identical]</a></td>";
             $local_count_identical += $details['identical'];
             $total_identical += $details['identical'];
         }
@@ -46,15 +46,17 @@ foreach ($lang_files as $site => $tablo) {
             $total_missing += $details['missing'];
         }
 
-        $critical = (isset($details['critical']) && $details['critical']) ? 'Yes' : 'No';
+        $critical = (isset($details['critical']) && $details['critical']) ? '<strong>Yes</strong>' : 'No';
 
-        if (isset($details['critical'])) {
-            $critical = "<strong>$critical</strong>";
+        if (isset($details['deadline'])) {
+            $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
+        } else {
+            $deadline = '--';
         }
-        $rows .= '     <td class="col3">'
-                . $critical
-                . '</td>';
-        $rows .= "</tr>";
+
+        $rows .= '     <td class="col3">' . $deadline  . '</td>';
+        $rows .= '     <td class="col3">' . $critical  . '</td>';
+        $rows .= '</tr>';
 
     }
 
@@ -64,7 +66,8 @@ foreach ($lang_files as $site => $tablo) {
     $lang_files_status .= "<table>
         <tr>
             <th class=\"col1 clickme\">$site</th>
-            <th class=\"col2\">$message</th>
+            <th class=\"col\">$message</th>
+            <th $extra_class2>Deadline</th>
             <th $extra_class2>Critical</th>
 
         </tr>";
