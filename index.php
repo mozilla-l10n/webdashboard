@@ -1,5 +1,12 @@
 <?php
 
 require_once __DIR__ . '/config/init.php';
-include __DIR__ . '/models/' . (isset($_GET['locale']) ? 'locale' : 'home'). '.php';
 
+$view = 'home';
+if (isset($_GET['project'])) {
+	$view = 'project';
+} elseif (isset($_GET['locale'])) {
+	$view = 'locale';
+}
+
+include __DIR__ . '/models/' . $view . '.php';

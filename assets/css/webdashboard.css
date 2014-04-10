@@ -25,6 +25,15 @@ div#locales {
     min-width: 650px;
 }
 
+#main-content table.results {
+    min-width: 0;
+}
+
+#main-content table.results td {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
 #main-content table th {
     text-align: left;
 }
@@ -41,6 +50,25 @@ div#locales {
 #main-content table th {
     border: 1px solid lightgray;
     padding: 1px 10px;
+}
+
+#main-content table td.missing {
+    background-color: #FF5252;
+    color: #FF5252;
+}
+
+#main-content table td.inprogress {
+    background-color: #FFBD52;
+}
+
+#main-content table td.done {
+    background-color: #92CC6E;
+    color: #92CC6E;
+}
+
+#main-content table td.none {
+    background-color: white;
+    color: white;
 }
 
 .feed {
