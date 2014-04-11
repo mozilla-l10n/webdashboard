@@ -23,7 +23,7 @@ $content .= '
 foreach ($status as $locale => $array_status) {
     $total_page = $page_done = 0;
     $content .= '<tr>' . "\n";
-    $content .= "<td><a href=\"/?locale=$locale\">$locale</a></td>" . "\n";
+    $content .= "<td><a href=\"?locale=$locale\">$locale</a></td>" . "\n";
     foreach ($array_status as $key => $result) {
         $cell = $class = '';
 
