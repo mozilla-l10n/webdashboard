@@ -3,7 +3,7 @@ namespace Webdashboard;
 
 $links = '<script language="javascript" type="text/javascript" src="./assets/js/sorttable.js"></script>';
 $content = "
-    <table class=\"table sortable\">
+    <table class=\"table sortable\" id=\"project\">
         <caption>L10n Project Dashboard ($project)</caption>
         <thead>
             <tr>
