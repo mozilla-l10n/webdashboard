@@ -153,6 +153,18 @@ span.wp_untrans {
     background-color: #FF0000;
 }
 
+/* Project view */
+#project caption {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#project tr td {
+    font-size: 14px;
+    text-align: center;
+}
+
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
     #wrapper {
         width: 90%;
