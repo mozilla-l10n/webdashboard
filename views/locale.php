@@ -48,13 +48,18 @@ foreach ($lang_files as $site => $tablo) {
 
         $critical = (isset($details['critical']) && $details['critical']) ? '<strong>Yes</strong>' : 'No';
 
+        $class = '';
         if (isset($details['deadline'])) {
-            $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
+            $deadline_timestamp = (new \DateTime($details['deadline']))->getTimestamp();
+            $deadline = date('F d', $deadline_timestamp);
+            if ($deadline_timestamp < time()) {
+                $class = 'overdue';
+            }
         } else {
             $deadline = '--';
         }
 
-        $rows .= '     <td class="col3">' . $deadline  . '</td>';
+        $rows .= "     <td class=\"col3 $class\">" . $deadline  . '</td>';
         $rows .= '     <td class="col3">' . $critical  . '</td>';
         $rows .= '</tr>';
 
