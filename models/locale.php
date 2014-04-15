@@ -86,6 +86,10 @@ foreach ($lang_files as $site => $tablo) {
             $status = (isset($details['critical']) && $details['critical'])
                       ? 'Priority file'
                       : 'Nice to have';
+            if (isset($details['deadline']) && $details['deadline']) {
+              $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
+              $status .= ' (Deadline is ' . $deadline . ')';
+            }
             $rss_data[] = array($status, $link, $message);
             $total_missing_strings += $count;
         }
