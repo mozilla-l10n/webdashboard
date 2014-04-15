@@ -53,6 +53,7 @@ foreach ($lang_files as $site => $tablo) {
             $deadline_timestamp = (new \DateTime($details['deadline']))->getTimestamp();
             $deadline = date('F d', $deadline_timestamp);
             if ($deadline_timestamp < time()) {
+                $deadline = date('F d Y', $deadline_timestamp);
                 $class = 'overdue';
             }
         } else {
