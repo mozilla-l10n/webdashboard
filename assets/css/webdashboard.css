@@ -46,6 +46,11 @@ div#locales {
     width: 400px;
 }
 
+#main-content table .overdue {
+    color: red;
+    font-weight: bold;
+}
+
 #main-content table td,
 #main-content table th {
     border: 1px solid lightgray;
