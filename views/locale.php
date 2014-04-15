@@ -9,9 +9,12 @@ $rss_status = <<<RSS
     </a>
 </p>
 <div id="locale">
-    <a href="http://wiki.mozilla.org/L10n:Teams:{$locale}">{$locale}</a>
-</div>
+    <a href="http://wiki.mozilla.org/L10n:Teams:{$locale}">{$locale}
 RSS;
+if ($locamotion) {
+    $rss_status .= '<img src="assets/images/locamotion.png" class="locamotion" />';
+}
+$rss_status .= '</div>';
 
 $lang_files_status = '<h2>State of your lang files <small>(data updated every 15 minutes)</small></h2>';
 $total_identical = 0;

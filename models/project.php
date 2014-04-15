@@ -1,8 +1,11 @@
 <?php
 namespace Webdashboard;
-// Fetch external data source
-$langchecker        = 'http://l10n.mozilla-community.org/~pascalc/langchecker/';
-$langchecker_query = $langchecker . '?locale=all&json';
+
+// Check if the locale is working on locamotion
+$locamotion = Json::fetch(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60));
+
+// Base for the query to get external data
+$langchecker_query = LANG_CHECKER . '?locale=all&json';
 $locale_done = 0;
 
 // include all data about project pages
