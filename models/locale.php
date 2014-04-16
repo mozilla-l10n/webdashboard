@@ -22,6 +22,10 @@ if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
 // get lang files status from langchecker
 $lang_files = Json::fetch(LANG_CHECKER . "?locale={$locale}&json");
 
+// check if the locale is working on locamotion
+$locamotion = Json::fetch(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60));
+$locamotion = in_array($locale, $locamotion);
+
 // all open bugs for a locale in the mozilla.org/l10n component
 $bugzilla_query_mozillaorg = 'https://bugzilla.mozilla.org/buglist.cgi?'
                            . 'f1=cf_locale'

@@ -22,8 +22,13 @@ $content .= '
 
 foreach ($status as $locale => $array_status) {
     $total_page = $page_done = 0;
+    $working_on_locamotion = in_array($locale, $locamotion);
     $content .= '<tr>' . "\n";
-    $content .= "<td><a href=\"?locale=$locale\">$locale</a></td>" . "\n";
+    $content .= "<td><a href=\"?locale=$locale\">$locale";
+    if ($working_on_locamotion) {
+        $content .= '<img src="./assets/images/locamotion_16.png" class="locamotion" />';
+    }
+    $content .= '</a></td>' . "\n";
     foreach ($array_status as $key => $result) {
         $cell = $class = '';
 

@@ -115,6 +115,11 @@ div#locales {
     background: rgba(255,255,255, 0.4);
 }
 
+.locamotion{
+    vertical-align: middle;
+    margin-left: 12px;
+}
+
 .bugbox1 {
     background: rgba(255,255,255, 0.4);
     margin-bottom: 1em
