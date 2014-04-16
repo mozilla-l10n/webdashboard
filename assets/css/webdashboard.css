@@ -99,6 +99,9 @@ div#locales {
     margin-right: 5px;
 }
 
+
+/* {{{ Locale view */
+
 #locale {
     position: absolute;
     top: -50px;
@@ -162,8 +165,11 @@ span.wp_fuzzy {
 span.wp_untrans {
     background-color: #FF0000;
 }
+/* Locale view }}} */
 
-/* Project view */
+
+/* {{{ Project view */
+
 #project caption {
     font-size: 30px;
     text-align: center;
@@ -174,6 +180,14 @@ span.wp_untrans {
     font-size: 14px;
     text-align: center;
 }
+
+#project tr td:first-child {
+    text-align: left;
+    white-space: pre;
+}
+
+/* Project view }}} */
+
 
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
     #wrapper {
