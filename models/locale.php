@@ -26,12 +26,19 @@ $lang_files = Json::fetch(LANG_CHECKER . "?locale={$locale}&json");
 $locamotion = Json::fetch(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60));
 $locamotion = in_array($locale, $locamotion);
 
+// This is needed for Norwegians, having different names in Bugzilla products
+if (in_array($locale, ['nb-NO', 'nn-NO'])) {
+    $localeweb = $locale . '-www';
+} else {
+    $localeweb = $locale;
+}
+
 // all open bugs for a locale in the mozilla.org/l10n component
 $bugzilla_query_mozillaorg = 'https://bugzilla.mozilla.org/buglist.cgi?'
                            . 'f1=cf_locale'
                            . '&o1=equals'
                            . '&query_format=advanced'
-                           . '&v1=' . urlencode(Utils::getBugzillaLocaleField($locale))
+                           . '&v1=' . urlencode(Utils::getBugzillaLocaleField($localeweb))
                            . '&o2=equals'
                            . '&f2=component'
                            . '&v2=L10N'
