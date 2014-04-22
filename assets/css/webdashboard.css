@@ -31,6 +31,9 @@ div#locales {
 
 #main-content table.results td {
     padding: 10px 20px;
+}
+
+#main-content table.results td.final {
     font-weight: bold;
 }
 

@@ -19,12 +19,10 @@ $content .= '
         <tbody>';
 
 // Display status for all pages per locale
-
-foreach ($status as $locale => $array_status) {
-    $total_page = $page_done = 0;
+foreach ($status_formated as $locale => $array_status) {
     $working_on_locamotion = in_array($locale, $locamotion);
-    $content .= '<tr>' . "\n";
-    $content .= "<td><a href=\"?locale=$locale\">$locale";
+    $content .= '<tr>' . "\n"
+              . "<td><a href=\"?locale=$locale\">$locale";
     if ($working_on_locamotion) {
         $content .= '<img src="./assets/images/locamotion_16.png" class="locamotion" />';
     }
@@ -35,45 +33,48 @@ foreach ($status as $locale => $array_status) {
         // This locale does not have this page
         if ($result == 'none') {
             $cell = '1';
-            $class = 'none';
+            $class = $result;
         } else {
-            $total_page++;
             // Page done
-            if ($result['Identical'] == 0 && $result['Missing'] == 0) {
+            if ($result  == 'done') {
                 $cell = '100%';
-                $class = ' done';
-                $page_done++;
-
+                $class = $result;
             // Missing
-            } elseif ($result['Translated'] == 0) {
+            } elseif ($result == 'missing') {
                 $cell = '0%';
-                $class = ' missing';
-
+                $class = $result;
             // In progress
             } else {
-                $count = $result['Translated'] + $result['Missing'] + $result['Identical'];
-                $cell = $result['Translated'] . '/' . $count;
-                $class = ' inprogress';
+                $cell = $result;
+                $class = 'inprogress';
             }
         }
         $content .= '<td class="' . $class . '">' . $cell . '</td>' . "\n";
     }
     $content .= '</tr>' . "\n";
-    if ($page_done == $total_page) {
-        $locale_done++;
-    }
 }
-$content .= '</tbody>';
-$content .= '</table>';
+$content .= '</tbody>'
+          . '</table>';
 
-// Display bottom statistics
-$content .= '<table class="results">';
-$content .= '<tbody>';
-$percent_locale_done = round($locale_done / $total_locales * 100, 2);
-$total_col = $total_page + 1;
-$content .= '<tr><td colspan="' . $total_col. '">' . $locale_done . '/'
-    . $total_locales . ' perfect locales (' . $percent_locale_done . '%)</td></tr>';
-$content .= '</tbody>';
-$content .= '</table>';
+// Display stats per page
+$content .= '<table class="results sortable">
+                <thead>
+                  <tr>
+                    <th>Page</th><th>Completion</th>
+                  </tr>
+                </thead>
+                <tbody>';
+
+foreach ($locale_done_per_page as $page => $locales) {
+    $content .= '<tr><td colspan="1">' . $page . '</td>'
+              . '<td colspan="1"> ' . count($locales) . '/'
+              . $total_locales . ' perfect locales ('. $page_coverage[$page] . '%)</td></tr>';
+}
+
+// Display global stats
+$content .= '<tr><td colspan="2" class="final">Total: ' . count($locale_done) . '/' . $total_locales . ' perfect locales (' . $perfect_locales_coverage . '%)</td></tr>'
+          . '<tr><td colspan="2">Average: ' . $average_nb_locales . '/' . $total_locales . ' perfect locales (' . $average_coverage . '%)</td></tr>'
+          . '</tbody>'
+          . '</table>';
 
 include __DIR__ . '/../templates/' . $template;
