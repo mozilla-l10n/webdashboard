@@ -10,7 +10,7 @@
     <link rel="icon" href="./assets/images/mozilla-l10n.png" type="image/png">
     <?=$links?>
 </head>
-<body class="sand">
+<body class="<?=$body_class?>">
     <div id="outer-wrapper">
         <div id="wrapper">
             <header id="masthead">

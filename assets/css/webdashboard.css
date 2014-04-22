@@ -7,6 +7,11 @@
     padding-top: 90px
 }
 
+body.project #wrapper {
+    margin: 0px 20px;
+    width: auto;
+}
+
 h2 small {
     font-size: 60%;
     font-style: italic;
