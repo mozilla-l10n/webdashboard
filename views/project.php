@@ -1,6 +1,7 @@
 <?php
 namespace Webdashboard;
 
+$body_class = $body_class . ' project';
 $links = '<script language="javascript" type="text/javascript" src="./assets/js/sorttable.js"></script>';
 $content = "
     <table class=\"table sortable\" id=\"project\">
