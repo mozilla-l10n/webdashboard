@@ -174,5 +174,20 @@ class Utils {
             return $locale . ' / ' . $locales[$locale];
         }
 
+        /**
+         * getUserBaseCoverage()
+         *
+         * @param $locales an array of locales
+         * @param $no_japan boolean, default to true, do we include Japanese?
+         *
+         * @return a percent value of our coverage for the user base
+         */
+
+        public static function getUserBaseCoverage($locales, $no_japan = true)
+        {
+            $url = LANG_CHECKER . '?action=coverage&json';
+            $url .= '&locales[]=' . implode('&locales[]=', array_map('urlencode', $locales));
+            return file_get_contents($url);
+        }
 
 }
