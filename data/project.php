@@ -21,9 +21,9 @@ $australis_mozorg = $australis_core;
 $australis_mozorg[] = ['file' => 'firefox/new.lang','site' => 0];
 $australis_mozorg[] = ['file' => 'mozorg/home.lang', 'site' => 0];
 $australis_mozorg[] = ['file' => 'tabzilla/tabzilla.lang', 'site' => 0];
-$australis_mozorg[] = ['file' => 'main.lang', 'site' => 0];
 
 $australis_all = $australis_mozorg;
+$australis_all[] = ['file' => 'main.lang', 'site' => 0];
 $australis_all[] = ['file' => 'apr2014.lang', 'site' => 6];
 
 $pages = [
