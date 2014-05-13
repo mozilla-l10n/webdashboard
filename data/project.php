@@ -41,5 +41,9 @@ $pages = [
          'site' => 0],
         ['file' => 'firefox/partners/index.lang',
          'site' => 0],
+    'firefox_usage' => [
+        ['file' => 'firefox/desktop/tips.lang',
+         'site' => 0],
+    ],
     ],
 ];
