@@ -114,6 +114,7 @@ if ($locale == 'es-ES') {
     $weblocale = 'es';
 }
 echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
+echo "<p>Data updated about every 5 hours. Last update: {$webprojects['metadata']['creation_date']}.</p>\n";
 if (count($webprojects[$weblocale]) > 0) {
     // Generate list of products for this locale and sort them by name
     $available_products = [];
