@@ -9,7 +9,7 @@ $rss_status = <<<RSS
     </a>
 </p>
 <div id="locale">
-    <a href="http://wiki.mozilla.org/L10n:Teams:{$locale}">{$locale}
+    <a href="http://wiki.mozilla.org/L10n:Teams:{$locale}">{$locale}</a>
 RSS;
 if ($locamotion) {
     $rss_status .= '<img src="assets/images/locamotion.png" class="locamotion" />';
