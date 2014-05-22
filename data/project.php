@@ -26,11 +26,19 @@ $australis_all = $australis_mozorg;
 $australis_all[] = ['file' => 'main.lang', 'site' => 0];
 $australis_all[] = ['file' => 'apr2014.lang', 'site' => 6];
 
+$worldcup_addons = [
+    ['file' => 'worldcup.lang',
+     'site' => 7],
+    ['file' => 'homefeeds.lang',
+     'site' => 7],
+];
+
 $pages = [
     'default' => [
         ['file' => 'main.lang',
          'site' => 0],
     ],
+    'worldcup_addons' => $worldcup_addons,
     'australis_core' => $australis_core,
     'australis_mozorg' => $australis_mozorg,
     'australis_all' => $australis_all,
