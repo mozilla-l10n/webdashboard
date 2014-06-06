@@ -10,5 +10,5 @@ $locales = [
     'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'nso', 'oc', 'or', 'pa-IN',
     'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'si', 'sk', 'sl', 'son',
     'sq', 'sr', 'sv-SE', 'sw', 'ta', 'ta-LK', 'te', 'th', 'tr', 'uk',
-    'ur', 'vi', 'wo', 'xh', 'zh-CN', 'zh-TW', 'zu',
+    'ur', 'uz', 'vi', 'wo', 'xh', 'zh-CN', 'zh-TW', 'zu',
 ];
