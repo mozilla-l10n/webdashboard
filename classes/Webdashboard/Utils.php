@@ -69,7 +69,7 @@ class Utils {
         return $url;
     }
 
-    public static function getBugzillaLocaleField($locale) {
+    public static function getBugzillaLocaleField($locale, $component = 'www') {
         $locales = [
             'ach'       => 'Acholi',
             'af'        => 'Afrikaans',
@@ -80,7 +80,8 @@ class Utils {
             'az'        => 'Azerbaijani',
             'be'        => 'Belarusian',
             'bg'        => 'Bulgarian',
-            'bn-BD'     => 'Bengali (Bangladesh)',
+            'bn-BD'     => 'Bengali',
+            'bn-BD-www' => 'Bengali (Bangladesh)',
             'bn-IN'     => 'Bengali (India)',
             'br'        => 'Breton',
             'bs'        => 'Bosnian',
@@ -90,12 +91,15 @@ class Utils {
             'cy'        => 'Welsh',
             'da'        => 'Danish',
             'de'        => 'German',
+            'dsb'       => 'Lower Sorbian',
             'el'        => 'Greek',
-            'en-GB'     => 'English (British)',
+            'en-GB'     => 'English (United Kingdom)',
+            'en-GB-www' => 'English (British)',
             'eo'        => 'Esperanto',
             'es-AR'     => 'Spanish (Argentina)',
             'es-CL'     => 'Spanish (Chile)',
-            'es-ES'     => 'Spanish (Spain)',
+            'es-ES'     => 'Spanish',
+            'es-ES-www' => 'Spanish (Spain)',
             'es-MX'     => 'Spanish (Mexico)',
             'et'        => 'Estonian',
             'eu'        => 'Basque',
@@ -104,14 +108,17 @@ class Utils {
             'fi'        => 'Finnish',
             'fr'        => 'French',
             'fy-NL'     => 'Frisian',
-            'ga-IE'     => 'Irish (Ireland)',
-            'gd'        => 'Gaelic (Scotland)',
+            'ga-IE'     => 'Irish',
+            'ga-IE-www' => 'Irish (Ireland)',
+            'gd'        => 'Scottish Gaelic',
+            'gd-www'    => 'Gaelic (Scotland)',
             'gl'        => 'Galician',
             'gu-IN'     => 'Gujarati',
             'he'        => 'Hebrew',
             'hi-IN'     => 'hindi',
             'hi-IN-www' => 'Hindi (India)',
             'hr'        => 'Croatian',
+            'hsb'       => 'Upper Sorbian',
             'hu'        => 'Hungarian',
             'hy-AM'     => 'Armenian',
             'id'        => 'Indonesian',
@@ -140,19 +147,24 @@ class Utils {
             'nl'        => 'Dutch',
             'nn-NO'     => 'Norwegian Nynorsk',
             'nn-NO-www' => 'Norwegian (Nynorsk)',
-            'nso'       => 'Northern Sotho',
-            'oc'        => 'Occitan (Lengadocian)',
+            'nso'       => 'Northern Sotho (Pedi)',
+            'nso-www'   => 'Northern Sotho',
+            'oc'        => 'Occitan',
+            'oc-www'    => 'Occitan (Lengadocian)',
             'or'        => 'Oriya',
             'pa-IN'     => 'Punjabi',
             'pl'        => 'Polish',
-            'pt-BR'     => 'Portuguese (Brazilian)',
-            'pt-PT'     => 'Portuguese (Portugal)',
+            'pt-BR'     => 'Portuguese (Brazil)',
+            'pt-BR-www' => 'Portuguese (Brazilian)',
+            'pt-PT'     => 'Portuguese',
+            'pt-PT-www' => 'Portuguese (Portugal)',
             'rm'        => 'Romansh',
             'ro'        => 'Romanian',
             'ru'        => 'Russian',
             'si'        => 'Sinhala',
             'sk'        => 'Slovak',
-            'sl'        => 'Slovenian',
+            'sl'        => 'Slovene',
+            'sl-www'    => 'Slovenian',
             'sq'        => 'Albanian',
             'sr'        => 'Serbian',
             'sv-SE'     => 'Swedish',
@@ -164,6 +176,7 @@ class Utils {
             'tr'        => 'Turkish',
             'uk'        => 'Ukrainian',
             'ur'        => 'Urdu',
+            'uz'        => 'Uzbek',
             'vi'        => 'Vietnamese',
             'wo'        => 'Wolof',
             'xh'        => 'Xhosa',
@@ -172,8 +185,12 @@ class Utils {
             'zu'        => 'Zulu',
             ];
 
-            // Eventually I need to remove -www to get the real locale code
-            return rtrim($locale, '-www') . ' / ' . $locales[$locale];
+            $localeweb = "{$locale}-www";
+            if ($component == 'www' && array_key_exists($localeweb, $locales)) {
+                return $locale . ' / ' . $locales[$localeweb];
+            }
+
+            return $locale . ' / ' . $locales[$locale];
         }
 
         /**
