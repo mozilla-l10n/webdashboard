@@ -26,8 +26,8 @@ $lang_files = Json::fetch(LANG_CHECKER . "?locale={$locale}&json");
 $locamotion = Json::fetch(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60));
 $locamotion = in_array($locale, $locamotion);
 
-// This is needed for Norwegians, having different names in Bugzilla products
-if (in_array($locale, ['nb-NO', 'nn-NO'])) {
+// This is needed for Norwegians and Hindi, having different names in Bugzilla products
+if (in_array($locale, ['hi-IN', 'nb-NO', 'nn-NO'])) {
     $localeweb = $locale . '-www';
 } else {
     $localeweb = $locale;

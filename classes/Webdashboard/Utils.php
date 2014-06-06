@@ -109,7 +109,8 @@ class Utils {
             'gl'        => 'Galician',
             'gu-IN'     => 'Gujarati',
             'he'        => 'Hebrew',
-            'hi-IN'     => 'Hindi (India)',
+            'hi-IN'     => 'hindi',
+            'hi-IN-www' => 'Hindi (India)',
             'hr'        => 'Croatian',
             'hu'        => 'Hungarian',
             'hy-AM'     => 'Armenian',
@@ -171,7 +172,8 @@ class Utils {
             'zu'        => 'Zulu',
             ];
 
-            return $locale . ' / ' . $locales[$locale];
+            // Eventually I need to remove -www to get the real locale code
+            return rtrim($locale, '-www') . ' / ' . $locales[$locale];
         }
 
         /**
