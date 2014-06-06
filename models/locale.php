@@ -26,19 +26,12 @@ $lang_files = Json::fetch(LANG_CHECKER . "?locale={$locale}&json");
 $locamotion = Json::fetch(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60));
 $locamotion = in_array($locale, $locamotion);
 
-// This is needed for Norwegians and Hindi, having different names in Bugzilla products
-if (in_array($locale, ['hi-IN', 'nb-NO', 'nn-NO'])) {
-    $localeweb = $locale . '-www';
-} else {
-    $localeweb = $locale;
-}
-
 // all open bugs for a locale in the mozilla.org/l10n component
 $bugzilla_query_mozillaorg = 'https://bugzilla.mozilla.org/buglist.cgi?'
                            . 'f1=cf_locale'
                            . '&o1=equals'
                            . '&query_format=advanced'
-                           . '&v1=' . urlencode(Utils::getBugzillaLocaleField($localeweb))
+                           . '&v1=' . urlencode(Utils::getBugzillaLocaleField($locale))
                            . '&o2=equals'
                            . '&f2=component'
                            . '&v2=L10N'
@@ -58,7 +51,7 @@ $bugzilla_query_l10ncomponent = 'https://bugzilla.mozilla.org/buglist.cgi?'
                               . '&bug_status=NEW'
                               . '&bug_status=ASSIGNED'
                               . '&bug_status=REOPENED'
-                              . '&component=' . urlencode(Utils::getBugzillaLocaleField($locale))
+                              . '&component=' . urlencode(Utils::getBugzillaLocaleField($locale, 'l10n'))
                               . '&classification=Client%20Software'
                               . '&product=Mozilla%20Localizations';
 
