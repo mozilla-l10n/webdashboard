@@ -18,6 +18,7 @@ $rss_status .= '</div>';
 
 $lang_files_status = '<h2>State of your lang files <small>(data updated every 15 minutes)</small></h2>';
 $total_identical = 0;
+$total_missing = 0;
 foreach ($lang_files as $site => $tablo) {
 
     $rows = '';
@@ -115,7 +116,7 @@ if ($locale == 'es-ES') {
 }
 echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
 echo "<p>Data updated about every 5 hours. Last update: {$webprojects['metadata']['creation_date']}.</p>\n";
-if (count($webprojects[$weblocale]) > 0) {
+if (isset($webprojects[$weblocale])) {
     // Generate list of products for this locale and sort them by name
     $available_products = [];
     foreach (array_keys($webprojects[$weblocale]) as $product_code) {
