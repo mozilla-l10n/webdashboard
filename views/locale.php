@@ -136,8 +136,14 @@ if (isset($webprojects[$weblocale])) {
     foreach ($available_products as $product_code => $product_name) {
         $webproject = $webprojects[$weblocale][$product_code];
         $status_row = function() use ($webproject) {
-            $untrans_width = floor($webproject['untranslated']/$webproject['total']*100);
-            $fuzzy_width = floor($webproject['fuzzy']/$webproject['total']*100);
+            if ($webproject['total'] !== 0) {
+                $untrans_width = floor($webproject['untranslated']/$webproject['total']*100);
+                $fuzzy_width = floor($webproject['fuzzy']/$webproject['total']*100);
+            } else {
+                // If locale has errors, I get 0 as total number of strings
+                $untrans_width = 100;
+                $fuzzy_width = 0;
+            }
             $trans_width = 100 - $fuzzy_width - $untrans_width;
             $row = "<span class='wp_status wp_trans' title='{$webproject['translated']} translated strings' style='width: {$trans_width}%;'></span>";
             $row .= "<span class='wp_status wp_untrans' title='{$webproject['untranslated']} untranslated strings'  style='width: {$untrans_width}%;'></span>";
