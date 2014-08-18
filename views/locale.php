@@ -115,7 +115,8 @@ if ($locale == 'es-ES') {
     $weblocale = 'es';
 }
 echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
-echo "<p>Data updated about every 5 hours. Last update: {$webprojects['metadata']['creation_date']}.</p>\n";
+echo "<p>Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
+         Data updated about every 5 hours. Last update: {$webprojects['metadata']['creation_date']}.</p>\n";
 if (isset($webprojects[$weblocale])) {
     // Generate list of products for this locale and sort them by name
     $available_products = [];
@@ -135,27 +136,42 @@ if (isset($webprojects[$weblocale])) {
   <tbody>\n";
     foreach ($available_products as $product_code => $product_name) {
         $webproject = $webprojects[$weblocale][$product_code];
-        $status_row = function() use ($webproject) {
-            if ($webproject['total'] !== 0) {
-                $untrans_width = floor($webproject['untranslated']/$webproject['total']*100);
-                $fuzzy_width = floor($webproject['fuzzy']/$webproject['total']*100);
-            } else {
-                // If locale has errors, I get 0 as total number of strings
-                $untrans_width = 100;
-                $fuzzy_width = 0;
-            }
-            $trans_width = 100 - $fuzzy_width - $untrans_width;
-            $row = "<span class='wp_status wp_trans' title='{$webproject['translated']} translated strings' style='width: {$trans_width}%;'></span>";
-            $row .= "<span class='wp_status wp_untrans' title='{$webproject['untranslated']} untranslated strings'  style='width: {$untrans_width}%;'></span>";
-            $row .= "<span class='wp_status wp_fuzzy' title='{$webproject['fuzzy']} fuzzy strings' style='width: {$fuzzy_width}%;'></span>";
-            return $row;
-        };
 
-        echo "    <tr>\n";
-        echo "      <td>{$webproject['name']}</td>\n";
-        echo "      <td class='perc'>{$webproject['percentage']}</td>\n";
-        echo "      <td class='status'>" . $status_row() . "</td>\n";
-        echo "</tr>\n";
+        // Initialize values
+        $untrans_width = 0;
+        $fuzzy_width = 0;
+        $errors_width = 0;
+        $trans_width = 0;
+
+        if ($webproject['error_status']) {
+            // File has errors
+            $errors_width = 100;
+            $message = $webproject['error_message'];
+        } elseif ($webproject['total'] === 0) {
+            // File is empty
+            $message = "File is empty (no strings)";
+        } else {
+            $untrans_width = floor($webproject['untranslated'] / $webproject['total'] * 100);
+            $fuzzy_width = floor($webproject['fuzzy'] / $webproject['total'] * 100);
+            $message = "{$webproject['translated']} translated, {$webproject['untranslated']} untranslated, {$webproject['fuzzy']} fuzzy";
+        }
+
+        if ($errors_width === 0) {
+            $trans_width = 100 - $fuzzy_width - $untrans_width;
+        }
+
+        echo  "
+    <tr>
+      <td>{$webproject['name']}</td>
+      <td class='perc'>{$webproject['percentage']}</td>
+      <td class='status' title='{$message}'>
+        <span class='wp_status wp_errors' style='width: {$errors_width}%;'>file contains errors</span>
+        <span class='wp_status wp_trans' style='width: {$trans_width}%;'></span>
+        <span class='wp_status wp_untrans' style='width: {$untrans_width}%;'></span>
+        <span class='wp_status wp_fuzzy' style='width: {$fuzzy_width}%;'></span>
+      </td>
+    </tr>\n";
+
     }
     echo "  </tbody>\n</table>\n";
 } else {

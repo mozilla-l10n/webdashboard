@@ -4,7 +4,7 @@
 }
 
 #masthead h2 {
-    padding-top: 90px
+    padding-top: 90px;
 }
 
 body.project #wrapper {
@@ -55,33 +55,33 @@ div#locales {
 }
 
 #main-content table .overdue {
-    color: red;
+    color: #f00;
     font-weight: bold;
 }
 
 #main-content table td,
 #main-content table th {
-    border: 1px solid lightgray;
+    border: 1px solid #d3d3d3;
     padding: 1px 10px;
 }
 
 #main-content table td.missing {
-    background-color: #FF5252;
-    color: #FF5252;
+    background-color: #ff5252;
+    color: #ff5252;
 }
 
 #main-content table td.inprogress {
-    background-color: #FFBD52;
+    background-color: #ffbd52;
 }
 
 #main-content table td.done {
-    background-color: #92CC6E;
-    color: #92CC6E;
+    background-color: #92cc6e;
+    color: #92cc6e;
 }
 
 #main-content table td.none {
-    background-color: white;
-    color: white;
+    background-color: #fff;
+    color: #fff;
 }
 
 .feed {
@@ -107,16 +107,13 @@ div#locales {
     margin-right: 5px;
 }
 
-
-/* {{{ Locale view */
-
 #locale {
     position: absolute;
     top: -50px;
     right: 20px;
     font-size: 65px;
     font-weight: bold;
-    border: 1px solid lightgray;
+    border: 1px solid #d3d3d3;
     border-radius: 5px;
     height: 92px;
     line-height: 88px;
@@ -133,7 +130,7 @@ div#locales {
 
 .bugbox1 {
     background: rgba(255,255,255, 0.4);
-    margin-bottom: 1em
+    margin-bottom: 1em;
 }
 
 .bugbox1 .bugdesc {
@@ -162,21 +159,27 @@ span.wp_status {
     float: left;
 }
 
+span.wp_errors {
+    background-color: #ff5252;
+    color: #fff;
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+
 span.wp_trans {
-    background-color: #28910D;
+    background-color: #92cc6e;
 }
 
 span.wp_fuzzy {
-    background-color: #FCCA00;
+    background-color: #fff152;
 }
 
 span.wp_untrans {
-    background-color: #FF0000;
+    background-color: #ffbd52;
 }
-/* Locale view }}} */
-
-
-/* {{{ Project view */
 
 #project caption {
     font-size: 30px;
@@ -193,9 +196,6 @@ span.wp_untrans {
     text-align: left;
     white-space: pre;
 }
-
-/* Project view }}} */
-
 
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
     #wrapper {
