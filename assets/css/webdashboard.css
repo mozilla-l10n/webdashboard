@@ -43,15 +43,12 @@ div#locales {
 }
 
 #main-content table th {
-    text-align: left;
-}
-
-#main-content table th.col {
     text-align: center;
 }
 
-#main-content table .col1 {
+#main-content table .maincolumn {
     width: 400px;
+    text-align: left;
 }
 
 #main-content table .overdue {
@@ -135,10 +132,6 @@ div#locales {
 
 .bugbox1 .bugdesc {
     font-weight: bold;
-}
-
-.hideme {
-    display: none;
 }
 
 table.webprojects td {
@@ -256,7 +249,7 @@ span.wp_untrans {
         min-width: 440px;
     }
 
-    #main-content table .col1 {
+    #main-content table .maincolumn {
         width: 70%;
     }
 }
@@ -298,7 +291,7 @@ span.wp_untrans {
         min-width: 320px;
     }
 
-    #main-content table .col1 {
+    #main-content table .maincolumn {
         width: 70%;
     }
 }

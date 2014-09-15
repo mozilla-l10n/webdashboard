@@ -17,79 +17,68 @@ if ($locamotion) {
 $rss_status .= '</div>';
 
 $lang_files_status = '<h2>State of your lang files <small>(data updated every 15 minutes)</small></h2>';
-$total_identical = 0;
-$total_missing = 0;
-foreach ($lang_files as $site => $tablo) {
+$locale_missing = 0;
 
+foreach ($lang_files as $site => $site_files) {
     $rows = '';
-    $local_count_identical = 0;
+    $site_missing = 0;
 
-    foreach ($tablo as $file => $details) {
+    foreach ($site_files as $file => $details) {
+        $file_missing = $details['identical'] + $details['missing'];
+        if ($file_missing > 0) {
+            // File has missing strings (identical or actually missing)
+            $site_missing += $file_missing;
+            $locale_missing += $file_missing;
 
-        $extra_class1 = '';
-        $extra_class2 = '';
+            // Determine critical status
+            $critical = (isset($details['critical']) && $details['critical']) ? '<strong>Yes</strong>' : 'No';
 
-        if ($details['identical'] == 0 && $details['missing'] == 0) {
-            $extra_class1 = 'class="hideme"';
-        }
-
-        $rows .= "
-                    <tr $extra_class1>
-                        <th class=\"clickme \"><a href=\"". LANG_CHECKER . "?locale=$locale#$file\">$file</a></th>";
-
-        if ($details['identical'] == 0) {
-            $rows .= "     <td class=\"col\">$details[identical]</td>";
-        } else {
-            $rows .= "     <td class=\"col\"><a href=\"". LANG_CHECKER . "?locale=$locale#$file\">$details[identical]</a></td>";
-            $local_count_identical += $details['identical'];
-            $total_identical += $details['identical'];
-        }
-
-        if ($details['missing'] > 0) {
-            $local_count_identical += $details['missing'];
-            $total_missing += $details['missing'];
-        }
-
-        $critical = (isset($details['critical']) && $details['critical']) ? '<strong>Yes</strong>' : 'No';
-
-        $class = '';
-        if (isset($details['deadline'])) {
-            $deadline_timestamp = (new \DateTime($details['deadline']))->getTimestamp();
-            $deadline = date('F d', $deadline_timestamp);
-            if ($deadline_timestamp < time()) {
-                $deadline = date('F d Y', $deadline_timestamp);
-                $class = 'overdue';
+            // Determine deadline status
+            $deadline_class = '';
+            if (isset($details['deadline'])) {
+                $deadline_timestamp = (new \DateTime($details['deadline']))->getTimestamp();
+                $deadline = date('F d', $deadline_timestamp);
+                if ($deadline_timestamp < time()) {
+                    $deadline = date('F d Y', $deadline_timestamp);
+                    $deadline_class = 'overdue';
+                }
+            } else {
+                $deadline = '--';
             }
-        } else {
-            $deadline = '--';
+
+            $url = LANG_CHECKER . "?locale={$locale}#{$file}";
+            $rows .= "  <tr>\n" .
+                     "    <th class='maincolumn'><a href='{$url}'>{$file}</a></th>\n" .
+                     "    <td><a href='{$url}'>{$file_missing}</a></td>" .
+                     "    <td class='{$deadline_class}'>{$deadline}</td>\n" .
+                     "    <td>{$critical}</td>\n" .
+                     "  </tr>\n";
         }
-
-        $rows .= "     <td class=\"col3 $class\">" . $deadline  . '</td>';
-        $rows .= '     <td class="col3">' . $critical  . '</td>';
-        $rows .= '</tr>';
-
     }
 
-    $extra_class2 = ($local_count_identical == 0) ? $extra_class1 : '';
-    $message = ($local_count_identical == 0) ? '<span style="color:gray">All Files translated</span>' : 'Not fully translated';
-
-    $lang_files_status .= "<table>
-        <tr>
-            <th class=\"col1 clickme\">$site</th>
-            <th class=\"col\">$message</th>
-            <th $extra_class2>Deadline</th>
-            <th $extra_class2>Critical</th>
-
-        </tr>";
-
-    $lang_files_status .= $rows;
-    $lang_files_status .= "</table>";
-
+    if ($site_missing > 0) {
+        $lang_files_status .= "\n<table class='file_detail'>\n" .
+                              "  <tr>\n" .
+                              "    <th class='maincolumn'>{$site}</th>\n" .
+                              "    <th>Not fully translated</th>\n" .
+                              "    <th>Deadline</th>\n" .
+                              "    <th>Critical</th>\n" .
+                              "  </tr>\n" .
+                              $rows .
+                              "</table>\n";
+    } else {
+        $lang_files_status .= "\n<table>\n" .
+                              "  <tr>\n" .
+                              "    <th class='maincolumn'>{$site}</th>\n" .
+                              "    <th><span style='color:gray'>All Files translated</span></th>\n" .
+                              "  </tr>\n" .
+                              "</table>\n";
+    }
 }
+
 $lang_files_status .= "<p><small>Reminder: Your staging site for mozilla.org/{$locale}/ is
-                       <a href=\"https://www-dev.allizom.org/{$locale}\">
-                       www-dev.allizom.org/{$locale}/
-                       </a></small></p>";
+                       <a href='https://www-dev.allizom.org/{$locale}'>www-dev.allizom.org/{$locale}/</a></small></p>";
+
 ob_start();
 echo '<h2>Open bugs for your locale:</h2>';
 echo '<ul>';
