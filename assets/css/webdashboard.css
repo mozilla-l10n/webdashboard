@@ -51,6 +51,24 @@ div#locales {
     text-align: left;
 }
 
+span.rawstatus {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+span.untranslated {
+    color: #ff5b52;
+}
+
+span.outdated {
+    color: #ffbd52;
+}
+
+span.missing_reference,
+span.missing_locale {
+    color: #82817f;
+}
+
 #main-content table .overdue {
     color: #f00;
     font-weight: bold;
