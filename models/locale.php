@@ -80,13 +80,36 @@ $webprojects = Json::fetch(Utils::cacheUrl(WEBPROJECTS_JSON, 60*60));
 // d($lang_files);
 // RSS feed  data
 $total_missing_strings = 0;
-$link = LANG_CHECKER .'?locale=' . $locale;
+$total_missing_files = 0;
+$link = LANG_CHECKER . "?locale={$locale}";
 
-foreach ($lang_files as $site => $tablo) {
-    foreach ($tablo as $file => $details) {
-        $count = $details['identical'] + $details['missing'];
-        if ($count > 0) {
-            $message = "You have $count strings untranslated in $file";
+foreach ($lang_files as $site => $site_files) {
+    foreach ($site_files as $file => $details) {
+        $message = '';
+
+        if ($details['data_source'] == 'lang') {
+            // Standard lang file
+            $count = $details['identical'] + $details['missing'];
+            if ($count > 0) {
+                $message = "You have {$count} strings untranslated in {$file}";
+                $total_missing_strings += $count;
+            }
+        } else {
+            // Raw file with only a generic status
+            $cmp_status = $details['status'];
+            $file_flags = isset($details['flags']) ? $details['flags'] : [];
+            if ($cmp_status == 'untranslated' || $cmp_status == 'outdated') {
+                $message = "{$file} needs to be updated.";
+                $total_missing_files++;
+            } elseif (($cmp_status == 'missing_locale' || $cmp_status == 'missing_reference') &&
+                ! in_array('optional', $file_flags)) {
+                // Display warning for a missing file only if it's not optional
+                $message = "{$file} is missing.";
+                $total_missing_files++;
+            }
+        }
+
+        if ($message != '') {
             $status = (isset($details['critical']) && $details['critical'])
                       ? 'Priority file'
                       : 'Nice to have';
@@ -95,21 +118,27 @@ foreach ($lang_files as $site => $tablo) {
               $status .= ' (Deadline is ' . $deadline . ')';
             }
             $rss_data[] = array($status, $link, $message);
-            $total_missing_strings += $count;
         }
     }
 }
 
-if ($total_missing_strings >0) {
+if ($total_missing_files > 0) {
     array_unshift(
         $rss_data,
-        ['Total', $link, "You need to translate $total_missing_strings strings."]
+        ['Other files', $link, "You need to update {$total_missing_files} files."]
+    );
+}
+
+if ($total_missing_strings > 0) {
+    array_unshift(
+        $rss_data,
+        ['Missing strings', $link, "You need to translate {$total_missing_strings} strings."]
     );
 }
 
 // Prepare a RSS feed
 $rss = new Feed($rss_data);
-$rss->title = "L10n Web Dashboard - ".$locale;
-$rss->site  = "http://l10n.mozilla-community.org/webdashboard/?locale=".$locale;
+$rss->title = "L10n Web Dashboard - {$locale}";
+$rss->site  = "http://l10n.mozilla-community.org/webdashboard/?locale={$locale}";
 
 include __DIR__ . '/../views/locale.php';

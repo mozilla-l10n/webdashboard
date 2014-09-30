@@ -24,35 +24,65 @@ foreach ($lang_files as $site => $site_files) {
     $site_missing = 0;
 
     foreach ($site_files as $file => $details) {
-        $file_missing = $details['identical'] + $details['missing'];
-        if ($file_missing > 0) {
-            // File has missing strings (identical or actually missing)
-            $site_missing += $file_missing;
-            $locale_missing += $file_missing;
+        // Determine critical status
+        $critical = (isset($details['critical']) && $details['critical']) ? '<strong>Yes</strong>' : 'No';
 
-            // Determine critical status
-            $critical = (isset($details['critical']) && $details['critical']) ? '<strong>Yes</strong>' : 'No';
+        // Determine deadline status
+        $deadline_class = '';
+        if (isset($details['deadline'])) {
+            $deadline_timestamp = (new \DateTime($details['deadline']))->getTimestamp();
+            $deadline = date('F d', $deadline_timestamp);
+            if ($deadline_timestamp < time()) {
+                $deadline = date('F d Y', $deadline_timestamp);
+                $deadline_class = 'overdue';
+            }
+        } else {
+            $deadline = '--';
+        }
 
-            // Determine deadline status
-            $deadline_class = '';
-            if (isset($details['deadline'])) {
-                $deadline_timestamp = (new \DateTime($details['deadline']))->getTimestamp();
-                $deadline = date('F d', $deadline_timestamp);
-                if ($deadline_timestamp < time()) {
-                    $deadline = date('F d Y', $deadline_timestamp);
-                    $deadline_class = 'overdue';
-                }
-            } else {
-                $deadline = '--';
+        if ($details['data_source'] == 'lang') {
+            // Standard lang file
+            $file_missing = $details['identical'] + $details['missing'];
+            if ($file_missing > 0) {
+                // File has missing strings (identical or actually missing)
+                $site_missing += $file_missing;
+                $locale_missing += $file_missing;
+                $url = LANG_CHECKER . "?locale={$locale}#{$file}";
+                $rows .= "  <tr>\n" .
+                         "    <th class='maincolumn'><a href='{$url}'>{$file}</a></th>\n" .
+                         "    <td><a href='{$url}'>{$file_missing} missing</a></td>" .
+                         "    <td class='{$deadline_class}'>{$deadline}</td>\n" .
+                         "    <td>{$critical}</td>\n" .
+                         "  </tr>\n";
+            }
+        } else {
+            // Raw file with only a generic status
+            $url = LANG_CHECKER . "?locale={$locale}#{$site}";
+            $cmp_status = $details['status'];
+            $file_flags = isset($details['flags']) ? $details['flags'] : [];
+
+            // We display a file only if it's untranslated or outdated, other cases
+            // are displayed only if file is not optional
+            $hide_file = true;
+
+            if ($cmp_status == 'untranslated' || $cmp_status == 'outdated') {
+                $hide_file = false;
+            } elseif (($cmp_status == 'missing_locale' || $cmp_status == 'missing_reference') &&
+                ! in_array('optional', $file_flags)) {
+                // File is missing and it's not optional
+                $hide_file = false;
             }
 
-            $url = LANG_CHECKER . "?locale={$locale}#{$file}";
-            $rows .= "  <tr>\n" .
-                     "    <th class='maincolumn'><a href='{$url}'>{$file}</a></th>\n" .
-                     "    <td><a href='{$url}'>{$file_missing}</a></td>" .
-                     "    <td class='{$deadline_class}'>{$deadline}</td>\n" .
-                     "    <td>{$critical}</td>\n" .
-                     "  </tr>\n";
+            if (! $hide_file) {
+                // Display warnings only if the file is not optional
+                $rows .= "  <tr>\n" .
+                         "    <th class='maincolumn'><a href='{$url}'>{$file}</a></th>\n" .
+                         "    <td><span class='rawstatus {$cmp_status}'>" . str_replace('_', ' ', $cmp_status) ."</span></td>" .
+                         "    <td class='{$deadline_class}'>{$deadline}</td>\n" .
+                         "    <td>{$critical}</td>\n" .
+                         "  </tr>\n";
+                $site_missing++;
+            }
         }
     }
 
@@ -60,7 +90,7 @@ foreach ($lang_files as $site => $site_files) {
         $lang_files_status .= "\n<table class='file_detail'>\n" .
                               "  <tr>\n" .
                               "    <th class='maincolumn'>{$site}</th>\n" .
-                              "    <th>Not fully translated</th>\n" .
+                              "    <th>Status</th>\n" .
                               "    <th>Deadline</th>\n" .
                               "    <th>Critical</th>\n" .
                               "  </tr>\n" .
