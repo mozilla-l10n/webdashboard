@@ -164,6 +164,10 @@ table.webprojects td.status {
     min-width: 300px;
 }
 
+.table_legend {
+    font-size: 85%;
+}
+
 span.wp_status {
     display: inline-block;
     height: 15px;

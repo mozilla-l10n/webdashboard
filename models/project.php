@@ -29,12 +29,15 @@ foreach ($pages as $page) {
 }
 $total_locales = count(array_unique($locales));
 
+$locales_per_page = [];
 // Get status from all locales for each page
 foreach ($pages as $page) {
-    $json_string = $langchecker_query . '&file=' . $page['file'] . '&website=' . $page['site'];
+    $filename = $page['file'];
+    $json_string = $langchecker_query . '&file=' . $filename . '&website=' . $page['site'];
     $data_page = Json::fetch(Utils::cacheUrl($json_string))[$page['file']];
+    $locales_per_page[$filename] = array_keys($data_page);
     foreach ($locales as $locale) {
-        if (in_array($locale, array_keys($data_page))) {
+        if (in_array($locale, $locales_per_page[$filename])) {
             $status[$locale][$page['file']] = $data_page[$locale];
             continue;
         }
@@ -44,7 +47,7 @@ foreach ($pages as $page) {
 ksort($status);
 
 // For each locale, for each page, check the status and store it into a new array
-$status_formated = [];
+$status_formatted = [];
 $locale_done_per_page = [];
 foreach ($status as $locale => $array_status) {
     $total_page = $page_done = 0;
@@ -69,7 +72,7 @@ foreach ($status as $locale => $array_status) {
                 $result = $result['Translated'] . '/' . $count;
             }
         }
-        $status_formated[$locale][$key] = $result;
+        $status_formatted[$locale][$key] = $result;
     }
     if ($page_done == $total_page) {
         $locale_done[] = $locale;
@@ -77,7 +80,7 @@ foreach ($status as $locale => $array_status) {
 }
 $percent_locale_done = round(count($locale_done) / $total_locales * 100, 2);
 
-// Compute user bse coverage for each page then an average
+// Compute user base coverage for each page then an average
 $page_coverage = [];
 $sum_percent_covered_users = $sum_locales_per_page = 0;
 foreach ($locale_done_per_page as $page => $locales) {
