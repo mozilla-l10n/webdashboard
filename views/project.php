@@ -20,7 +20,7 @@ $content .= '
         <tbody>';
 
 // Display status for all pages per locale
-foreach ($status_formated as $locale => $array_status) {
+foreach ($status_formatted as $locale => $array_status) {
     $working_on_locamotion = in_array($locale, $locamotion);
     $content .= '<tr>' . "\n"
               . "<td><a href=\"?locale=$locale\">$locale";
@@ -69,13 +69,14 @@ $content .= '<table class="results sortable">
 foreach ($locale_done_per_page as $page => $locales) {
     $content .= '<tr><td colspan="1">' . $page . '</td>'
               . '<td colspan="1"> ' . count($locales) . '/'
-              . $total_locales . ' perfect locales ('. $page_coverage[$page] . '%)</td></tr>';
+              . count($locales_per_page[$page]) . ' perfect locales ('. $page_coverage[$page] . '%)</td></tr>';
 }
 
 // Display global stats
 $content .= '<tr><td colspan="2" class="final">Total: ' . count($locale_done) . '/' . $total_locales . ' perfect locales (' . $perfect_locales_coverage . '%)</td></tr>'
           . '<tr><td colspan="2">Average: ' . $average_nb_locales . '/' . $total_locales . ' perfect locales (' . $average_coverage . '%)</td></tr>'
           . '</tbody>'
-          . '</table>';
+          . '</table>'
+          . '<p class="table_legend">Percentages between parenthesis express coverage of our l10n base.</p>';
 
 include __DIR__ . '/../templates/' . $template;
