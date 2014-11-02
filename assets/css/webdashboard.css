@@ -38,6 +38,14 @@ div#locales {
     padding: 10px 20px;
 }
 
+#main-content table.results .results_file {
+    text-align: left;
+}
+
+#main-content table.results .results_stats {
+    text-align: right;
+}
+
 #main-content table.results td.final {
     font-weight: bold;
 }

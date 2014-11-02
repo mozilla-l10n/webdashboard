@@ -66,9 +66,11 @@ $content .= '<table class="results sortable">
                 </thead>
                 <tbody>';
 
+// Sort pages
+ksort($locale_done_per_page);
 foreach ($locale_done_per_page as $page => $locales) {
-    $content .= '<tr><td colspan="1">' . $page . '</td>'
-              . '<td colspan="1"> ' . count($locales) . '/'
+    $content .= '<tr><td class="results_file">' . $page . '</td>'
+              . '<td class="results_stats"> ' . count($locales) . '/'
               . count($locales_per_page[$page]) . ' perfect locales ('. $page_coverage[$page] . '%)</td></tr>';
 }
 
