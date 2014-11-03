@@ -42,12 +42,12 @@
               </div>
 
               <div class="footer-license">
-                  <p>Except where otherwise <a href="http://www.mozilla.org/en-US/about/legal.html#site">noted</a>, content on this site is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.</p>
+                  <p>Portions of this content are ©1998–<?php echo date("Y"); ?> by individual mozilla.org contributors. Content available under a <a href="https://www.mozilla.org/foundation/licensing/website-content/">Creative Commons license</a>.</p>
               </div>
 
               <ul class="footer-nav">
-                <li><a href="/privacy/">Privacy Policy</a></li>
-                <li><a href="http://mozilla.org/about/legal.html">Legal Notices</a></li>
+                <li><a href="https://www.mozilla.org/about/privacy/">Privacy</a></li>
+                <li class="wrap"><a href="https://www.mozilla.org/about/legal/">Legal</a></li>
               </ul>
           </div>
          </footer>

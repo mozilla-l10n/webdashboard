@@ -4,7 +4,7 @@ namespace Webdashboard;
 $body_class = $body_class . ' project';
 $links = '<script language="javascript" type="text/javascript" src="./assets/js/sorttable.js"></script>';
 $content = "
-    <table class=\"table sortable\" id=\"project\">
+    <table class=\"table\" id=\"project\">
         <caption>L10n Project Dashboard ($project)</caption>
         <thead>
             <tr>
@@ -12,7 +12,8 @@ $content = "
 
 // Display columns name
 foreach ($pages as $page) {
-    $content .= '<td>' . $page['file'] . '</td>';
+    $status_url = LANG_CHECKER . '?locale=all&amp;website=' . $page['site'] . '&amp;file=' . $page['file'];
+    $content .= '<td><a href="' . $status_url . '" title="Open the status page for this file">' . $page['file'] . '</a></td>';
 }
 $content .= '
             </tr>
@@ -58,7 +59,7 @@ $content .= '</tbody>'
           . '</table>';
 
 // Display stats per page
-$content .= '<table class="results sortable">
+$content .= '<table class="results">
                 <thead>
                   <tr>
                     <th>Page</th><th>Completion</th>
@@ -75,8 +76,8 @@ foreach ($locale_done_per_page as $page => $locales) {
 }
 
 // Display global stats
-$content .= '<tr><td colspan="2" class="final">Total: ' . count($locale_done) . '/' . $total_locales . ' perfect locales (' . $perfect_locales_coverage . '%)</td></tr>'
-          . '<tr><td colspan="2">Average: ' . $average_nb_locales . '/' . $total_locales . ' perfect locales (' . $average_coverage . '%)</td></tr>'
+$content .= '<tr><th colspan="2" class="final">Total: ' . count($locale_done) . '/' . $total_locales . ' perfect locales (' . $perfect_locales_coverage . '%)</th></tr>'
+          . '<tr><th colspan="2">Average: ' . $average_nb_locales . '/' . $total_locales . ' perfect locales (' . $average_coverage . '%)</th></tr>'
           . '</tbody>'
           . '</table>'
           . '<p class="table_legend">Percentages between parenthesis express coverage of our l10n base.</p>';
