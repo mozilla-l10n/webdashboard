@@ -30,6 +30,7 @@ foreach ($pages as $page) {
 $total_locales = count(array_unique($locales));
 
 $locales_per_page = [];
+$page_descriptions = [];
 // Get status from all locales for each page
 foreach ($pages as $page) {
     $filename = $page['file'];
@@ -43,6 +44,7 @@ foreach ($pages as $page) {
         }
         $status[$locale][$page['file']] = 'none';
     }
+    $page_descriptions[$page['file']] = $page['description'];
 }
 ksort($status);
 
@@ -92,5 +94,6 @@ foreach ($locale_done_per_page as $page => $locales) {
 $perfect_locales_coverage = Utils::getUserBaseCoverage($locale_done);
 $average_coverage = round($sum_percent_covered_users / $sum_pages, 2);
 $average_nb_locales = round($sum_locales_per_page / $sum_pages, 2);
+
 
 include __DIR__ . '/../views/project.php';

@@ -8,23 +8,29 @@ $content = "
         <caption>L10n Project Dashboard ($project)</caption>
         <thead>
             <tr>
-                <th>Locale</th>";
+                <th rowspan=\"2\">Locale</th>";
 
 // Display columns name
+$upper_row = $lower_row = '';
 foreach ($pages as $page) {
     $status_url = LANG_CHECKER . '?locale=all&amp;website=' . $page['site'] . '&amp;file=' . $page['file'];
-    $content .= '<td><a href="' . $status_url . '" title="Open the status page for this file">' . $page['file'] . '</a></td>';
+    $upper_row .= '<td><a href="' . $status_url . '" title="Open the status page for this file">' . $page['description'] . '</a></td>';
+    $lower_row .= '<td class="filename">' . $page['file'] . '</td>';
 }
-$content .= '
+
+$content .= "{$upper_row}
+            </tr>
+            <tr>
+                {$lower_row}
             </tr>
         </thead>
-        <tbody>';
+        <tbody>";
 
 // Display status for all pages per locale
 foreach ($status_formatted as $locale => $array_status) {
     $working_on_locamotion = in_array($locale, $locamotion);
     $content .= '<tr>' . "\n"
-              . "<td><a href=\"?locale=$locale\">$locale";
+              . "<td class=\"locale\"><a href=\"?locale=$locale\">$locale";
     if ($working_on_locamotion) {
         $content .= '<img src="./assets/images/locamotion_16.png" class="locamotion" />';
     }
@@ -70,7 +76,7 @@ $content .= '<table class="results">
 // Sort pages
 ksort($locale_done_per_page);
 foreach ($locale_done_per_page as $page => $locales) {
-    $content .= '<tr><td class="results_file">' . $page . '</td>'
+    $content .= '<tr><td class="results_file">' . $page_descriptions[$page] . ' <span class="filename">(' . $page . ')</span></td>'
               . '<td class="results_stats"> ' . count($locales) . '/'
               . count($locales_per_page[$page]) . ' perfect locales ('. $page_coverage[$page] . '%)</td></tr>';
 }
