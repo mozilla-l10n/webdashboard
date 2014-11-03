@@ -72,6 +72,15 @@ div#locales {
     text-align: center;
 }
 
+#main-content table td.filename {
+    font-size: 80%;
+    padding: 0 5px;
+}
+
+#main-content table span.filename {
+    font-size: 80%;
+}
+
 #main-content table .maincolumn {
     width: 400px;
     text-align: left;
@@ -231,9 +240,10 @@ span.wp_untrans {
 #project tr td {
     font-size: 14px;
     text-align: center;
+    max-width: 130px;
 }
 
-#project tr td:first-child {
+#project tr td.locale {
     text-align: left;
     white-space: pre;
 }
