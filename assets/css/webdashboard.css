@@ -22,6 +22,19 @@ div#locales {
     width: 100%;
 }
 
+#colophon .footer-license {
+    width: 300px;
+}
+
+#colophon .footer-nav li {
+    float: left;
+    margin-right: 5px;
+}
+
+#colophon .footer-nav li.wrap::before {
+    content: " · ";
+}
+
 #main-content table {
     text-align: center;
     border-collapse: collapse;
@@ -35,6 +48,11 @@ div#locales {
 }
 
 #main-content table.results td {
+    padding: 10px 20px;
+    background-color: #FFF;
+}
+
+#main-content table.results th {
     padding: 10px 20px;
 }
 
