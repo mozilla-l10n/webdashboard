@@ -18,6 +18,11 @@ $fx10 = [
         'site'        => 0,
     ],
     [
+        'file'        => 'main.lang',
+        'description' => 'Main (shared)',
+        'site'        => 0,
+    ],
+    [
         'file'        => 'firefox/tiles.lang',
         'description' => 'Tiles Landing',
         'site'        => 0,
