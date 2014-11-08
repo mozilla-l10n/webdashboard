@@ -87,7 +87,7 @@ $fx10_extra = [
     ],
     [
         'file'        => 'firefox/desktop/trust.lang',
-        'description' => 'Developer Edition',
+        'description' => 'Trust Page',
         'site'        => 0,
     ],
 ];
