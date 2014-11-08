@@ -74,6 +74,24 @@ $fx10 = [
     ],
 ];
 
+$fx10_extra = [
+    [
+        'file'        => 'firefox/developer.lang',
+        'description' => 'Developer Edition',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/channel.lang',
+        'description' => 'Channel',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/desktop/trust.lang',
+        'description' => 'Developer Edition',
+        'site'        => 0,
+    ],
+];
+
 $firefox_os = [
     [
         'file'        => 'firefox/os/index.lang',
@@ -143,5 +161,6 @@ $pages = [
             'site'        => 0,
         ],
     ],
-    'fx10' => $fx10,
+    'fx10'     => $fx10,
+    'fx10_all' => array_merge($fx10, $fx10_extra),
 ];
