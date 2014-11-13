@@ -41,6 +41,7 @@ div#locales {
     margin-bottom: 1em;
     background-color: rgba(255,255,255,0.4);
     min-width: 650px;
+    clear: both;
 }
 
 #main-content table.results {
@@ -68,13 +69,39 @@ div#locales {
     font-weight: bold;
 }
 
-#main-content table th {
+#main-content table.locales_summary th {
+    padding: 10px 20px;
+}
+
+#main-content table.locales_summary td {
+    padding: 10px 20px;
+    background-color: #FFF;
+    text-align: left;
+    max-width: 300px;
+    vertical-align: top;
+}
+
+#main-content table.locales_summary td.category {
     text-align: center;
 }
 
-#main-content table td.filename {
+table.locales_summary span.title {
+    display: block;
+    font-weight: bold;
+}
+
+table.locales_summary span.description {
+    display: block;
     font-size: 80%;
-    padding: 0 5px;
+}
+
+#main-content table.locales_summary td.summary_locales {
+    width: 300px;
+    text-align: left;
+}
+
+#main-content table th {
+    text-align: center;
 }
 
 #main-content table span.filename {
@@ -118,6 +145,10 @@ span.missing_locale {
 #main-content table td.missing {
     background-color: #ff5252;
     color: #ff5252;
+}
+
+#main-content table td.missing_strings {
+    background-color: #fff;
 }
 
 #main-content table td.inprogress {
@@ -173,9 +204,10 @@ span.missing_locale {
     background: rgba(255,255,255, 0.4);
 }
 
-.locamotion{
+.locamotion {
     vertical-align: middle;
-    margin-left: 12px;
+    margin-left: 6px;
+    margin-top: -3px;
 }
 
 .bugbox1 {
@@ -234,7 +266,13 @@ span.wp_untrans {
 #project caption {
     font-size: 30px;
     text-align: center;
-    margin-bottom: 20px;
+    margin: 20px 0;
+}
+
+#main-content #project th {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
 }
 
 #project tr td {
@@ -246,6 +284,34 @@ span.wp_untrans {
 #project tr td.locale {
     text-align: left;
     white-space: pre;
+    min-width: 70px;
+    line-height: 1.6em;
+}
+
+#project tfoot tr td{
+    font-size: 11px;
+}
+
+#project span.hidden_locales {
+    display: block;
+    font-size: 11px;
+}
+
+#hide_buttons button {
+    float: left;
+    margin-right: 10px;
+}
+
+#hidden_message {
+    font-weight: bold;
+    position: absolute;
+    top: 30px;
+    padding-left: 10px;
+}
+
+.hidden,
+.hidden_locale {
+    display: none;
 }
 
 @media only screen and (min-width: 760px) and (max-width: 1000px) {

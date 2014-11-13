@@ -2,39 +2,65 @@
 namespace Webdashboard;
 
 $body_class = $body_class . ' project';
-$links = '<script language="javascript" type="text/javascript" src="./assets/js/sorttable.js"></script>';
-$content = "
-    <table class=\"table\" id=\"project\">
-        <caption>L10n Project Dashboard ($project)</caption>
-        <thead>
-            <tr>
-                <th rowspan=\"2\">Locale</th>";
+$links = '<script language="javascript" type="text/javascript" src="./assets/js/sorttable.js"></script>' .
+         '<script language="javascript" type="text/javascript" src="./assets/js/toggle.js"></script>';
 
 // Display columns name
-$upper_row = $lower_row = '';
+$header_row = $footer_row = '';
 foreach ($pages as $page) {
     $status_url = LANG_CHECKER . '?locale=all&amp;website=' . $page['site'] . '&amp;file=' . $page['file'];
-    $upper_row .= '<td><a href="' . $status_url . '" title="Open the status page for this file">' . $page['description'] . '</a></td>';
-    $lower_row .= '<td class="filename">' . $page['file'] . '</td>';
+    $header_row .= "<th>{$page['description']}</th>\n";
+    $footer_row .= "<td>
+                      <a href='{$status_url}' title='Open the status page for this file'>{$page['file']}</a>
+                    </td>\n";
 }
 
-$content .= "{$upper_row}
-            </tr>
+$content = "
+    <div id='hide_buttons'>
+        <button class='button' id='button_locales' onclick='toggleLocales(\"complete_locale\", this.id)'>Hide completed locales</button>
+        <button class='button' id='button_locamotion' onclick='toggleLocales(\"locamotion_locale\", this.id)'>Hide Locamotion locales</button>
+        <p id='hidden_message' class='hidden'></p>
+    </div>
+    <table class='table sortable' id='project'>
+        <caption>L10n Dashboard - {$project['title']}</caption>
+        <thead>
             <tr>
-                {$lower_row}
+                <th>Locale</th>
+                <th>Missing<br/>strings</th>
+                {$header_row}
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <td colspan='2'>&nbsp;</td>
+                {$footer_row}
+            </tr>
+        </tfoot>
         <tbody>";
 
 // Display status for all pages per locale
 foreach ($status_formatted as $locale => $array_status) {
     $working_on_locamotion = in_array($locale, $locamotion);
-    $content .= '<tr>' . "\n"
-              . "<td class=\"locale\"><a href=\"?locale=$locale\">$locale";
+
+    // Add extra class if locale is complete
+    $row_class = $stats[$locale]['complete'] ? 'complete_locale' : '';
+
+    if ($working_on_locamotion) {
+        $row_class .= ' locamotion_locale';
+    }
+
+    $missing_strings = $stats[$locale]['strings_total'] - $stats[$locale]['strings_done'];
+    if ($missing_strings == 0) {
+        $missing_strings = '';
+    }
+
+    $content .= "<tr class='{$row_class}'>\n"
+              . "<td class='locale'><a href='?locale={$locale}'>{$locale}";
     if ($working_on_locamotion) {
         $content .= '<img src="./assets/images/locamotion_16.png" class="locamotion" />';
     }
-    $content .= '</a></td>' . "\n";
+    $content .= "</a></td>\n"
+              . "<td class='missing_strings'>{$missing_strings}</td>";
     foreach ($array_status as $key => $result) {
         $cell = $class = '';
 
@@ -68,7 +94,8 @@ $content .= '</tbody>'
 $content .= '<table class="results">
                 <thead>
                   <tr>
-                    <th>Page</th><th>Completion</th>
+                    <th>Page</th>
+                    <th>Completion</th>
                   </tr>
                 </thead>
                 <tbody>';
@@ -87,5 +114,31 @@ $content .= '<tr><th colspan="2" class="final">Total: ' . count($locale_done) . 
           . '</tbody>'
           . '</table>'
           . '<p class="table_legend">Percentages between parenthesis express coverage of our l10n base.</p>';
+
+if ($project['summary']) {
+    // Display table with status summary for locales
+    $content .= '<table class="locales_summary">
+                    <thead>
+                      <tr>
+                        <th>Status</th>
+                        <th>Locales</th>
+                        <th>On Locamotion</th>
+                      </tr>
+                    </thead>
+                    <tbody>';
+    foreach ($locales_summary as $stats) {
+        $content .= "<tr>\n" .
+                    "  <td class='category'>\n" .
+                    "    <span class='title'>{$stats['title']} (" . count($stats['locales']) . ")</span>\n" .
+                    "    <span class='description'>{$stats['description']}</span>\n" .
+                    "  </td>\n" .
+                    "  <td>" . implode(', ', $stats['locales']) . "</td>\n" .
+                    "  <td>" . implode(', ', $stats['locamotion_locales']) . "</td>" .
+                    "</tr>\n";
+    }
+    $content .= '   </tbody>
+                </table>';
+
+}
 
 include __DIR__ . '/../templates/' . $template;
