@@ -143,6 +143,24 @@ $firefox_os_extra = [
     ],
 ];
 
+$snippets_dec14 = [
+    [
+        'file'        => 'dec2014_a.lang',
+        'description' => 'Snippets A',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'dec2014_b.lang',
+        'description' => 'Snippets B',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'dec2014_c.lang',
+        'description' => 'Snippets C',
+        'site'        => 6,
+    ],
+];
+
 $pages = [
     'default' => [
         [
@@ -163,4 +181,5 @@ $pages = [
     ],
     'fx10'     => $fx10,
     'fx10_all' => array_merge($fx10, $fx10_extra),
+    'snippets_dec14' => $snippets_dec14,
 ];
