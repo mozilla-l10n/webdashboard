@@ -1,4 +1,5 @@
 cache/*.cache
 composer.lock
 composer.phar
+config/settings.inc.php
 vendor

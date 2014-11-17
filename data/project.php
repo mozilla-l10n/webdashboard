@@ -161,25 +161,48 @@ $snippets_dec14 = [
     ],
 ];
 
-$pages = [
+/*
+* Each project has a key name that will be used in the URL.
+* Value is an array with:
+* - pages: list of files
+* - title: text to be displayed in the project page as title
+* - summary: if we need to display the summary table with good/bad locales
+*/
+
+$projects = [
     'default' => [
-        [
-            'file'        => 'main.lang',
-            'description' => 'main.lang',
-            'site'        => 0,
-        ],
+        'pages'  =>
+            [
+                'file'        => 'main.lang',
+                'description' => 'main.lang',
+                'site'        => 0,
+            ],
+        'title'   => 'Default',
+        'summary' => true,
     ],
-    'firefox_os' => $firefox_os,
-    'firefox_os_all' => array_merge($firefox_os, $firefox_os_extra),
-    'firefox_usage' =>
-    [
-        [
-            'file'        => 'firefox/desktop/tips.lang',
-            'description' => 'Firefox Tips',
-            'site'        => 0,
-        ],
+    'firefox_os' => [
+        'pages'   => $firefox_os,
+        'title'   => 'Firefox OS',
+        'summary' => true,
     ],
-    'fx10'     => $fx10,
-    'fx10_all' => array_merge($fx10, $fx10_extra),
-    'snippets_dec14' => $snippets_dec14,
+    'firefox_os_all' => [
+        'pages'   => array_merge($firefox_os, $firefox_os_extra),
+        'title'   => 'Firefox OS Complete',
+        'summary' => true,
+    ],
+    'fx10' => [
+        'pages'   => $fx10,
+        'title'   => 'Firefox 10th Anniversary',
+        'summary' => true,
+    ],
+    'fx10_all' => [
+        'pages'   => array_merge($fx10, $fx10_extra),
+        'title'   => 'Firefox 10th Anniversary Complete',
+        'summary' => true,
+    ],
+    'snippets_dec14' => [
+        'pages'   => $snippets_dec14,
+        'title'   => 'Snippets December 2014',
+        'summary' => false,
+    ],
 ];

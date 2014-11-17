@@ -11,8 +11,9 @@ $locale_done = [];
 // include all data about project pages
 include __DIR__ . '/../data/project.php';
 
-$project = (array_key_exists($_GET['project'], $pages)) ? $_GET['project'] : 'default';
-$pages = $pages[$project];
+$requested_project = (array_key_exists($_GET['project'], $projects)) ? $_GET['project'] : 'default';
+$project = $projects[$requested_project];
+$pages = $project['pages'];
 $sum_pages = count($pages);
 
 // Get all locales from project pages list
@@ -48,36 +49,51 @@ foreach ($pages as $page) {
 }
 ksort($status);
 
-// For each locale, for each page, check the status and store it into a new array
+// For each locale and each page, check the status and store it into a new array
 $status_formatted = [];
 $locale_done_per_page = [];
+$stats = [];
 foreach ($status as $locale => $array_status) {
     $total_page = $page_done = 0;
+    $stats[$locale] = [
+        'strings_total' => 0,
+        'strings_done'  => 0,
+        'complete'      => false,
+        'percentage'    => 0,
+        'locamotion'    => in_array($locale, $locamotion),
+    ];
     foreach ($array_status as $key => $result) {
-        // This locale does not have this page
         if ($result != 'none') {
             $total_page++;
-            // Page done
+            // Update stats for this locale
+            $stats[$locale]['strings_total'] += $result['Translated'] + $result['Missing'] + $result['Identical'];
+            $stats[$locale]['strings_done'] += $result['Translated'];
             if ($result['Identical'] == 0 && $result['Missing'] == 0) {
+                // Page done
                 $page_done++;
                 $result = 'done';
                 (isset($locale_done_per_page[$key]))
                     ? $locale_done_per_page[$key][] = $locale
                     : $locale_done_per_page[$key] = [$locale];
-            // Missing
             } elseif ($result['Translated'] == 0) {
+                // Missing
                 $result = 'missing';
-
-            // In progress
             } else {
+                // In progress
                 $count = $result['Translated'] + $result['Missing'] + $result['Identical'];
                 $result = $result['Translated'] . '/' . $count;
             }
         }
         $status_formatted[$locale][$key] = $result;
     }
+
     if ($page_done == $total_page) {
+        // Locale is complete
         $locale_done[] = $locale;
+        $stats[$locale]['complete'] = true;
+        $stats[$locale]['percentage'] = 100;
+    } else {
+        $stats[$locale]['percentage'] = round($stats[$locale]['strings_done'] / $stats[$locale]['strings_total'] * 100, 2);
     }
 }
 $percent_locale_done = round(count($locale_done) / $total_locales * 100, 2);
@@ -95,5 +111,58 @@ $perfect_locales_coverage = Utils::getUserBaseCoverage($locale_done);
 $average_coverage = round($sum_percent_covered_users / $sum_pages, 2);
 $average_nb_locales = round($sum_locales_per_page / $sum_pages, 2);
 
+// Organize data in $stats to display a summary of all locales
+$locales_summary = [
+    'perfect' => [
+        'title'              => 'Perfect',
+        'description'        => 'No missing strings',
+        'locales'            => [],
+        'locamotion_locales' => [],
+    ],
+    'good'    => [
+        'title'              => 'Good',
+        'description'        => 'Less than 10% missing',
+        'locales'            => [],
+        'locamotion_locales' => [],
+    ],
+    'average' => [
+        'title'              => 'Average',
+        'description'        => 'Between 10% and 40% missing',
+        'locales'            => [],
+        'locamotion_locales' => [],
+    ],
+    'bad'     => [
+        'title'              => 'Bad',
+        'description'        => 'Between 40% and 70% missing',
+        'locales'            => [],
+        'locamotion_locales' => [],
+    ],
+    'verybad' => [
+        'title'              => 'Very Bad',
+        'description'        => 'Over 70% missing',
+        'locales'            => [],
+        'locamotion_locales' => [],
+    ],
+];
+
+foreach ($stats as $locale => $locale_stats) {
+    $category = '';
+    if ($locale_stats['percentage'] == 100) {
+        $category = 'perfect';
+    } elseif ($locale_stats['percentage'] >= 90) {
+        $category = 'good';
+    } elseif ($locale_stats['percentage'] >= 60) {
+        $category = 'average';
+    } elseif ($locale_stats['percentage'] >= 30) {
+        $category = 'bad';
+    } else {
+        $category = 'verybad';
+    }
+
+    $locales_summary[$category]['locales'][] = $locale;
+    if ($locale_stats['locamotion']) {
+        $locales_summary[$category]['locamotion_locales'][] = $locale;
+    }
+}
 
 include __DIR__ . '/../views/project.php';
