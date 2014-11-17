@@ -1,6 +1,14 @@
 <?php
 // This is the list of the tracked pages
 
+$default_page = [
+    [
+        'file'        => 'main.lang',
+        'description' => 'main.lang',
+        'site'        => 0,
+    ],
+];
+
 $fx10 = [
     [
         'file'        => 'firefox/privacy_tour/privacy_tour.lang',
@@ -171,12 +179,7 @@ $snippets_dec14 = [
 
 $projects = [
     'default' => [
-        'pages'  =>
-            [
-                'file'        => 'main.lang',
-                'description' => 'main.lang',
-                'site'        => 0,
-            ],
+        'pages'   => $default_page,
         'title'   => 'Default',
         'summary' => true,
     ],
