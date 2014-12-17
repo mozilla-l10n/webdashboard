@@ -1,7 +1,7 @@
 <?php
 namespace Webdashboard;
 
-$body_class = $body_class . ' project';
+$body_class = $body_class . ' project_view';
 $links = '<script language="javascript" type="text/javascript" src="./assets/js/sorttable.js"></script>' .
          '<script language="javascript" type="text/javascript" src="./assets/js/toggle.js"></script>';
 
@@ -21,7 +21,7 @@ $content = "
         <button class='button' id='button_locamotion' onclick='toggleLocales(\"locamotion_locale\", this.id)'>Hide Locamotion locales</button>
         <p id='hidden_message' class='hidden'></p>
     </div>
-    <table class='table sortable' id='project'>
+    <table class='sortable' id='project_data'>
         <caption>L10n Dashboard - {$project['title']}</caption>
         <thead>
             <tr>
@@ -60,27 +60,27 @@ foreach ($status_formatted as $locale => $array_status) {
         $content .= '<img src="./assets/images/locamotion_16.png" class="locamotion" />';
     }
     $content .= "</a></td>\n"
-              . "<td class='missing_strings'>{$missing_strings}</td>";
+              . "<td class='project_missing_strings'>{$missing_strings}</td>";
     foreach ($array_status as $key => $result) {
         $cell = $class = '';
 
         // This locale does not have this page
         if ($result == 'none') {
             $cell = '1';
-            $class = $result;
+            $class = 'project_none';
         } else {
             // Page done
             if ($result  == 'done') {
                 $cell = '100%';
-                $class = $result;
+                $class = 'project_done';
             // Missing
             } elseif ($result == 'missing') {
                 $cell = '0%';
-                $class = $result;
+                $class = 'project_missing';
             // In progress
             } else {
                 $cell = $result;
-                $class = 'inprogress';
+                $class = 'project_in_progress';
             }
         }
         $content .= '<td class="' . $class . '">' . $cell . '</td>' . "\n";
@@ -91,7 +91,7 @@ $content .= '</tbody>'
           . '</table>';
 
 // Display stats per page
-$content .= '<table class="results">
+$content .= '<table id="project_results">
                 <thead>
                   <tr>
                     <th>Page</th>
@@ -117,7 +117,7 @@ $content .= '<tr><th colspan="2" class="final">Total: ' . count($locale_done) . 
 
 if ($project['summary']) {
     // Display table with status summary for locales
-    $content .= '<table class="locales_summary">
+    $content .= '<table id="project_locales_summary">
                     <thead>
                       <tr>
                         <th>Status</th>

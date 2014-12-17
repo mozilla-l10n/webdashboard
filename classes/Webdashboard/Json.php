@@ -1,16 +1,55 @@
 <?php
 namespace Webdashboard;
 
+/**
+ * Json class
+ *
+ * JSON functions to read a JSON file or output data in JSON/JSONP format
+ *
+ *
+ * @package Webdashboard
+ */
 class Json
 {
-    /*
-     * Return a json/jsonp representation of data and exits;
-     *
-     * @param  array  data in json field
-     * @param  string jsonp function name, default to false
-     * @return json feed
+    /**
+     * @var  string  $jsonURI  URI of the JSON stream to read
      */
-    public static function output(array $data, $jsonp = false, $pretty_print = false)
+    private $jsonURI;
+
+    /**
+     * Build Json object and set URI (default empty)
+     *
+     * @param  string  $uri  URI of the JSON stream to read
+     */
+    public function __construct($uri = '')
+    {
+        $this->jsonURI = $uri;
+    }
+
+    /**
+     * Set JSON URI
+     *
+     * @param  string  $uri  JSON URI to read
+     *
+     * @return $this         Newly created Json object
+     */
+    public function setURI($uri)
+    {
+        $this->jsonURI = $uri;
+
+        return $this;
+    }
+
+    /**
+     * Return a JSON/JSONP representation of data
+     *
+     * @param  array  Data in JSON field
+     * @param  mixed  Can be a string (JSONP function name), or boolean.
+     *                Default value is false
+     *
+     * @return json   JSON content
+     */
+    public function outputContent(array $data, $jsonp = false, $pretty_print = false)
     {
         $json = $pretty_print ? json_encode($data, JSON_PRETTY_PRINT) : json_encode($data);
         $mime = 'application/json';
@@ -30,14 +69,13 @@ class Json
         return $json;
     }
 
-    /*
-     * Return a array from a local or remote file json file
+    /**
+     * Return an array from a local or remote JSON file
      *
-     * @param  string  uri of the resource
-     * @return array
+     * @return  array  Decoded JSON content
      */
-    public static function fetch($uri)
+    public function fetchContent()
     {
-        return json_decode(file_get_contents($uri), true);
+        return json_decode(file_get_contents($this->jsonURI), true);
     }
 }

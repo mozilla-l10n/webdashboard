@@ -5,8 +5,8 @@
 
 $json = isset($_get['json']) ? true : false;
 
-// include all data about our locales
+// Include all data about our locales
 include __DIR__ . '/../data/locales.php';
 
-// include view
+// Include view
 include __DIR__ . '/../views/home.php';

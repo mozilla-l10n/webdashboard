@@ -1,3 +1,4 @@
+/*jshint unused:false*/
 
 function toggleLocales(className, buttonID) {
     var localeList = document.getElementsByClassName(className);
