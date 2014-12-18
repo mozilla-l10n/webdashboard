@@ -151,20 +151,35 @@ $firefox_os_extra = [
     ],
 ];
 
-$snippets_dec14 = [
+$snippets_jan15 = [
     [
-        'file'        => 'dec2014_a.lang',
-        'description' => 'Snippets A',
+        'file'        => 'jan2015a_a.lang',
+        'description' => 'Snippets A - Jan 7',
         'site'        => 6,
     ],
     [
-        'file'        => 'dec2014_b.lang',
-        'description' => 'Snippets B',
+        'file'        => 'jan2015a_b.lang',
+        'description' => 'Snippets B - Jan 7',
         'site'        => 6,
     ],
     [
-        'file'        => 'dec2014_c.lang',
-        'description' => 'Snippets C',
+        'file'        => 'jan2015a_c.lang',
+        'description' => 'Snippets C - Jan 7',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jan2015a_d.lang',
+        'description' => 'Snippets D - Jan 7',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jan2015b_a.lang',
+        'description' => 'Snippets A - Jan 21',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jan2015b_b.lang',
+        'description' => 'Snippets B - Jan 21',
         'site'        => 6,
     ],
 ];
@@ -203,9 +218,9 @@ $projects = [
         'title'   => 'Firefox 10th Anniversary Complete',
         'summary' => true,
     ],
-    'snippets_dec14' => [
-        'pages'   => $snippets_dec14,
-        'title'   => 'Snippets December 2014',
+    'snippets_jan2015' => [
+        'pages'   => $snippets_jan15,
+        'title'   => 'Snippets January 2015',
         'summary' => false,
     ],
 ];
