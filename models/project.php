@@ -2,16 +2,19 @@
 namespace Webdashboard;
 
 // Check if the locale is working on locamotion
-$locamotion = Json::fetch(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60));
+$json_data = new Json;
+$locamotion = $json_data
+    ->setURI(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60))
+    ->fetchContent();
 
 // Base for the query to get external data
 $langchecker_query = LANG_CHECKER . '?locale=all&json';
 $locale_done = [];
 
-// include all data about project pages
+// Include all data about project pages
 include __DIR__ . '/../data/project.php';
 
-$requested_project = (array_key_exists($_GET['project'], $projects)) ? $_GET['project'] : 'default';
+$requested_project = array_key_exists($_GET['project'], $projects) ? $_GET['project'] : 'default';
 $project = $projects[$requested_project];
 $pages = $project['pages'];
 $sum_pages = count($pages);
@@ -20,7 +23,9 @@ $sum_pages = count($pages);
 $locales = [];
 foreach ($pages as $page) {
     $json_string = $langchecker_query . '&file=' . $page['file'] . '&website=' . $page['site'];
-    $data_page = Json::fetch(Utils::cacheUrl($json_string))[$page['file']];
+    $data_page = $json_data
+        ->setURI(Utils::cacheUrl($json_string, 15*60))
+        ->fetchContent()[$page['file']];
     foreach ($data_page as $key => $val) {
         if (in_array($key, $locales)) {
             continue;
@@ -36,7 +41,9 @@ $page_descriptions = [];
 foreach ($pages as $page) {
     $filename = $page['file'];
     $json_string = $langchecker_query . '&file=' . $filename . '&website=' . $page['site'];
-    $data_page = Json::fetch(Utils::cacheUrl($json_string))[$page['file']];
+    $data_page = $json_data
+        ->setURI(Utils::cacheUrl($json_string, 15*60))
+        ->fetchContent()[$page['file']];
     $locales_per_page[$filename] = array_keys($data_page);
     foreach ($locales as $locale) {
         if (in_array($locale, $locales_per_page[$filename])) {
@@ -102,12 +109,12 @@ $percent_locale_done = round(count($locale_done) / $total_locales * 100, 2);
 $page_coverage = [];
 $sum_percent_covered_users = $sum_locales_per_page = 0;
 foreach ($locale_done_per_page as $page => $locales) {
-    $page_coverage[$page] = Utils::getUserBaseCoverage($locales);
+    $page_coverage[$page] = Utils::getUserBaseCoverage($locales, LANG_CHECKER);
     $sum_percent_covered_users += $page_coverage[$page];
     $sum_locales_per_page += count($locales);
 }
 
-$perfect_locales_coverage = Utils::getUserBaseCoverage($locale_done);
+$perfect_locales_coverage = Utils::getUserBaseCoverage($locale_done, LANG_CHECKER);
 $average_coverage = round($sum_percent_covered_users / $sum_pages, 2);
 $average_nb_locales = round($sum_locales_per_page / $sum_pages, 2);
 

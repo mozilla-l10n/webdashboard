@@ -55,7 +55,7 @@ namespace Webdashboard;
 
 require_once __DIR__ . '/../config/init.php';
 
-// include all data about our locales
+// Include all data about our locales
 include __DIR__ . '/../data/locales.php';
 
 $results = [];
@@ -63,14 +63,13 @@ $results['types']["Webbugs"] = ["pluralLabel" => "Webbugs"];
 $results['properties']["total_webbugs"] = ["valueType" => "number"];
 $results['properties']["missing_webbugs"] = ["valueType" => "number"];
 
-// all opened bugs for a locale in the mozilla.org/l10n component
+// All opened bugs for a locale in the mozilla.org/l10n component
 foreach ($locales as $locale) {
-
     $bugzilla_query = 'https://bugzilla.mozilla.org/buglist.cgi?'
                     . 'f1=cf_locale'
                     . '&o1=equals'
                     . '&query_format=advanced'
-                    . '&v1=' . urlencode(Utils::getBugzillaLocaleField($locale))
+                    . '&v1=' . urlencode(Bugzilla::getBugzillaLocaleField($locale))
                     . '&o2=equals'
                     . '&f2=component'
                     . '&v2=L10N'
@@ -81,13 +80,11 @@ foreach ($locales as $locale) {
                     . '&classification=Other'
                     . '&product=www.mozilla.org';
 
-
-    // cache in a local cache folder if possible, 6 hours cache
+    // Cache in a local cache folder if possible, 6 hours cache
     $csv = Utils::cacheUrl($bugzilla_query . '&ctype=csv', 6*60*60);
 
-    // generate all the bugs
-    $bugs = Utils::getBugsFromCSV($csv);
-    // print $locale . ': ' . count($bugs) . '<br>';
+    // Generate all the bugs
+    $bugs = Bugzilla::getBugsFromCSV($csv);
     $results['items'][] = [
         "type"            => "Webbugs",
         "label"           => $locale,
@@ -96,4 +93,5 @@ foreach ($locales as $locale) {
     ];
 }
 
-print Json::output($results, false, true);
+$json_data = new Json;
+print $json_data->outputContent($results, false, true);

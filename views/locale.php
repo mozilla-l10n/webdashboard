@@ -8,7 +8,7 @@ $rss_status = <<<RSS
     Subscribe to the RSS feed for your locale!
     </a>
 </p>
-<div id="locale">
+<div id="locale_page_title">
     <a href="http://wiki.mozilla.org/L10n:Teams:{$locale}">{$locale}</a>
 RSS;
 if ($locamotion) {
@@ -17,11 +17,10 @@ if ($locamotion) {
 $rss_status .= '</div>';
 
 $lang_files_status = '<h2>State of your lang files <small>(data updated every 15 minutes)</small></h2>';
-$locale_missing = 0;
 
 foreach ($lang_files as $site => $site_files) {
     $rows = '';
-    $site_missing = 0;
+    $display_errors = false;
 
     foreach ($site_files as $file => $details) {
         // Determine critical status
@@ -34,23 +33,34 @@ foreach ($lang_files as $site => $site_files) {
             $deadline = date('F d', $deadline_timestamp);
             if ($deadline_timestamp < time()) {
                 $deadline = date('F d Y', $deadline_timestamp);
-                $deadline_class = 'overdue';
+                $deadline_class = 'deadline_overdue';
             }
         } else {
-            $deadline = '--';
+            $deadline = '-';
         }
 
         if ($details['data_source'] == 'lang') {
-            // Standard lang file
+            // Standard .lang file
             $file_missing = $details['identical'] + $details['missing'];
-            if ($file_missing > 0) {
+            $file_errors = $details['errors'];
+            if ($file_missing + $file_errors > 0) {
                 // File has missing strings (identical or actually missing)
-                $site_missing += $file_missing;
-                $locale_missing += $file_missing;
+                $display_errors = true;
                 $url = LANG_CHECKER . "?locale={$locale}#{$file}";
+                if ($file_errors > 0) {
+                    $error_display = "<a href='{$url}'>{$file_errors}</a>";
+                } else {
+                    $error_display = '-';
+                }
+                if ($file_missing > 0) {
+                    $missing_display = "<a href='{$url}'>{$file_missing}</a>";
+                } else {
+                    $missing_display = '-';
+                }
                 $rows .= "  <tr>\n" .
-                         "    <th class='maincolumn'><a href='{$url}'>{$file}</a></th>\n" .
-                         "    <td><a href='{$url}'>{$file_missing} missing</a></td>" .
+                         "    <th class='main_column'><a href='{$url}'>{$file}</a></th>\n" .
+                         "    <td>{$missing_display}</td>\n" .
+                         "    <td>{$error_display}</td>\n" .
                          "    <td class='{$deadline_class}'>{$deadline}</td>\n" .
                          "    <td>{$critical}</td>\n" .
                          "  </tr>\n";
@@ -76,30 +86,51 @@ foreach ($lang_files as $site => $site_files) {
             if (! $hide_file) {
                 // Display warnings only if the file is not optional
                 $rows .= "  <tr>\n" .
-                         "    <th class='maincolumn'><a href='{$url}'>{$file}</a></th>\n" .
-                         "    <td><span class='rawstatus {$cmp_status}'>" . str_replace('_', ' ', $cmp_status) ."</span></td>" .
+                         "    <th class='main_column'><a href='{$url}'>{$file}</a></th>\n" .
+                         "    <td><span class='raw_status raw_{$cmp_status}'>" . str_replace('_', ' ', $cmp_status) ."</span></td>" .
                          "    <td class='{$deadline_class}'>{$deadline}</td>\n" .
                          "    <td>{$critical}</td>\n" .
                          "  </tr>\n";
-                $site_missing++;
+                $display_errors = true;
             }
         }
     }
 
-    if ($site_missing > 0) {
-        $lang_files_status .= "\n<table class='file_detail'>\n" .
-                              "  <tr>\n" .
-                              "    <th class='maincolumn'>{$site}</th>\n" .
-                              "    <th>Status</th>\n" .
-                              "    <th>Deadline</th>\n" .
-                              "    <th>Critical</th>\n" .
-                              "  </tr>\n" .
-                              $rows .
-                              "</table>\n";
+    if ($display_errors) {
+        /* The type of data source is identical for all files in a website.
+         * Since I have errors, there's at least one file that I can use to
+         * determine the data source type, no need to check if it exists.
+         */
+        $data_source_type = array_shift($site_files)['data_source'];
+
+        if ($data_source_type == 'lang') {
+            // Standard .lang file
+            $lang_files_status .= "\n<table class='file_detail'>\n" .
+                                  "  <tr>\n" .
+                                  "    <th class='main_column'>{$site}</th>\n" .
+                                  "    <th>Missing</th>\n" .
+                                  "    <th>Errors</th>\n" .
+                                  "    <th>Deadline</th>\n" .
+                                  "    <th>Critical</th>\n" .
+                                  "  </tr>\n" .
+                                  $rows .
+                                  "</table>\n";
+        } else {
+            // Raw file with only a generic status
+            $lang_files_status .= "\n<table class='file_detail'>\n" .
+                                  "  <tr>\n" .
+                                  "    <th class='main_column'>{$site}</th>\n" .
+                                  "    <th>Status</th>\n" .
+                                  "    <th>Deadline</th>\n" .
+                                  "    <th>Critical</th>\n" .
+                                  "  </tr>\n" .
+                                  $rows .
+                                  "</table>\n";
+        }
     } else {
         $lang_files_status .= "\n<table>\n" .
                               "  <tr>\n" .
-                              "    <th class='maincolumn'>{$site}</th>\n" .
+                              "    <th class='main_column'>{$site}</th>\n" .
                               "    <th><span style='color:gray'>All Files translated</span></th>\n" .
                               "  </tr>\n" .
                               "</table>\n";
@@ -144,7 +175,7 @@ if (isset($webprojects[$weblocale])) {
     }
     asort($available_products);
     echo "
-<table class='webprojects'>
+<table class='web_projects'>
   <thead>
     <tr>
       <th>Project</th>
@@ -184,10 +215,10 @@ if (isset($webprojects[$weblocale])) {
       <td>{$webproject['name']}</td>
       <td class='perc'>{$webproject['percentage']}</td>
       <td class='status' title='{$message}'>
-        <span class='wp_status wp_errors' style='width: {$errors_width}%;'>file contains errors</span>
-        <span class='wp_status wp_trans' style='width: {$trans_width}%;'></span>
-        <span class='wp_status wp_untrans' style='width: {$untrans_width}%;'></span>
-        <span class='wp_status wp_fuzzy' style='width: {$fuzzy_width}%;'></span>
+        <span class='web_projects_status web_projects_errors' style='width: {$errors_width}%;'>error</span>
+        <span class='web_projects_status web_projects_trans' style='width: {$trans_width}%;'></span>
+        <span class='web_projects_status web_projects_untrans' style='width: {$untrans_width}%;'></span>
+        <span class='web_projects_status web_projects_fuzzy' style='width: {$fuzzy_width}%;'></span>
       </td>
     </tr>\n";
 
