@@ -3,6 +3,8 @@
  * Model for individual locale view
  */
 namespace Webdashboard;
+use Bugzilla\Bugzilla;
+use Cache\Cache;
 
 $json = isset($_GET['json']);
 $locale = $_GET['locale'];
@@ -26,9 +28,14 @@ $lang_files = $json_data
     ->fetchContent();
 
 // Check if the locale is working on locamotion
-$locamotion = $json_data
-    ->setURI(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60))
-    ->fetchContent();
+$cache_id = 'locamotion_locales';
+if (! $locamotion = Cache::getKey($cache_id)) {
+    $locamotion = $json_data
+        ->setURI(LANG_CHECKER . '?action=listlocales&project=locamotion&json')
+        ->fetchContent();
+    Cache::setKey($cache_id, $locamotion);
+}
+
 $locamotion = in_array($locale, $locamotion);
 
 // All open bugs for a locale in the mozilla.org/l10n component
@@ -61,13 +68,24 @@ $bugzilla_query_l10ncomponent = 'https://bugzilla.mozilla.org/buglist.cgi?'
                               . '&product=Mozilla%20Localizations';
 
 
-// Cache in a local cache folder if possible
-$csv_mozillaorg = Utils::cacheUrl($bugzilla_query_mozillaorg . '&ctype=csv', 15*60);
-$csv_l10ncomponent = Utils::cacheUrl($bugzilla_query_l10ncomponent . '&ctype=csv', 15*60);
+/* Use cached requests if available, cache expires after 1 hour
+ * Note: result can be empty, so I need to check strictly for false
+ */
+$cache_id = "bugs_mozillaorg_{$locale}";
+$bugs_mozillaorg = Cache::getKey($cache_id, 60*60);
+if ($bugs_mozillaorg === false) {
+    $csv_mozillaorg = file($bugzilla_query_mozillaorg . '&ctype=csv');
+    $bugs_mozillaorg = Bugzilla::getBugsFromCSV($csv_mozillaorg);
+    Cache::setKey($cache_id, $bugs_mozillaorg);
+}
 
-// Generate all the bugs
-$bugs_mozillaorg = Bugzilla::getBugsFromCSV($csv_mozillaorg);
-$bugs_l10ncomponent = Bugzilla::getBugsFromCSV($csv_l10ncomponent);
+$cache_id = "bugs_l10ncomponent_{$locale}";
+$bugs_l10ncomponent = Cache::getKey($cache_id, 60*60);
+if ($bugs_l10ncomponent === false) {
+    $csv_l10ncomponent = file($bugzilla_query_l10ncomponent . '&ctype=csv');
+    $bugs_l10ncomponent = Bugzilla::getBugsFromCSV($csv_l10ncomponent);
+    Cache::setKey($cache_id, $bugs_l10ncomponent);
+}
 
 $bugs = $bugs_mozillaorg + $bugs_l10ncomponent;
 
@@ -79,10 +97,14 @@ if (count($bugs) > 0) {
     }
 }
 
-// Read status of external web projects, cache cleaned every hour.
-$webprojects = $json_data
-    ->setURI(Utils::cacheUrl(WEBPROJECTS_JSON, 60*60))
-    ->fetchContent();
+// Read status of external web projects, cache expires after 1 hour.
+$cache_id = 'external_webprojects';
+if (! $webprojects = Cache::getKey($cache_id, 60*60)) {
+    $webprojects = $json_data
+        ->setURI(WEBPROJECTS_JSON)
+        ->fetchContent();
+    Cache::setKey($cache_id, $webprojects);
+}
 
 // RSS feed data
 $total_missing_strings = 0;

@@ -1,11 +1,17 @@
 <?php
 namespace Webdashboard;
+use Cache\Cache;
 
 // Check if the locale is working on locamotion
 $json_data = new Json;
-$locamotion = $json_data
-    ->setURI(Utils::cacheUrl(LANG_CHECKER . '?action=listlocales&project=locamotion&json', 15*60))
-    ->fetchContent();
+
+$cache_id = 'locamotion_locales';
+if (! $locamotion = Cache::getKey($cache_id)) {
+    $locamotion = $json_data
+        ->setURI(LANG_CHECKER . '?action=listlocales&project=locamotion&json')
+        ->fetchContent();
+    Cache::setKey($cache_id, $locamotion);
+}
 
 // Base for the query to get external data
 $langchecker_query = LANG_CHECKER . '?locale=all&json';
@@ -22,17 +28,23 @@ $sum_pages = count($pages);
 // Get all locales from project pages list
 $locales = [];
 foreach ($pages as $page) {
-    $json_string = $langchecker_query . '&file=' . $page['file'] . '&website=' . $page['site'];
-    $data_page = $json_data
-        ->setURI(Utils::cacheUrl($json_string, 15*60))
-        ->fetchContent()[$page['file']];
-    foreach ($data_page as $key => $val) {
-        if (in_array($key, $locales)) {
-            continue;
-        }
-        $locales[] = $key;
+    $filename = $page['file'];
+    $json_string = $langchecker_query . '&file=' . $filename . '&website=' . $page['site'];
+
+    $cache_id = 'page_' . $filename . '_' . $page['site'];
+    if (! $data_page = Cache::getKey($cache_id)) {
+        $data_page = $json_data
+            ->setURI($json_string)
+            ->fetchContent()[$filename];
+        Cache::setKey($cache_id, $data_page);
     }
+
+    $locales = array_merge($locales, array_keys($data_page));
 }
+
+$locales = array_unique($locales);
+sort($locales);
+
 $total_locales = count(array_unique($locales));
 
 $locales_per_page = [];
@@ -41,18 +53,24 @@ $page_descriptions = [];
 foreach ($pages as $page) {
     $filename = $page['file'];
     $json_string = $langchecker_query . '&file=' . $filename . '&website=' . $page['site'];
-    $data_page = $json_data
-        ->setURI(Utils::cacheUrl($json_string, 15*60))
-        ->fetchContent()[$page['file']];
+
+    $cache_id = 'page_' . $filename . '_' . $page['site'];
+    if (! $data_page = Cache::getKey($cache_id)) {
+        $data_page = $json_data
+            ->setURI($json_string)
+            ->fetchContent()[$filename];
+        Cache::setKey($cache_id, $data_page);
+    }
+
     $locales_per_page[$filename] = array_keys($data_page);
     foreach ($locales as $locale) {
         if (in_array($locale, $locales_per_page[$filename])) {
-            $status[$locale][$page['file']] = $data_page[$locale];
+            $status[$locale][$filename] = $data_page[$locale];
             continue;
         }
-        $status[$locale][$page['file']] = 'none';
+        $status[$locale][$filename] = 'none';
     }
-    $page_descriptions[$page['file']] = $page['description'];
+    $page_descriptions[$filename] = $page['description'];
 }
 ksort($status);
 

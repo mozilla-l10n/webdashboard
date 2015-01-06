@@ -137,8 +137,13 @@ foreach ($lang_files as $site => $site_files) {
     }
 }
 
-$lang_files_status .= "<p><small>Reminder: Your staging site for mozilla.org/{$locale}/ is
-                       <a href='https://www-dev.allizom.org/{$locale}'>www-dev.allizom.org/{$locale}/</a></small></p>";
+if (count($lang_files) > 0) {
+    $lang_files_status .= "<p><small>Reminder: Your staging site for mozilla.org/{$locale}/ is
+                           <a href='https://www-dev.allizom.org/{$locale}'>www-dev.allizom.org/{$locale}/</a></small></p>";
+} else {
+    $lang_files_status .= "<p>There are no files tracked for this locale at the moment.</p>";
+}
+
 
 ob_start();
 echo '<h2>Open bugs for your locale:</h2>';

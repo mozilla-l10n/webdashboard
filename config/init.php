@@ -1,5 +1,6 @@
 <?php
 namespace Webdashboard;
+use Symfony\VarDumper;
 
 // We always work with UTF8 encoding
 mb_internal_encoding('UTF-8');
@@ -20,15 +21,15 @@ if (file_exists($settings_filename)) {
 	exit;
 }
 
-define('CACHE', __DIR__ . '/../cache/');
+// Cache class
+define('CACHE_ENABLED', true);
+define('CACHE_PATH', __DIR__ . '/../cache/');   // This folder needs to be writable by PHP
+define('CACHE_TIME', 15*60);    // Default: 15 minutes
 
 // For debugging
 if (DEBUG) {
     error_reporting(E_ALL);
-    \kint::enabled(true);
-} else {
-    \kint::enabled(false);
 }
 
-// this is the default template, views can define a different one
+// This is the default template, views can define a different one
 $template = 'default.php';
