@@ -52,6 +52,8 @@ dashboard.
 */
 
 namespace Webdashboard;
+use Bugzilla\Bugzilla;
+use Cache\Cache;
 
 require_once __DIR__ . '/../config/init.php';
 
@@ -80,11 +82,20 @@ foreach ($locales as $locale) {
                     . '&classification=Other'
                     . '&product=www.mozilla.org';
 
-    // Cache in a local cache folder if possible, 6 hours cache
-    $csv = Utils::cacheUrl($bugzilla_query . '&ctype=csv', 6*60*60);
+
+    /* Check if there is a cached request for this element.
+     * For this request I use a ttl of 6 hours instead of default (15 minutes),
+     * since it requires a lot of time.
+     */
+    $cache_id = "bugs_mozillaorg_{$locale}";
+    $bugs = Cache::getKey($cache_id, 6*60*60);
+    if ($bugs === false) {
+        $csv = file($bugzilla_query . '&ctype=csv');
+        $bugs = Bugzilla::getBugsFromCSV($csv);
+        Cache::setKey($cache_id, $bugs);
+    }
 
     // Generate all the bugs
-    $bugs = Bugzilla::getBugsFromCSV($csv);
     $results['items'][] = [
         "type"            => "Webbugs",
         "label"           => $locale,
