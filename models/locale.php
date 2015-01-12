@@ -92,8 +92,11 @@ $bugs = $bugs_mozillaorg + $bugs_l10ncomponent;
 $rss_data = [];
 
 if (count($bugs) > 0) {
-    foreach ($bugs as $k => $v) {
-        $rss_data[] = [$k, "https://bugzilla.mozilla.org/show_bug.cgi?id={$k}", $v];
+    foreach ($bugs as $bug_number => $bug_description) {
+        $rss_data[] = [
+            "Bug {$bug_number}",
+            "https://bugzilla.mozilla.org/show_bug.cgi?id={$bug_number}",
+            $bug_description];
     }
 }
 
@@ -120,11 +123,15 @@ foreach ($lang_files as $site => $site_files) {
             // Standard lang file
             $count = $details['identical'] + $details['missing'];
             if ($count > 0) {
-                $message = "You have {$count} strings untranslated in {$file}";
+                $message  = "You have {$count} untranslated ";
+                $message .= $count == 1 ? 'string' : 'strings';
+                $message .= " in {$file}";
                 $total_missing_strings += $count;
             }
             if ($details['errors'] > 0) {
-                $message = "You have {$details['errors']} errors in {$file}";
+                $message  = "You have {$details['errors']} ";
+                $message .= $details['errors'] == 1 ? 'error' : 'errors';
+                $message .= " in {$file}";
                 $total_errors += $details['errors'];
             }
         } else {
@@ -148,7 +155,7 @@ foreach ($lang_files as $site => $site_files) {
                       : 'Nice to have';
             if (isset($details['deadline']) && $details['deadline']) {
               $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
-              $status .= ' (Deadline is ' . $deadline . ')';
+              $status .= ' (deadline is ' . $deadline . ')';
             }
             $rss_data[] = [$status, $link, $message];
         }
@@ -156,23 +163,29 @@ foreach ($lang_files as $site => $site_files) {
 }
 
 if ($total_missing_files > 0) {
+    $tmp_message  = "You need to update {$total_missing_files} ";
+    $tmp_message .= $total_missing_files == 1 ? 'file.' : 'files.';
     array_unshift(
         $rss_data,
-        ['Other files', $link, "You need to update {$total_missing_files} files."]
+        ['Other files', $link, $tmp_message]
     );
 }
 
 if ($total_missing_strings > 0) {
+    $tmp_message  = "You need to translate {$total_missing_strings} ";
+    $tmp_message .= $total_missing_strings == 1 ? 'string.' : 'strings.';
     array_unshift(
         $rss_data,
-        ['Missing strings', $link, "You need to translate {$total_missing_strings} strings."]
+        ['Missing strings', $link, $tmp_message]
     );
 }
 
 if ($total_errors > 0) {
+    $tmp_message  = "You need to fix {$total_errors} ";
+    $tmp_message .= $total_errors == 1 ? 'error.' : 'errors.';
     array_unshift(
         $rss_data,
-        ['Errors', $link, "You need to fix {$total_errors} errors."]
+        ['Errors', $link, $tmp_message]
     );
 }
 
