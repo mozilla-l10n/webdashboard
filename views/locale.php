@@ -137,10 +137,14 @@ foreach ($lang_files as $site => $site_files) {
     }
 }
 
-if (count($lang_files) > 0) {
-    $lang_files_status .= "<p><small>Reminder: Your staging site for mozilla.org/{$locale}/ is
-                           <a href='https://www-dev.allizom.org/{$locale}'>www-dev.allizom.org/{$locale}/</a></small></p>";
-} else {
+if (isset($lang_files['www.mozilla.org'])) {
+    $optin_url = LANG_CHECKER . "?action=optin&locale={$locale}";
+    $lang_files_status .= "<p><small>Reminder: Your staging site for mozilla.org/{$locale}/ is " .
+                          "<a href='https://www-dev.allizom.org/{$locale}'>www-dev.allizom.org/{$locale}/</a><br/>" .
+                          "The list of opt-in pages for mozilla.org is available <a href='{$optin_url}'>here</a>.</small></p>";
+}
+
+if (count($lang_files) == 0) {
     $lang_files_status .= "<p>There are no files tracked for this locale at the moment.</p>";
 }
 
