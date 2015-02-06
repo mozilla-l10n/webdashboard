@@ -210,13 +210,23 @@ if (isset($webprojects[$weblocale])) {
             // File is empty
             $message = "File is empty (no strings)";
         } else {
-            $untrans_width = floor($webproject['untranslated'] / $webproject['total'] * 100);
-            $fuzzy_width = floor($webproject['fuzzy'] / $webproject['total'] * 100);
-            $message = "{$webproject['translated']} translated, {$webproject['untranslated']} untranslated, {$webproject['fuzzy']} fuzzy";
+            if ($webproject['source_type'] == 'properties') {
+                // Web project based on .properties files
+                $fuzzy_width = 0;
+                $identical_width = floor($webproject['identical'] / $webproject['total'] * 100);
+                $untrans_width = floor($webproject['missing'] / $webproject['total'] * 100);
+                $message = "{$webproject['translated']} translated, {$webproject['missing']} missing, {$webproject['identical']} identical";
+            } else {
+                // Web project based on .po files (default)
+                $fuzzy_width = floor($webproject['fuzzy'] / $webproject['total'] * 100);
+                $identical_width = 0;
+                $untrans_width = floor($webproject['untranslated'] / $webproject['total'] * 100);
+                $message = "{$webproject['translated']} translated, {$webproject['untranslated']} untranslated, {$webproject['fuzzy']} fuzzy";
+            }
         }
 
         if ($errors_width === 0) {
-            $trans_width = 100 - $fuzzy_width - $untrans_width;
+            $trans_width = 100 - $fuzzy_width - $identical_width - $untrans_width;
         }
 
         echo  "
@@ -228,11 +238,13 @@ if (isset($webprojects[$weblocale])) {
         <span class='web_projects_status web_projects_trans' style='width: {$trans_width}%;'></span>
         <span class='web_projects_status web_projects_untrans' style='width: {$untrans_width}%;'></span>
         <span class='web_projects_status web_projects_fuzzy' style='width: {$fuzzy_width}%;'></span>
+        <span class='web_projects_status web_projects_identical' style='width: {$identical_width}%;'></span>
       </td>
     </tr>\n";
 
     }
-    echo "  </tbody>\n</table>\n";
+    echo "  </tbody>\n</table>\n" .
+         "  <p><small>An alternative view for web projects is <a href='https://l10n.mozilla-community.org/~flod/webstatus/?locale={$locale}'>available in this page</a>.</small></p>\n";
 } else {
     echo '<p>There are no web projects available for this locale.</p>';
 }
