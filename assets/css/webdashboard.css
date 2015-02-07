@@ -170,6 +170,10 @@ table th {
     background-color: #fff152;
 }
 
+.web_projects_identical {
+    background-color: #a0e179;
+}
+
 .web_projects_untrans {
     background-color: #ffbd52;
 }
