@@ -16,7 +16,7 @@ if ($locamotion) {
 }
 $rss_status .= '</div>';
 
-$lang_files_status = '<h2>State of your lang files <small>(data updated every 15 minutes)</small></h2>';
+$lang_files_status = '<h2 class="title_anchor" id="lang_status"><a href="#lang_status">#</a>State of your lang files <small>(data updated every 15 minutes)</small></h2>';
 
 foreach ($lang_files as $site => $site_files) {
     $rows = '';
@@ -150,7 +150,7 @@ if (count($lang_files) == 0) {
 
 
 ob_start();
-echo '<h2>Open bugs for your locale:</h2>';
+echo '<h2 class="title_anchor" id="bugs"><a href="#bugs">#</a>Open bugs for your locale:</h2>';
 echo '<ul>';
 
 if (count($bugs) > 0) {
@@ -173,7 +173,7 @@ if ($locale == 'es-ES') {
     // Use 'es' instead of 'es-ES' for web projects
     $weblocale = 'es';
 }
-echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
+echo "<h2 class=\"title_anchor\" id=\"web_projects\"><a href=\"#web_projects\">#</a>External Web Projects Status ({$weblocale})</h2>\n";
 echo "<p>Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
          Data updated about every 5 hours. Last update: {$webprojects['metadata']['creation_date']}.</p>\n";
 if (isset($webprojects['locales'][$weblocale])) {

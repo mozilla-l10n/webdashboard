@@ -44,6 +44,21 @@ h2 small {
     margin-right: 10px;
 }
 
+.title_anchor {
+    margin-left: -0.8em;
+    padding-left: 0.8em;
+}
+
+.title_anchor a {
+    display: none;
+    position: absolute;
+    margin-left: -0.8em;
+}
+
+.title_anchor:hover a {
+    display: block;
+}
+
 #locale_page_title {
     position: absolute;
     top: -50px;
