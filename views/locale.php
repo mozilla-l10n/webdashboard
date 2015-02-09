@@ -176,11 +176,11 @@ if ($locale == 'es-ES') {
 echo "<h2>External Web Projects Status ({$weblocale})</h2>\n";
 echo "<p>Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
          Data updated about every 5 hours. Last update: {$webprojects['metadata']['creation_date']}.</p>\n";
-if (isset($webprojects[$weblocale])) {
+if (isset($webprojects['locales'][$weblocale])) {
     // Generate list of products for this locale and sort them by name
     $available_products = [];
-    foreach (array_keys($webprojects[$weblocale]) as $product_code) {
-        $available_products[$product_code] = $webprojects[$weblocale][$product_code]['name'];
+    foreach (array_keys($webprojects['locales'][$weblocale]) as $product_code) {
+        $available_products[$product_code] = $webprojects['locales'][$weblocale][$product_code]['name'];
     }
     asort($available_products);
     echo "
@@ -194,7 +194,7 @@ if (isset($webprojects[$weblocale])) {
   </thead>
   <tbody>\n";
     foreach ($available_products as $product_code => $product_name) {
-        $webproject = $webprojects[$weblocale][$product_code];
+        $webproject = $webprojects['locales'][$weblocale][$product_code];
 
         // Initialize values
         $untrans_width = 0;
