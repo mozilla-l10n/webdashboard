@@ -12,14 +12,14 @@ namespace Webdashboard;
 class Json
 {
     /**
-     * @var  string  $jsonURI  URI of the JSON stream to read
+     * @var string $jsonURI  URI of the JSON stream to read
      */
     private $jsonURI;
 
     /**
      * Build Json object and set URI (default empty)
      *
-     * @param  string  $uri  URI of the JSON stream to read
+     * @param string $uri URI of the JSON stream to read
      */
     public function __construct($uri = '')
     {
@@ -29,9 +29,9 @@ class Json
     /**
      * Set JSON URI
      *
-     * @param  string  $uri  JSON URI to read
+     * @param string $uri JSON URI to read
      *
-     * @return $this         Newly created Json object
+     * @return $this Newly created Json object
      */
     public function setURI($uri)
     {
@@ -47,7 +47,7 @@ class Json
      * @param  mixed  Can be a string (JSONP function name), or boolean.
      *                Default value is false
      *
-     * @return json   JSON content
+     * @return json JSON content
      */
     public function outputContent(array $data, $jsonp = false, $pretty_print = false)
     {
@@ -72,7 +72,7 @@ class Json
     /**
      * Return an array from a local or remote JSON file
      *
-     * @return  array  Decoded JSON content
+     * @return array Decoded JSON content
      */
     public function fetchContent()
     {

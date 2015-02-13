@@ -52,6 +52,7 @@ dashboard.
 */
 
 namespace Webdashboard;
+
 use Bugzilla\Bugzilla;
 use Cache\Cache;
 
@@ -81,7 +82,6 @@ foreach ($locales as $locale) {
                     . '&bug_status=REOPENED'
                     . '&classification=Other'
                     . '&product=www.mozilla.org';
-
 
     /* Check if there is a cached request for this element.
      * For this request I use a ttl of 6 hours instead of default (15 minutes),

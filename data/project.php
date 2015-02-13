@@ -104,22 +104,22 @@ $firefox_os = [
     [
         'file'        => 'firefox/os/index.lang',
         'description' => 'Firefox OS Index',
-        'site'        => 0
+        'site'        => 0,
     ],
     [
         'file'        => 'firefox/os/devices.lang',
         'description' => 'Firefox OS Devices',
-        'site'        => 0
+        'site'        => 0,
     ],
     [
         'file'        => 'firefox/os/faq.lang',
         'description' => 'Firefox OS FAQ',
-        'site'        => 0
+        'site'        => 0,
     ],
     [
         'file'        => 'firefox/partners/index.lang',
         'description' => 'Firefox OS Partners',
-        'site'        => 0
+        'site'        => 0,
     ],
 ];
 
