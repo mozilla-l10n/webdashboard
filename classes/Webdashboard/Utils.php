@@ -9,17 +9,16 @@ namespace Webdashboard;
  *
  * @package Webdashboard
  */
-class Utils {
+class Utils
+{
     /**
      * Given a set of locales, determine l10n user population coverage
      *
-     * @param  array   $locales          Array of locale codes
-     * @param  string  $langchecker_url  Base URL for langchecker
+     * @param array  $locales         Array of locale codes
+     * @param string $langchecker_url Base URL for langchecker
      *
-     * @return string                    A percent value of our coverage for
-     *                                   the user base
+     * @return string A percent value of our coverage for the user base
      */
-
     public static function getUserBaseCoverage($locales, $langchecker_url)
     {
         $url = "{$langchecker_url}?action=coverage&json&locales[]=" .

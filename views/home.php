@@ -8,5 +8,4 @@ foreach ($locales as $locale) {
 
 $content .= "</ul></div>";
 
-
 include __DIR__ . '/../templates/' . $template;

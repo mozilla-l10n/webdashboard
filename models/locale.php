@@ -3,6 +3,7 @@
  * Model for individual locale view
  */
 namespace Webdashboard;
+
 use Bugzilla\Bugzilla;
 use Cache\Cache;
 
@@ -16,6 +17,7 @@ include __DIR__ . '/../data/locales.php';
 if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
     $content = '<h2>Wrong locale code</h2>';
     include __DIR__ . '/../views/error.php';
+
     return;
 } else {
     $locale = $_GET['locale'];
@@ -67,7 +69,6 @@ $bugzilla_query_l10ncomponent = 'https://bugzilla.mozilla.org/buglist.cgi?'
                               . '&classification=Client%20Software'
                               . '&product=Mozilla%20Localizations';
 
-
 /* Use cached requests if available, cache expires after 1 hour
  * Note: result can be empty, so I need to check strictly for false
  */
@@ -96,7 +97,8 @@ if (count($bugs) > 0) {
         $rss_data[] = [
             "Bug {$bug_number}",
             "https://bugzilla.mozilla.org/show_bug.cgi?id={$bug_number}",
-            $bug_description];
+            $bug_description,
+        ];
     }
 }
 
@@ -154,8 +156,8 @@ foreach ($lang_files as $site => $site_files) {
                       ? 'Priority file'
                       : 'Nice to have';
             if (isset($details['deadline']) && $details['deadline']) {
-              $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
-              $status .= ' (deadline is ' . $deadline . ')';
+                $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
+                $status .= ' (deadline is ' . $deadline . ')';
             }
             $rss_data[] = [$status, $link, $message];
         }

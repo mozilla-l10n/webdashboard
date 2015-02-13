@@ -1,6 +1,5 @@
 <?php
 namespace Webdashboard;
-use Symfony\VarDumper;
 
 // We always work with UTF8 encoding
 mb_internal_encoding('UTF-8');
@@ -13,12 +12,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $settings_filename = __DIR__ . '/settings.inc.php';
 if (file_exists($settings_filename)) {
-	require $settings_filename;
+    require $settings_filename;
 } else {
-	echo "<h1>Error: missing config file</h1>";
-	echo "<p>Config file is missing: <code>{$settings_filename}</code></p>";
-	echo "<p>Rename <strong>config/settings.inc.php.ini</strong> as <strong>config/settings.inc.php</strong> to get started.</p>";
-	exit;
+    echo "<h1>Error: missing config file</h1>";
+    echo "<p>Config file is missing: <code>{$settings_filename}</code></p>";
+    echo "<p>Rename <strong>config/settings.inc.php.ini</strong> as <strong>config/settings.inc.php</strong> to get started.</p>";
+    exit;
 }
 
 // Cache class

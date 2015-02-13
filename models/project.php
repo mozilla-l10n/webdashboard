@@ -1,5 +1,6 @@
 <?php
 namespace Webdashboard;
+
 use Cache\Cache;
 
 // Check if the locale is working on locamotion

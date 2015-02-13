@@ -87,7 +87,7 @@ foreach ($lang_files as $site => $site_files) {
                 // Display warnings only if the file is not optional
                 $rows .= "  <tr>\n" .
                          "    <th class='main_column'><a href='{$url}'>{$file}</a></th>\n" .
-                         "    <td><span class='raw_status raw_{$cmp_status}'>" . str_replace('_', ' ', $cmp_status) ."</span></td>" .
+                         "    <td><span class='raw_status raw_{$cmp_status}'>" . str_replace('_', ' ', $cmp_status) . "</span></td>" .
                          "    <td class='{$deadline_class}'>{$deadline}</td>\n" .
                          "    <td>{$critical}</td>\n" .
                          "  </tr>\n";
@@ -147,7 +147,6 @@ if (isset($lang_files['www.mozilla.org'])) {
 if (count($lang_files) == 0) {
     $lang_files_status .= "<p>There are no files tracked for this locale at the moment.</p>";
 }
-
 
 ob_start();
 echo '<h2 class="title_anchor" id="bugs"><a href="#bugs">#</a>Open bugs for your locale:</h2>';
@@ -241,7 +240,6 @@ if (isset($webprojects['locales'][$weblocale])) {
         <span class='web_projects_status web_projects_identical' style='width: {$identical_width}%;'></span>
       </td>
     </tr>\n";
-
     }
     echo "  </tbody>\n</table>\n" .
          "  <p><small>An alternative view for web projects is <a href='https://l10n.mozilla-community.org/~flod/webstatus/?locale={$locale}'>available in this page</a>.</small></p>\n";

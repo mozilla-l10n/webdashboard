@@ -105,7 +105,7 @@ ksort($locale_done_per_page);
 foreach ($locale_done_per_page as $page => $locales) {
     $content .= '<tr><td class="results_file">' . $page_descriptions[$page] . ' <span class="filename">(' . $page . ')</span></td>'
               . '<td class="results_stats"> ' . count($locales) . '/'
-              . count($locales_per_page[$page]) . ' perfect locales ('. $page_coverage[$page] . '%)</td></tr>';
+              . count($locales_per_page[$page]) . ' perfect locales (' . $page_coverage[$page] . '%)</td></tr>';
 }
 
 // Display global stats
@@ -138,7 +138,6 @@ if ($project['summary']) {
     }
     $content .= '   </tbody>
                 </table>';
-
 }
 
 include __DIR__ . '/../templates/' . $template;
