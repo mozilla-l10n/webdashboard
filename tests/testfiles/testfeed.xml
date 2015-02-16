@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+ <channel>
+  <atom:link href="http://localhost&amp;rss=1" rel="self" type="application/rss+xml" />
+  <title>Test feed</title>
+  <description>[ab] Test feed generator</description>
+  <lastBuildDate>%DATE%</lastBuildDate>
+  <link>http://localhost</link>
+  <item>
+  <guid isPermaLink="false">ac1e743a4e611cf4a748e290717e98418e114c78</guid>
+  <pubDate>%DATE%</pubDate>
+  <title>B: g</title>
+  <description>g</description>
+  <link>u</link>
+  </item>
+  <item>
+  <guid isPermaLink="false">fa38a316c52dbc5693863cd42f6445ba1fba4e22</guid>
+  <pubDate>%DATE%</pubDate>
+  <title>h: t</title>
+  <description>t</description>
+  <link>t</link>
+  </item>
+  <item>
+  <guid isPermaLink="false">472f35af0c93b51cfc8d875fe62d42ca798a66b3</guid>
+  <pubDate>%DATE%</pubDate>
+  <title>T: s</title>
+  <description>s</description>
+  <link>e</link>
+  </item>
+ </channel>
+</rss>
