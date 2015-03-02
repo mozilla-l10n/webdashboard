@@ -2,7 +2,7 @@
 
 $locales = [
     'ach', 'af', 'an', 'ar', 'as', 'ast', 'az', 'be', 'bg',
-    'bn-BD', 'bn-IN', 'br', 'bs', 'ca', 'cs', 'cy', 'da',
+    'bn-BD', 'bn-IN', 'br', 'brx', 'bs', 'ca', 'cs', 'cy', 'da',
     'de', 'dsb', 'ee', 'el', 'en-GB', 'en-ZA', 'eo', 'es',
     'es-AR', 'es-CL', 'es-ES', 'es-MX', 'et', 'eu', 'fa',
     'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gu-IN',
