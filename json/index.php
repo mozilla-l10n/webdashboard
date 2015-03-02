@@ -50,7 +50,6 @@ able to ship a release. We no longer make this distinction on the web
 dashboard.
 
 */
-
 namespace Webdashboard;
 
 use Bugzilla\Bugzilla;
