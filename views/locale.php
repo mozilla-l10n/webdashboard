@@ -204,7 +204,7 @@ if (isset($webprojects['locales'][$weblocale])) {
         if ($webproject['error_status']) {
             // File has errors
             $errors_width = 100;
-            $message = $webproject['error_message'];
+            $message = str_replace('\'', '"', htmlspecialchars($webproject['error_message']));
         } elseif ($webproject['total'] === 0) {
             // File is empty
             $message = "File is empty (no strings)";
