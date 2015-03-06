@@ -209,8 +209,8 @@ if (isset($webprojects['locales'][$weblocale])) {
             // File is empty
             $message = "File is empty (no strings)";
         } else {
-            if ($webproject['source_type'] == 'properties') {
-                // Web project based on .properties files
+            if ($webproject['source_type'] == 'properties' || $webproject['source_type'] == 'xliff') {
+                // Web project based on .properties or .xliff files
                 $fuzzy_width = 0;
                 $identical_width = floor($webproject['identical'] / $webproject['total'] * 100);
                 $untrans_width = floor($webproject['missing'] / $webproject['total'] * 100);
