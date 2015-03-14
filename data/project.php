@@ -151,67 +151,6 @@ $firefox_os_extra = [
     ],
 ];
 
-$snippets_jan15 = [
-    [
-        'file'        => 'jan2015a_a.lang',
-        'description' => 'Snippets A - Jan 7',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jan2015a_b.lang',
-        'description' => 'Snippets B - Jan 7',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jan2015a_c.lang',
-        'description' => 'Snippets C - Jan 7',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jan2015a_d.lang',
-        'description' => 'Snippets D - Jan 7',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jan2015b_a.lang',
-        'description' => 'Snippets A - Jan 21',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jan2015b_b.lang',
-        'description' => 'Snippets B - Jan 21',
-        'site'        => 6,
-    ],
-];
-
-$snippets_feb15 = [
-    [
-        'file'        => 'feb2015_a.lang',
-        'description' => 'Snippets A - Feb 4',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'feb2015_b.lang',
-        'description' => 'Snippets B - Feb 4',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'feb2015_c.lang',
-        'description' => 'Snippets C - Feb 4',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'feb2015_d.lang',
-        'description' => 'Snippets D - Feb 4',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'feb2015_e.lang',
-        'description' => 'Snippets E - Feb 4',
-        'site'        => 6,
-    ],
-];
-
 $snippets_mar15 = [
     [
         'file'        => 'mar2015_a.lang',
@@ -221,6 +160,14 @@ $snippets_mar15 = [
     [
         'file'        => 'mar2015_b.lang',
         'description' => 'Snippets B - Mar 2',
+        'site'        => 6,
+    ],
+];
+
+$snippets_apr15 = [
+    [
+        'file'        => 'apr2015.lang',
+        'description' => 'Snippets Content - Apr 2',
         'site'        => 6,
     ],
 ];
@@ -259,19 +206,14 @@ $projects = [
         'title'   => 'Firefox 10th Anniversary Complete',
         'summary' => true,
     ],
-    'snippets_jan2015' => [
-        'pages'   => $snippets_jan15,
-        'title'   => 'Snippets January 2015',
-        'summary' => false,
-    ],
-    'snippets_feb2015' => [
-        'pages'   => $snippets_feb15,
-        'title'   => 'Snippets February 2015',
-        'summary' => false,
-    ],
     'snippets_mar2015' => [
         'pages'   => $snippets_mar15,
         'title'   => 'Snippets March 2015',
+        'summary' => false,
+    ],
+    'snippets_apr2015' => [
+        'pages'   => $snippets_apr15,
+        'title'   => 'Snippets April 2015',
         'summary' => false,
     ],
 ];
