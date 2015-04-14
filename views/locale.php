@@ -209,12 +209,20 @@ if (isset($webprojects['locales'][$weblocale])) {
             // File is empty
             $message = "File is empty (no strings)";
         } else {
-            if ($webproject['source_type'] == 'properties' || $webproject['source_type'] == 'xliff') {
-                // Web project based on .properties or .xliff files
+            if ($webproject['source_type'] == 'properties') {
+                // Web project based on .properties
                 $fuzzy_width = 0;
                 $identical_width = floor($webproject['identical'] / $webproject['total'] * 100);
                 $untrans_width = floor($webproject['missing'] / $webproject['total'] * 100);
                 $message = "{$webproject['translated']} translated, {$webproject['missing']} missing, {$webproject['identical']} identical";
+            } elseif ($webproject['source_type'] == 'xliff') {
+                // Web project based on .xliff files
+                $fuzzy_width = 0;
+                $total = $webproject['total'] + $webproject['missing'];
+                $missing = $webproject['untranslated'] + $webproject['missing'];
+                $identical_width = floor($webproject['identical'] / $total * 100);
+                $untrans_width = floor($missing / $total * 100);
+                $message = "{$webproject['translated']} translated, {$webproject['missing']} missing, {$webproject['untranslated']} untranslated, {$webproject['identical']} identical";
             } else {
                 // Web project based on .po files (default)
                 $fuzzy_width = floor($webproject['fuzzy'] / $webproject['total'] * 100);
