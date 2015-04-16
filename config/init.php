@@ -23,7 +23,7 @@ if (file_exists($settings_filename)) {
 // Cache class
 define('CACHE_ENABLED', true);
 define('CACHE_PATH', __DIR__ . '/../cache/');   // This folder needs to be writable by PHP
-define('CACHE_TIME', 15*60);    // Default: 15 minutes
+define('CACHE_TIME', 15 * 60);    // Default: 15 minutes
 
 // For debugging
 if (DEBUG) {

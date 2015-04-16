@@ -73,7 +73,7 @@ $bugzilla_query_l10ncomponent = 'https://bugzilla.mozilla.org/buglist.cgi?'
  * Note: result can be empty, so I need to check strictly for false
  */
 $cache_id = "bugs_mozillaorg_{$locale}";
-$bugs_mozillaorg = Cache::getKey($cache_id, 60*60);
+$bugs_mozillaorg = Cache::getKey($cache_id, 60 * 60);
 if ($bugs_mozillaorg === false) {
     $csv_mozillaorg = file($bugzilla_query_mozillaorg . '&ctype=csv');
     $bugs_mozillaorg = Bugzilla::getBugsFromCSV($csv_mozillaorg);
@@ -81,7 +81,7 @@ if ($bugs_mozillaorg === false) {
 }
 
 $cache_id = "bugs_l10ncomponent_{$locale}";
-$bugs_l10ncomponent = Cache::getKey($cache_id, 60*60);
+$bugs_l10ncomponent = Cache::getKey($cache_id, 60 * 60);
 if ($bugs_l10ncomponent === false) {
     $csv_l10ncomponent = file($bugzilla_query_l10ncomponent . '&ctype=csv');
     $bugs_l10ncomponent = Bugzilla::getBugsFromCSV($csv_l10ncomponent);
@@ -104,7 +104,7 @@ if (count($bugs) > 0) {
 
 // Read status of external web projects, cache expires after 1 hour.
 $cache_id = 'external_webprojects';
-if (! $webprojects = Cache::getKey($cache_id, 60*60)) {
+if (! $webprojects = Cache::getKey($cache_id, 60 * 60)) {
     $webprojects = $json_data
         ->setURI(WEBPROJECTS_JSON)
         ->fetchContent();
