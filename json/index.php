@@ -87,7 +87,7 @@ foreach ($locales as $locale) {
      * since it requires a lot of time.
      */
     $cache_id = "bugs_mozillaorg_{$locale}";
-    $bugs = Cache::getKey($cache_id, 6*60*60);
+    $bugs = Cache::getKey($cache_id, 6 * 60 * 60);
     if ($bugs === false) {
         $csv = file($bugzilla_query . '&ctype=csv');
         $bugs = Bugzilla::getBugsFromCSV($csv);
