@@ -172,6 +172,24 @@ $snippets_apr15 = [
     ],
 ];
 
+$snippets_may15 = [
+    [
+        'file'        => 'may2015_a.lang',
+        'description' => 'Snippets Content A - May 11',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'may2015_b.lang',
+        'description' => 'Snippets Content B - May 11',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'spring2015.lang',
+        'description' => 'Snippets Spring Release - May 25',
+        'site'        => 6,
+    ],
+];
+
 /*
 * Each project has a key name that will be used in the URL.
 * Value is an array with:
@@ -214,6 +232,11 @@ $projects = [
     'snippets_apr2015' => [
         'pages'   => $snippets_apr15,
         'title'   => 'Snippets April 2015',
+        'summary' => false,
+    ],
+    'snippets_may2015' => [
+        'pages'   => $snippets_may15,
+        'title'   => 'Snippets May 2015',
         'summary' => false,
     ],
 ];
