@@ -202,8 +202,18 @@ $spring15 = [
         'site'        => 0,
     ],
     [
+        'file'        => 'firefox/sendto.lang',
+        'description' => 'SendTo Widget',
+        'site'        => 0,
+    ],
+    [
         'file'        => 'firefox/android/index.lang',
         'description' => 'Firefox for Android',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/ios.lang',
+        'description' => 'Firefox for iOS',
         'site'        => 0,
     ],
     [
@@ -217,13 +227,8 @@ $spring15 = [
         'site'        => 0,
     ],
     [
-        'file'        => 'firefox/ios.lang',
-        'description' => 'Firefox for iOS',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/sendto.lang',
-        'description' => 'SendTo Widget',
+        'file'        => 'firefox/hello.lang',
+        'description' => 'Firefox Hello',
         'site'        => 0,
     ],
     [
