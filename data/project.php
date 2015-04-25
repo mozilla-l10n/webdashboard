@@ -190,6 +190,54 @@ $snippets_may15 = [
     ],
 ];
 
+$spring15 = [
+    [
+        'file'        => 'main.lang',
+        'description' => 'Main (Shared)',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'download_button.lang',
+        'description' => 'Download Buttons',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/android/index.lang',
+        'description' => 'Firefox for Android',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/developer.lang',
+        'description' => 'Developer Edition',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/family/index.lang',
+        'description' => 'Family Page',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/ios.lang',
+        'description' => 'Firefox for iOS',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/sendto.lang',
+        'description' => 'SendTo Widget',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/sync.lang',
+        'description' => 'Firefox Sync',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'spring2015.lang',
+        'description' => 'Snippets',
+        'site'        => 6,
+    ],
+];
+
 /*
 * Each project has a key name that will be used in the URL.
 * Value is an array with:
@@ -237,6 +285,11 @@ $projects = [
     'snippets_may2015' => [
         'pages'   => $snippets_may15,
         'title'   => 'Snippets May 2015',
+        'summary' => false,
+    ],
+    'spring2015' => [
+        'pages'   => $spring15,
+        'title'   => 'Spring Release 2015 - June 2',
         'summary' => false,
     ],
 ];
