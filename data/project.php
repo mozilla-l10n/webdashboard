@@ -207,6 +207,11 @@ $spring15 = [
         'site'        => 0,
     ],
     [
+        'file'        => 'firefox/whatsnew_38.lang',
+        'description' => 'Whatsnew and Firstrun',
+        'site'        => 0,
+    ],
+    [
         'file'        => 'firefox/android/index.lang',
         'description' => 'Firefox for Android',
         'site'        => 0,
