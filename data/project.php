@@ -212,6 +212,11 @@ $spring15 = [
         'site'        => 0,
     ],
     [
+        'file'        => 'mozorg/home/index.lang',
+        'description' => 'Home',
+        'site'        => 0,
+    ],
+    [
         'file'        => 'firefox/android/index.lang',
         'description' => 'Firefox for Android',
         'site'        => 0,
