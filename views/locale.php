@@ -173,9 +173,9 @@ if ($locale == 'es-ES') {
     $weblocale = 'es';
 }
 echo "<h2 class=\"title_anchor\" id=\"web_projects\"><a href=\"#web_projects\">#</a>External Web Projects Status ({$weblocale})</h2>\n";
-echo "<p>Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
-         Data updated about every 5 hours. Last update: {$webprojects['metadata']['creation_date']}.</p>\n";
 if (isset($webprojects['locales'][$weblocale])) {
+    echo "<p>Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
+          <small>Data updated about every 3 hours. Last update: {$webprojects['metadata']['creation_date']}.</small></p>\n";
     // Generate list of products for this locale and sort them by name
     $available_products = [];
     foreach (array_keys($webprojects['locales'][$weblocale]) as $product_code) {
