@@ -31,9 +31,13 @@ foreach ($lang_files as $site => $site_files) {
         if (isset($details['deadline'])) {
             $deadline_timestamp = (new \DateTime($details['deadline']))->getTimestamp();
             $deadline = date('F d', $deadline_timestamp);
-            if ($deadline_timestamp < time()) {
+            $last_week = $deadline_timestamp - 604800; // 7 days (60 * 60 * 24 * 7)
+            $current_time = time();
+            if ($deadline_timestamp < $current_time) {
                 $deadline = date('F d Y', $deadline_timestamp);
                 $deadline_class = 'deadline_overdue';
+            } elseif ($last_week < $current_time) {
+                $deadline_class = 'deadline_closing';
             }
         } else {
             $deadline = '-';

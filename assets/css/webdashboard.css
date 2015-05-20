@@ -145,6 +145,11 @@ table th {
     font-weight: bold;
 }
 
+.deadline_closing {
+    color: #ff965b;
+    font-weight: bold;
+}
+
 .web_projects td {
     text-align: left;
 }
