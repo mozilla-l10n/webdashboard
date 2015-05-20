@@ -222,11 +222,6 @@ $spring15 = [
         'site'        => 0,
     ],
     [
-        'file'        => 'firefox/ios.lang',
-        'description' => 'Firefox for iOS',
-        'site'        => 0,
-    ],
-    [
         'file'        => 'firefox/developer.lang',
         'description' => 'Developer Edition',
         'site'        => 0,
