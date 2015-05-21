@@ -190,6 +190,29 @@ $snippets_may15 = [
     ],
 ];
 
+$snippets_jun15 = [
+    [
+        'file'        => 'jun2015_a.lang',
+        'description' => 'Snippets Content A - Jun 14',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jun2015_b.lang',
+        'description' => 'Snippets Content B - Jun 14',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jun2015_c.lang',
+        'description' => 'Snippets Content C - Jun 14',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jun2015_d.lang',
+        'description' => 'Snippets Content D - Jun 14',
+        'site'        => 6,
+    ],
+];
+
 $spring15 = [
     [
         'file'        => 'main.lang',
@@ -297,7 +320,11 @@ $projects = [
         'title'   => 'Snippets May 2015',
         'summary' => false,
     ],
-    'spring2015' => [
+    'snippets_jun2015' => [
+        'pages'   => $snippets_jun15,
+        'title'   => 'Snippets June 2015',
+        'summary' => false,
+    ],    'spring2015' => [
         'pages'   => $spring15,
         'title'   => 'Spring Release 2015 - June 2',
         'summary' => false,
