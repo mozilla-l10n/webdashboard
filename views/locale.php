@@ -171,19 +171,14 @@ ob_end_clean();
 
 ob_start();
 
-$weblocale = $locale;
-if ($locale == 'es-ES') {
-    // Use 'es' instead of 'es-ES' for web projects
-    $weblocale = 'es';
-}
-echo "<h2 class=\"title_anchor\" id=\"web_projects\"><a href=\"#web_projects\">#</a>External Web Projects Status ({$weblocale})</h2>\n";
-if (isset($webprojects['locales'][$weblocale])) {
+echo "<h2 class=\"title_anchor\" id=\"web_projects\"><a href=\"#web_projects\">#</a>External Web Projects Status ({$locale})</h2>\n";
+if (isset($webprojects['locales'][$locale])) {
     echo "<p>Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
           <small>Data updated about every 3 hours. Last update: {$webprojects['metadata']['creation_date']}.</small></p>\n";
     // Generate list of products for this locale and sort them by name
     $available_products = [];
-    foreach (array_keys($webprojects['locales'][$weblocale]) as $product_code) {
-        $available_products[$product_code] = $webprojects['locales'][$weblocale][$product_code]['name'];
+    foreach (array_keys($webprojects['locales'][$locale]) as $product_code) {
+        $available_products[$product_code] = $webprojects['locales'][$locale][$product_code]['name'];
     }
     asort($available_products);
     echo "
@@ -197,7 +192,7 @@ if (isset($webprojects['locales'][$weblocale])) {
   </thead>
   <tbody>\n";
     foreach ($available_products as $product_code => $product_name) {
-        $webproject = $webprojects['locales'][$weblocale][$product_code];
+        $webproject = $webprojects['locales'][$locale][$product_code];
 
         // Initialize values
         $untrans_width = 0;
