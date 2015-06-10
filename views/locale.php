@@ -172,16 +172,9 @@ ob_end_clean();
 ob_start();
 
 echo "<h2 class=\"title_anchor\" id=\"web_projects\"><a href=\"#web_projects\">#</a>External Web Projects Status ({$locale})</h2>\n";
-if (isset($webprojects['locales'][$locale])) {
-    $last_update_local = date('Y-m-d H:i e (O)', strtotime($webprojects['metadata']['creation_date']));
+if ($locale_has_web_projects) {
     echo "<p>Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
           <small>Data updated about every 3 hours. Last update: {$last_update_local}.</small></p>\n";
-    // Generate list of products for this locale and sort them by name
-    $available_products = [];
-    foreach (array_keys($webprojects['locales'][$locale]) as $product_code) {
-        $available_products[$product_code] = $webprojects['locales'][$locale][$product_code]['name'];
-    }
-    asort($available_products);
     echo "
 <table class='web_projects'>
   <thead>

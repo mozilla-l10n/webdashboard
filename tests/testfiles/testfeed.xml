@@ -10,7 +10,7 @@
   <guid isPermaLink="false">%GUID%</guid>
   <pubDate>%DATE%</pubDate>
   <title>Bug 123456789: Test bug</title>
-  <description>Test bug</description>
+  <description><![CDATA[ Test bug ]]></description>
   <link>https://bugzilla.mozilla.org/show_bug.cgi?id=123456789</link>
   </item>
  </channel>
