@@ -39,7 +39,12 @@ class FeedRSS
     }
 
     /**
-     * Build the RSS feed content
+     * Build the RSS feed content.
+     *
+     * Each item is an array with the following structure:
+     * 0: Title
+     * 1: Link (URL)
+     * 2: Description (might contain HTML code)
      *
      * @return string Content of the RSS feed
      */
@@ -60,8 +65,8 @@ class FeedRSS
             $output .= '  <item>' . "\n";
             $output .= '  <guid isPermaLink="false">' . sha1($item[0] . $item[1] . $item[2] . date('W')) . '</guid>' . "\n";
             $output .= '  <pubDate>' . date(DATE_RSS) . '</pubDate>' . "\n";
-            $output .= '  <title>' . $item[0] . ': ' . $item[2] . '</title>' . "\n";
-            $output .= '  <description>' . $item[2] . '</description>' . "\n";
+            $output .= '  <title>' . $item[0] . '</title>' . "\n";
+            $output .= '  <description><![CDATA[ ' . $item[2] . ' ]]></description>' . "\n";
             $output .= '  <link>' . $item[1] . '</link>' . "\n";
             $output .= '  </item>' . "\n";
         }

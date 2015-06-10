@@ -95,7 +95,7 @@ $rss_data = [];
 if (count($bugs) > 0) {
     foreach ($bugs as $bug_number => $bug_description) {
         $rss_data[] = [
-            "Bug {$bug_number}",
+            "Bug {$bug_number}: {$bug_description}",
             "https://bugzilla.mozilla.org/show_bug.cgi?id={$bug_number}",
             $bug_description,
         ];
@@ -159,7 +159,7 @@ foreach ($lang_files as $site => $site_files) {
                 $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
                 $status .= ' (deadline is ' . $deadline . ')';
             }
-            $rss_data[] = [$status, $link, $message];
+            $rss_data[] = ["{$status}: {$message}", $link, $message];
         }
     }
 }
@@ -169,7 +169,7 @@ if ($total_missing_files > 0) {
     $tmp_message .= $total_missing_files == 1 ? 'file.' : 'files.';
     array_unshift(
         $rss_data,
-        ['Other files', $link, $tmp_message]
+        ["Other files: {$tmp_message}", $link, $tmp_message]
     );
 }
 
@@ -178,7 +178,7 @@ if ($total_missing_strings > 0) {
     $tmp_message .= $total_missing_strings == 1 ? 'string.' : 'strings.';
     array_unshift(
         $rss_data,
-        ['Missing strings', $link, $tmp_message]
+        ["Missing strings: {$tmp_message}", $link, $tmp_message]
     );
 }
 
@@ -187,14 +187,49 @@ if ($total_errors > 0) {
     $tmp_message .= $total_errors == 1 ? 'error.' : 'errors.';
     array_unshift(
         $rss_data,
-        ['Errors', $link, $tmp_message]
+        ["Errors: {$tmp_message}", $link, $tmp_message]
     );
+}
+
+// Add information about external web projects
+if (isset($webprojects['locales'][$locale])) {
+    $locale_has_web_projects = true;
+    $last_update_local = date('Y-m-d H:i e (O)', strtotime($webprojects['metadata']['creation_date']));
+
+    // Generate a list of products for this locale and sort them by name
+    $available_products = [];
+    foreach (array_keys($webprojects['locales'][$locale]) as $product_code) {
+        $available_products[$product_code] = $webprojects['locales'][$locale][$product_code]['name'];
+    }
+    asort($available_products);
+
+    $link = "https://l10n.mozilla-community.org/webdashboard/?locale={$locale}#web_projects";
+    $tmp_message = '';
+    foreach ($available_products as $product_code => $product_name) {
+        $webproject = $webprojects['locales'][$locale][$product_code];
+        if ($webproject['missing'] + $webproject['untranslated'] > 0) {
+            // Web project is incomplete (either missing or untranslated strings)
+            $tmp_message .= "<p><strong>{$webproject['name']}:</strong> {$webproject['missing']} missing ";
+            $tmp_message .= $webproject['missing'] == 1 ? 'string, ' : 'strings, ';
+            $tmp_message .= "{$webproject['untranslated']} untranslated ";
+            $tmp_message .= $webproject['untranslated'] == 1 ? 'string, ' : 'strings.';
+            $tmp_message .= '</p>';
+        }
+    }
+    if ($tmp_message != '') {
+        array_push(
+            $rss_data,
+            ['Incomplete Web Projects', $link, $tmp_message]
+        );
+    }
+} else {
+    $locale_has_web_projects = false;
 }
 
 // Build a RSS feed
 $rss = new FeedRSS(
                 "L10n Web Dashboard - {$locale}",
-                "http://l10n.mozilla-community.org/webdashboard/?locale={$locale}",
+                "https://l10n.mozilla-community.org/webdashboard/?locale={$locale}",
                 "[{$locale}] Localization Status of Web Content",
                 $rss_data
            );

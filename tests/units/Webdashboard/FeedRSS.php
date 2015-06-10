@@ -11,7 +11,7 @@ class FeedRSS extends atoum\test
     public function testBuildRSS()
     {
         $item = [
-            'Bug 123456789',
+            'Bug 123456789: Test bug',
             'https://bugzilla.mozilla.org/show_bug.cgi?id=123456789',
             'Test bug',
         ];
