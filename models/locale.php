@@ -207,12 +207,18 @@ if (isset($webprojects['locales'][$locale])) {
     $tmp_message = '';
     foreach ($available_products as $product_code => $product_name) {
         $webproject = $webprojects['locales'][$locale][$product_code];
-        if ($webproject['missing'] + $webproject['untranslated'] > 0) {
+        $webproject_errors = $webproject['error_status'];
+        $webproject_incomplete = $webproject['missing'] + $webproject['untranslated'] > 0;
+        if ($webproject_incomplete || $webproject_errors) {
             // Web project is incomplete (either missing or untranslated strings)
-            $tmp_message .= "<p><strong>{$webproject['name']}:</strong> {$webproject['missing']} missing ";
-            $tmp_message .= $webproject['missing'] == 1 ? 'string, ' : 'strings, ';
-            $tmp_message .= "{$webproject['untranslated']} untranslated ";
-            $tmp_message .= $webproject['untranslated'] == 1 ? 'string, ' : 'strings.';
+            $tmp_message .= "<p><strong>{$webproject['name']}</strong><br/>";
+            $tmp_message .= "{$webproject['missing']} missing ";
+            $tmp_message .= $webproject['missing'] == 1 ? 'string' : 'strings';
+            $tmp_message .= ", {$webproject['untranslated']} untranslated ";
+            $tmp_message .= $webproject['untranslated'] == 1 ? 'string.' : 'strings.';
+            if ($webproject_errors) {
+                $tmp_message .= '<br/>' . htmlspecialchars($webproject['error_message']);
+            }
             $tmp_message .= '</p>';
         }
     }
