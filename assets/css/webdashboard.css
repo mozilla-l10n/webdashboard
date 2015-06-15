@@ -373,6 +373,11 @@ table th {
     -ms-column-count: 5;
     column-count: 5;
     width: 100%;
+    padding: 40px 20px;
+}
+
+#locales ul {
+    margin: 0;
 }
 
 /* Rules used in Project View */
