@@ -3,7 +3,7 @@
 require_once __DIR__ . '/config/init.php';
 
 $view = 'home';
-$body_class = 'sand';
+$body_class = '';
 
 if (isset($_GET['project'])) {
     $view = 'project';
