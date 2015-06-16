@@ -108,7 +108,7 @@ h4 {
     display: block;
     margin: 0 0 12px 0;
     line-height: 100%;
-    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
     color: #484848;
 }
 
@@ -145,7 +145,7 @@ h2 small {
 
 #tabzilla {
     display: block;
-    background: transparent url(../images/tabzilla.png) repeat scroll 0% 0%;
+    background: transparent url(../images/tabzilla.png) repeat scroll 0 0;
     height: 42px;
     width: 150px;
     position: absolute;
@@ -229,7 +229,7 @@ h2 small {
 
 #colophon .row {
     width: 960px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 #colophon .footer-logo {
@@ -363,10 +363,6 @@ table th {
 
 /* Empty page with list of locales */
 
-.project_view #wrapper {
-    margin: 0 20px;
-}
-
 #locales {
     -moz-column-count: 5;
     -webkit-column-count: 5;
@@ -382,6 +378,14 @@ table th {
 
 /* Rules used in Project View */
 
+.project_view #wrapper {
+    width: 95%;
+}
+
+.project_view #colophon .row {
+    margin-left: 2%;
+}
+
 .button,
 .button:link,
 .button:visited {
@@ -391,7 +395,7 @@ table th {
     *zoom: 1;
     -moz-border-radius: 0.25em;
     border-radius: 0.25em;
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.2), inset 0px -1px 0px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
     background-color: #43a6e2;
     background-color: #277ac1;
     background-repeat: repeat-x;
@@ -401,7 +405,7 @@ table th {
     /* FF 3.6+ */
     background-image: -ms-linear-gradient(#43a6e2, #277ac1);
     /* IE10 */
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #43a6e2), color-stop(100%, #277ac1));
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #43a6e2), color-stop(100%, #277ac1));
     /* Safari 4+, Chrome 2+ */
     background-image: -webkit-linear-gradient(#43a6e2, #277ac1);
     /* Safari 5.1+, Chrome 10+ */
@@ -441,9 +445,9 @@ table th {
 .button.focus,
 .button:link.focus,
 .button:visited.focus {
-    -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.2), inset 0px -1px 0px 0px rgba(0, 0, 0, 0.3), inset 0px 12px 24px 2px #38a9ed;
-    -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.2), inset 0px -1px 0px 0px rgba(0, 0, 0, 0.3), inset 0px 12px 24px 2px #38a9ed;
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.2), inset 0px -1px 0px 0px rgba(0, 0, 0, 0.3), inset 0px 12px 24px 2px #38a9ed;
+    -webkit-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3), inset 0 12px 24px 2px #38a9ed;
+    -moz-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3), inset 0 12px 24px 2px #38a9ed;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3), inset 0 12px 24px 2px #38a9ed;
     color: #fff;
     text-decoration: none;
     -webkit-transition: all linear 0.25s;
