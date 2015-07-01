@@ -15,7 +15,8 @@ include __DIR__ . '/../data/locales.php';
 
 // Check that this is a valid locale code called via GET
 if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
-    $content = '<h2>Wrong locale code</h2>';
+    $content = "<h2 class='errortitle'>Wrong locale code: {$locale}</h2>\n" .
+               '<p>The requested language is not available on the dashboard.</p>';
     include __DIR__ . '/../views/error.php';
 
     return;

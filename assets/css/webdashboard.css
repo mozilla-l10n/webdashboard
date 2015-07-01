@@ -74,6 +74,7 @@ body {
 #wrapper {
     padding: 0 20px;
     width: 960px;
+    min-height: 400px;
     margin: 0 auto;
     position: relative;
 }
@@ -141,6 +142,10 @@ small {
 h2 small {
     font-size: 60%;
     font-style: italic;
+}
+
+.errortitle {
+    margin-top: 40px;
 }
 
 #tabzilla {
