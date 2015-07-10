@@ -150,6 +150,11 @@ if (isset($lang_files['www.mozilla.org'])) {
 
 if (count($lang_files) == 0) {
     $lang_files_status .= "<p>There are no files tracked for this locale at the moment.</p>";
+} else {
+    ob_start();
+    include 'stats_graph.php';
+    $lang_files_status .= ob_get_contents();
+    ob_end_clean();
 }
 
 ob_start();
