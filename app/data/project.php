@@ -151,27 +151,6 @@ $firefox_os_extra = [
     ],
 ];
 
-$snippets_mar15 = [
-    [
-        'file'        => 'mar2015_a.lang',
-        'description' => 'Snippets A - Mar 2',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'mar2015_b.lang',
-        'description' => 'Snippets B - Mar 2',
-        'site'        => 6,
-    ],
-];
-
-$snippets_apr15 = [
-    [
-        'file'        => 'apr2015.lang',
-        'description' => 'Snippets Content - Apr 2',
-        'site'        => 6,
-    ],
-];
-
 $snippets_may15 = [
     [
         'file'        => 'may2015_a.lang',
@@ -186,24 +165,6 @@ $snippets_may15 = [
     [
         'file'        => 'spring2015.lang',
         'description' => 'Snippets Spring Release - May 25',
-        'site'        => 6,
-    ],
-];
-
-$snippets_jul15 = [
-    [
-        'file'        => 'jul2015_a.lang',
-        'description' => 'Snippets Content A - Jul 13',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jul2015_b.lang',
-        'description' => 'Snippets Content B - Jul 13',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jul2015_c.lang',
-        'description' => 'Snippets Content C - Jul 13',
         'site'        => 6,
     ],
 ];
@@ -227,6 +188,52 @@ $snippets_jun15 = [
     [
         'file'        => 'jun2015_d.lang',
         'description' => 'Snippets Content D - Jun 14',
+        'site'        => 6,
+    ],
+];
+
+$snippets_jul15 = [
+    [
+        'file'        => 'jul2015_a.lang',
+        'description' => 'Snippets Content A - Jul 13',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jul2015_b.lang',
+        'description' => 'Snippets Content B - Jul 13',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'jul2015_c.lang',
+        'description' => 'Snippets Content C - Jul 13',
+        'site'        => 6,
+    ],
+];
+
+$snippets_aug15 = [
+    [
+        'file'        => 'aug2015_win10.lang',
+        'description' => 'Snippets Windows 10 - Aug 7',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'tiles_aug2015.lang',
+        'description' => 'Tiles - Aug 7',
+        'site'        => 10,
+    ],
+    [
+        'file'        => 'aug2015_a.lang',
+        'description' => 'Snippets Content A - Aug 14',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'aug2015_b.lang',
+        'description' => 'Snippets Content B - Aug 14',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'aug2015_c.lang',
+        'description' => 'Snippets Content C - Aug 14',
         'site'        => 6,
     ],
 ];
@@ -323,19 +330,14 @@ $projects = [
         'title'   => 'Firefox 10th Anniversary Complete',
         'summary' => true,
     ],
-    'snippets_mar2015' => [
-        'pages'   => $snippets_mar15,
-        'title'   => 'Snippets March 2015',
-        'summary' => false,
-    ],
-    'snippets_apr2015' => [
-        'pages'   => $snippets_apr15,
-        'title'   => 'Snippets April 2015',
-        'summary' => false,
-    ],
     'snippets_may2015' => [
         'pages'   => $snippets_may15,
         'title'   => 'Snippets May 2015',
+        'summary' => false,
+    ],
+    'snippets_jun2015' => [
+        'pages'   => $snippets_jun15,
+        'title'   => 'Snippets June 2015',
         'summary' => false,
     ],
     'snippets_jul2015' => [
@@ -343,9 +345,9 @@ $projects = [
         'title'   => 'Snippets July 2015',
         'summary' => false,
     ],
-    'snippets_jun2015' => [
-        'pages'   => $snippets_jun15,
-        'title'   => 'Snippets June 2015',
+    'snippets_aug2015' => [
+        'pages'   => $snippets_aug15,
+        'title'   => 'Snippets August 2015',
         'summary' => false,
     ],
     'spring2015' => [
