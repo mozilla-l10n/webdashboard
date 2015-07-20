@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/config/init.php';
+require_once __DIR__ . '/../app/config/init.php';
 
 $view = 'home';
 $body_class = '';
@@ -11,4 +11,4 @@ if (isset($_GET['project'])) {
     $view = 'locale';
 }
 
-include __DIR__ . '/models/' . $view . '.php';
+include __DIR__ . '/../app/models/' . $view . '.php';
