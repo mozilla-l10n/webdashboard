@@ -728,3 +728,57 @@ table th {
         width: 200px;
     }
 }
+
+/* Rules for the Graph displayed on the locale view */
+#graphdiv {
+    width: 700px;
+    height: 350px;
+    margin-left: -20px;
+}
+
+#graphdiv .dygraph-title {
+    font-weight: normal;
+    color: #808080;
+    margin-top: -10px;
+}
+
+#graphdiv .dygraph-legend > span {
+    display: none;
+}
+
+#graphdiv .dygraph-legend > span.highlight {
+    display: inline;
+}
+
+#graphdiv .dygraph-axis-label {
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 760px) {
+    #graphdiv {
+        width: 500px;
+    }
+
+    #graphdiv .dygraph-title {
+        font-size: 18px;
+    }
+
+    #graphdiv .dygraph-axis-label {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #graphdiv {
+        width: 450px;
+    }
+
+    #graphdiv .dygraph-title {
+        font-size: 16px;
+    }
+
+    #graphdiv .dygraph-axis-label {
+        font-size: 8px;
+    }
+}
+/* end of rules for the graph */
