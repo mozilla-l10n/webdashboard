@@ -55,10 +55,10 @@ namespace Webdashboard;
 use Bugzilla\Bugzilla;
 use Cache\Cache;
 
-require_once __DIR__ . '/../config/init.php';
+require_once __DIR__ . '/../../app/config/init.php';
 
 // Include all data about our locales
-include __DIR__ . '/../data/locales.php';
+include __DIR__ . '/../../app/data/locales.php';
 
 $results = [];
 $results['types']["Webbugs"] = ["pluralLabel" => "Webbugs"];

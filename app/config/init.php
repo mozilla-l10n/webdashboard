@@ -8,7 +8,7 @@ mb_internal_encoding('UTF-8');
 date_default_timezone_set('Europe/Paris');
 
 // Autoloading of classes (both /vendor and /classes)
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 $settings_filename = __DIR__ . '/settings.inc.php';
 if (file_exists($settings_filename)) {
@@ -22,7 +22,7 @@ if (file_exists($settings_filename)) {
 
 // Cache class
 define('CACHE_ENABLED', true);
-define('CACHE_PATH', __DIR__ . '/../cache/');   // This folder needs to be writable by PHP
+define('CACHE_PATH', __DIR__ . '/../../cache/');   // This folder needs to be writable by PHP
 define('CACHE_TIME', 15 * 60);    // Default: 15 minutes
 
 // For debugging

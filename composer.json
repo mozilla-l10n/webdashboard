@@ -22,7 +22,7 @@
     },
 
     "autoload": {
-        "psr-0": {"Webdashboard": "classes/"},
-        "files": ["helpers/debug.php"]
+        "psr-0": {"Webdashboard": "app/classes/"},
+        "files": ["app/helpers/debug.php"]
     }
 }
