@@ -729,17 +729,11 @@ table th {
     }
 }
 
-/* Rules for the Graph displayed on the locale view */
+/* Rules for the graph displayed on the locale view */
 #graphdiv {
+    margin: 20px 0 10px -20px;
     width: 700px;
     height: 350px;
-    margin-left: -20px;
-}
-
-#graphdiv .dygraph-title {
-    font-weight: normal;
-    color: #808080;
-    margin-top: -10px;
 }
 
 #graphdiv .dygraph-legend > span {
@@ -759,10 +753,6 @@ table th {
         width: 500px;
     }
 
-    #graphdiv .dygraph-title {
-        font-size: 18px;
-    }
-
     #graphdiv .dygraph-axis-label {
         font-size: 10px;
     }
@@ -771,10 +761,6 @@ table th {
 @media only screen and (max-width: 480px) {
     #graphdiv {
         width: 450px;
-    }
-
-    #graphdiv .dygraph-title {
-        font-size: 16px;
     }
 
     #graphdiv .dygraph-axis-label {
