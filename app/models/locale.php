@@ -7,21 +7,16 @@ namespace Webdashboard;
 use Bugzilla\Bugzilla;
 use Cache\Cache;
 
-$json = isset($_GET['json']);
-$locale = $_GET['locale'];
-
 // Include all data about our locales
 include __DIR__ . '/../data/locales.php';
 
 // Check that this is a valid locale code called via GET
-if (!isset($_GET['locale']) || !in_array($_GET['locale'], $locales)) {
+if (! in_array($locale, $locales)) {
     $content = "<h2 class='errortitle'>Wrong locale code: {$locale}</h2>\n" .
                '<p>The requested language is not available on the dashboard.</p>';
     include __DIR__ . '/../views/error.php';
 
     return;
-} else {
-    $locale = $_GET['locale'];
 }
 
 // Get lang files status from langchecker
@@ -234,11 +229,11 @@ if (isset($webprojects['locales'][$locale])) {
 }
 
 // Build a RSS feed
-$rss = new FeedRSS(
+$rss_feed = new FeedRSS(
                 "L10n Web Dashboard - {$locale}",
                 "https://l10n.mozilla-community.org/webdashboard/?locale={$locale}",
                 "[{$locale}] Localization Status of Web Content",
                 $rss_data
-           );
+            );
 
 include __DIR__ . '/../views/locale.php';

@@ -22,7 +22,7 @@ $content = "
         <p id='hidden_message' class='hidden'></p>
     </div>
     <table class='sortable' id='project_data'>
-        <caption>L10n Dashboard - {$project['title']}</caption>
+        <caption>L10n Dashboard - {$project_data['title']}</caption>
         <thead>
             <tr>
                 <th>Locale</th>
@@ -115,7 +115,7 @@ $content .= '<tr><th colspan="2" class="final">Total: ' . count($locale_done) . 
           . '</table>'
           . '<p class="table_legend">Percentages between parenthesis express coverage of our l10n base.</p>';
 
-if ($project['summary']) {
+if ($project_data['summary']) {
     // Display table with status summary for locales
     $content .= '<table id="project_locales_summary">
                     <thead>
