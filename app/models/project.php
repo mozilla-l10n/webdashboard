@@ -21,9 +21,10 @@ $locale_done = [];
 // Include all data about project pages
 include __DIR__ . '/../data/project.php';
 
-$requested_project = array_key_exists($_GET['project'], $projects) ? $_GET['project'] : 'default';
-$project = $projects[$requested_project];
-$pages = $project['pages'];
+// Fall back to default if the project is not available
+$requested_project = array_key_exists($project, $projects) ? $project : 'default';
+$project_data = $projects[$requested_project];
+$pages = $project_data['pages'];
 $sum_pages = count($pages);
 
 // Get all locales from project pages list

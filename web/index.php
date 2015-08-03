@@ -1,13 +1,20 @@
 <?php
+namespace Webdashboard;
 
 require_once __DIR__ . '/../app/config/init.php';
 
 $view = 'home';
 $body_class = '';
 
-if (isset($_GET['project'])) {
+// Get query parameters
+$json = Utils::getQueryParam('json', false);
+$locale = Utils::getQueryParam('locale');
+$project = Utils::getQueryParam('project');
+$rss = Utils::getQueryParam('rss', false);
+
+if ($project != '') {
     $view = 'project';
-} elseif (isset($_GET['locale'])) {
+} elseif ($locale != '') {
     $view = 'locale';
 }
 
