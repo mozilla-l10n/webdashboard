@@ -233,6 +233,34 @@ $snippets_sep15 = [
     ],
 ];
 
+$snippets_oct15 = [
+    [
+        'file'        => 'oct2015_a.lang',
+        'description' => 'Snippets A - Oct 12',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'oct2015_b.lang',
+        'description' => 'Snippets B - Oct 12',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'oct2015_c.lang',
+        'description' => 'Snippets C - Oct 12',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'oct2015_mofo.lang',
+        'description' => 'Snippets MoFo - Oct 12',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'tiles_oct2015.lang',
+        'description' => 'Tiles - Oct 12',
+        'site'        => 10,
+    ],
+];
+
 $spring15 = [
     [
         'file'        => 'main.lang',
@@ -343,6 +371,11 @@ $projects = [
     'snippets_sep2015' => [
         'pages'   => $snippets_sep15,
         'title'   => 'Snippets September 2015',
+        'summary' => false,
+    ],
+    'snippets_oct2015' => [
+        'pages'   => $snippets_oct15,
+        'title'   => 'Snippets October 2015',
         'summary' => false,
     ],
     'spring2015' => [
