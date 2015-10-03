@@ -9,93 +9,35 @@ $default_page = [
     ],
 ];
 
-$fx10 = [
+$fall15 = [
     [
-        'file'        => 'firefox/privacy_tour/privacy_tour.lang',
-        'description' => 'Privacy Tour',
+        'file'        => 'firefox/android/index.lang',
+        'description' => 'Android',
         'site'        => 0,
     ],
     [
-        'file'        => 'firefox/independent.lang',
-        'description' => 'Anniversary Landing',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'mozorg/home/index.lang',
-        'description' => 'Home',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'main.lang',
-        'description' => 'Main (shared)',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/tiles.lang',
-        'description' => 'Tiles Landing',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'tiles.lang',
-        'description' => 'Tiles',
-        'site'        => 10,
-    ],
-    [
-        'file'        => 'firefox/new.lang',
-        'description' => 'Download Page',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'privacycoach.lang',
-        'description' => 'Privacy&nbsp;Coach Add-on',
-        'site'        => 7,
-    ],
-    [
-        'file'        => 'description_page.lang',
-        'description' => 'Google Play',
-        'site'        => 12,
-    ],
-    [
-        'file'        => 'nov2014_a.lang',
-        'description' => 'Snippets A',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'nov2014_b.lang',
-        'description' => 'Snippets B',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'nov2014_c.lang',
-        'description' => 'Snippets C',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'nov2014_d.lang',
-        'description' => 'Snippets D',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'nov2014_e.lang',
-        'description' => 'Snippets E',
-        'site'        => 6,
-    ],
-];
-
-$fx10_extra = [
-    [
-        'file'        => 'firefox/developer.lang',
-        'description' => 'Developer Edition',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/channel.lang',
-        'description' => 'Channel',
+        'file'        => 'firefox/choose.lang',
+        'description' => 'Campaign Landing',
         'site'        => 0,
     ],
     [
         'file'        => 'firefox/desktop/trust.lang',
         'description' => 'Trust Page',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/push.lang',
+        'description' => 'Push',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/tracking-protection-tour.lang',
+        'description' => 'TP UI Tour',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/whatsnew_42.lang',
+        'description' => 'Whatsnew and Firstrun',
         'site'        => 0,
     ],
 ];
@@ -148,47 +90,6 @@ $firefox_os_extra = [
         'file'        => 'screenshots_dolphin.lang',
         'description' => 'Screenshots Dolphin',
         'site'        => 9,
-    ],
-];
-
-$snippets_jun15 = [
-    [
-        'file'        => 'jun2015_a.lang',
-        'description' => 'Snippets Content A - Jun 14',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jun2015_b.lang',
-        'description' => 'Snippets Content B - Jun 14',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jun2015_c.lang',
-        'description' => 'Snippets Content C - Jun 14',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jun2015_d.lang',
-        'description' => 'Snippets Content D - Jun 14',
-        'site'        => 6,
-    ],
-];
-
-$snippets_jul15 = [
-    [
-        'file'        => 'jul2015_a.lang',
-        'description' => 'Snippets Content A - Jul 13',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jul2015_b.lang',
-        'description' => 'Snippets Content B - Jul 13',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'jul2015_c.lang',
-        'description' => 'Snippets Content C - Jul 13',
-        'site'        => 6,
     ],
 ];
 
@@ -343,25 +244,10 @@ $projects = [
         'title'   => 'Firefox OS Complete',
         'summary' => true,
     ],
-    'fx10' => [
-        'pages'   => $fx10,
-        'title'   => 'Firefox 10th Anniversary',
+    'fall15' => [
+        'pages'   => $fall15,
+        'title'   => 'Fall Release 2015 - Nov 3',
         'summary' => true,
-    ],
-    'fx10_all' => [
-        'pages'   => array_merge($fx10, $fx10_extra),
-        'title'   => 'Firefox 10th Anniversary Complete',
-        'summary' => true,
-    ],
-    'snippets_jun2015' => [
-        'pages'   => $snippets_jun15,
-        'title'   => 'Snippets June 2015',
-        'summary' => false,
-    ],
-    'snippets_jul2015' => [
-        'pages'   => $snippets_jul15,
-        'title'   => 'Snippets July 2015',
-        'summary' => false,
     ],
     'snippets_aug2015' => [
         'pages'   => $snippets_aug15,
