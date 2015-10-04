@@ -244,7 +244,7 @@ $projects = [
         'title'   => 'Firefox OS Complete',
         'summary' => true,
     ],
-    'fall15' => [
+    'fall2015' => [
         'pages'   => $fall15,
         'title'   => 'Fall Release 2015 - Nov 3',
         'summary' => true,
