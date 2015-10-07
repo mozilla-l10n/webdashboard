@@ -11,13 +11,33 @@ $default_page = [
 
 $fall15 = [
     [
-        'file'        => 'firefox/android/index.lang',
-        'description' => 'Android',
+        'file'        => 'firefox/choose.lang',
+        'description' => 'Campaign Landing',
         'site'        => 0,
     ],
     [
-        'file'        => 'firefox/choose.lang',
-        'description' => 'Campaign Landing',
+        'file'        => 'firefox/private-browsing.lang',
+        'description' => 'Private Browsing',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'mozorg/home/index.lang',
+        'description' => 'Home',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/tracking-protection-tour.lang',
+        'description' => 'TP UI Tour',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/whatsnew_42.lang',
+        'description' => 'Whatsnew and Firstrun',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/android/index.lang',
+        'description' => 'Android',
         'site'        => 0,
     ],
     [
@@ -31,13 +51,23 @@ $fall15 = [
         'site'        => 0,
     ],
     [
-        'file'        => 'firefox/tracking-protection-tour.lang',
-        'description' => 'TP UI Tour',
+        'file'        => 'firefox/family/index.lang',
+        'description' => 'Family Page',
         'site'        => 0,
     ],
     [
-        'file'        => 'firefox/whatsnew_42.lang',
-        'description' => 'Whatsnew and Firstrun',
+        'file'        => 'firefox/ios.lang',
+        'description' => 'iOS',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'firefox/new.lang',
+        'description' => 'Download (/new)',
+        'site'        => 0,
+    ],
+    [
+        'file'        => 'main.lang',
+        'description' => 'Main (Shared)',
         'site'        => 0,
     ],
 ];
