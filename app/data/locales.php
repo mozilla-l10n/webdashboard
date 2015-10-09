@@ -8,7 +8,7 @@ $locales = [
     'eu', 'fa', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd',
     'gl', 'gu-IN', 'ha', 'he', 'hi-IN', 'hr', 'hsb', 'hu',
     'hy-AM', 'id', 'ig', 'is', 'it', 'ja', 'ka', 'kk', 'km',
-    'kn', 'ko', 'kok', 'ks', 'lij', 'ln', 'lt', 'lv', 'mai',
+    'kn', 'ko', 'kok', 'ks', 'lij', 'ln', 'lo', 'lt', 'lv', 'mai',
     'mg', 'mk', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
     'oc', 'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm', 'ro',
     'ru', 'sat', 'si', 'sk', 'sl', 'son', 'sq', 'sr', 'sr-Latn',
