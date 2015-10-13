@@ -9,10 +9,12 @@ function toggleLocales(className, buttonID) {
         if (toggleButton.classList.contains('active')) {
             // I need to restore elements' visibility
             toggleButton.classList.remove('active');
+            toggleButton.innerHTML = toggleButton.innerHTML.replace("Show", "Hide");
             hideLocales = false;
         } else {
             // I need to hide locales
             toggleButton.classList.add('active');
+            toggleButton.innerHTML = toggleButton.innerHTML.replace("Hide", "Show");
             hideLocales = true;
         }
 
