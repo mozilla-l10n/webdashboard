@@ -470,8 +470,7 @@ table th {
 #hidden_message {
     font-weight: bold;
     position: absolute;
-    top: 30px;
-    padding-left: 10px;
+    top: 130px;
 }
 
 .hidden,
@@ -606,6 +605,10 @@ table th {
         padding-bottom: 6px;
     }
 
+    #hidden_message {
+       top: 220px;
+    }
+
     #locale_page_title {
         left: auto;
         right: 55px;
@@ -636,6 +639,10 @@ table th {
     #masthead h2 img {
         display: block;
         padding-bottom: 6px;
+    }
+
+    #hidden_message {
+       top: 165px;
     }
 
     #tabzilla {
