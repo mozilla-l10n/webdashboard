@@ -125,27 +125,27 @@ $firefox_os_extra = [
 
 $snippets_aug15 = [
     [
-        'file'        => 'aug2015_win10.lang',
+        'file'        => 'snippets/aug2015_win10.lang',
         'description' => 'Snippets Windows 10 - Aug 7',
         'site'        => 6,
     ],
     [
-        'file'        => 'tiles_aug2015.lang',
+        'file'        => 'tiles/tiles_aug2015.lang',
         'description' => 'Tiles - Aug 7',
-        'site'        => 10,
+        'site'        => 6,
     ],
     [
-        'file'        => 'aug2015_a.lang',
+        'file'        => 'snippets/aug2015_a.lang',
         'description' => 'Snippets Content A - Aug 14',
         'site'        => 6,
     ],
     [
-        'file'        => 'aug2015_b.lang',
+        'file'        => 'snippets/aug2015_b.lang',
         'description' => 'Snippets Content B - Aug 14',
         'site'        => 6,
     ],
     [
-        'file'        => 'aug2015_c.lang',
+        'file'        => 'snippets/aug2015_c.lang',
         'description' => 'Snippets Content C - Aug 14',
         'site'        => 6,
     ],
@@ -153,42 +153,42 @@ $snippets_aug15 = [
 
 $snippets_sep15 = [
     [
-        'file'        => 'sep2015.lang',
+        'file'        => 'snippets/sep2015.lang',
         'description' => 'Snippets - Sep 11',
         'site'        => 6,
     ],
     [
-        'file'        => 'tiles_sep2015.lang',
+        'file'        => 'tiles/tiles_sep2015.lang',
         'description' => 'Tiles - Sep 11',
-        'site'        => 10,
+        'site'        => 6,
     ],
 ];
 
 $snippets_oct15 = [
     [
-        'file'        => 'oct2015_a.lang',
+        'file'        => 'snippets/oct2015_a.lang',
         'description' => 'Snippets A - Oct 12',
         'site'        => 6,
     ],
     [
-        'file'        => 'oct2015_b.lang',
+        'file'        => 'snippets/oct2015_b.lang',
         'description' => 'Snippets B - Oct 12',
         'site'        => 6,
     ],
     [
-        'file'        => 'oct2015_c.lang',
+        'file'        => 'snippets/oct2015_c.lang',
         'description' => 'Snippets C - Oct 12',
         'site'        => 6,
     ],
     [
-        'file'        => 'oct2015_mofo.lang',
+        'file'        => 'snippets/oct2015_mofo.lang',
         'description' => 'Snippets MoFo - Oct 12',
         'site'        => 6,
     ],
     [
-        'file'        => 'tiles_oct2015.lang',
+        'file'        => 'tiles/tiles_oct2015.lang',
         'description' => 'Tiles - Oct 12',
-        'site'        => 10,
+        'site'        => 6,
     ],
 ];
 
@@ -244,7 +244,7 @@ $spring15 = [
         'site'        => 0,
     ],
     [
-        'file'        => 'spring2015.lang',
+        'file'        => 'snippets/spring2015.lang',
         'description' => 'Snippets',
         'site'        => 6,
     ],
