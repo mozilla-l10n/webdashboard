@@ -123,34 +123,6 @@ $firefox_os_extra = [
     ],
 ];
 
-$snippets_aug15 = [
-    [
-        'file'        => 'snippets/aug2015_win10.lang',
-        'description' => 'Snippets Windows 10 - Aug 7',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'tiles/tiles_aug2015.lang',
-        'description' => 'Tiles - Aug 7',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/aug2015_a.lang',
-        'description' => 'Snippets Content A - Aug 14',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/aug2015_b.lang',
-        'description' => 'Snippets Content B - Aug 14',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/aug2015_c.lang',
-        'description' => 'Snippets Content C - Aug 14',
-        'site'        => 6,
-    ],
-];
-
 $snippets_sep15 = [
     [
         'file'        => 'snippets/sep2015.lang',
@@ -188,6 +160,37 @@ $snippets_oct15 = [
     [
         'file'        => 'tiles/tiles_oct2015.lang',
         'description' => 'Tiles - Oct 12',
+        'site'        => 6,
+    ],
+];
+
+$snippets_fall15 = [
+    [
+        'file'        => 'snippets/fall2015.lang',
+        'description' => 'Snippets Fall Campaign - Nov 2',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'snippets/nov2015_eoy_mofo.lang',
+        'description' => 'Snippets EOY - Nov 2',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'tiles/tiles_nov2015.lang',
+        'description' => 'Tiles - Nov 2',
+        'site'        => 6,
+    ],
+];
+
+$snippets_nov15 = [
+    [
+        'file'        => 'snippets/nov2015_a.lang',
+        'description' => 'Snippets A - Nov 14',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'snippets/nov2015_b.lang',
+        'description' => 'Snippets B - Nov 14',
         'site'        => 6,
     ],
 ];
@@ -279,11 +282,6 @@ $projects = [
         'title'   => 'Fall Release 2015 - Nov 3',
         'summary' => true,
     ],
-    'snippets_aug2015' => [
-        'pages'   => $snippets_aug15,
-        'title'   => 'Snippets August 2015',
-        'summary' => false,
-    ],
     'snippets_sep2015' => [
         'pages'   => $snippets_sep15,
         'title'   => 'Snippets September 2015',
@@ -292,6 +290,16 @@ $projects = [
     'snippets_oct2015' => [
         'pages'   => $snippets_oct15,
         'title'   => 'Snippets October 2015',
+        'summary' => false,
+    ],
+    'snippets_fall2015' => [
+        'pages'   => $snippets_fall15,
+        'title'   => 'Snippets Fall Campaign 2015',
+        'summary' => false,
+    ],
+    'snippets_nov2015' => [
+        'pages'   => $snippets_nov15,
+        'title'   => 'Snippets November 2015',
         'summary' => false,
     ],
     'spring2015' => [
