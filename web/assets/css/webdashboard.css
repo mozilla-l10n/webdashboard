@@ -178,7 +178,7 @@ h2 small {
     height: 100%;
 }
 
-.feed a img{
+.feed a img {
     float: left;
     margin-right: 10px;
 }
@@ -526,8 +526,14 @@ table th {
     line-height: 1.6;
 }
 
-#project_data tfoot tr td{
+#project_data tfoot tr td {
     font-size: 11px;
+}
+
+#project_data tfoot a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #project_results td {
