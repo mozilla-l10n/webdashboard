@@ -66,4 +66,26 @@ class Utils extends atoum\test
             ->string($obj->secureText($a, $b))
                 ->isEqualTo($c);
     }
+
+    public function getPluralFormDP()
+    {
+        return [
+            [0, 'file', '0 files'],
+            [1, 'file', '1 file'],
+            [10, 'error', '10 errors'],
+            [1, 'untranslated string', '1 untranslated string'],
+            [20, 'untranslated string', '20 untranslated strings'],
+        ];
+    }
+
+    /**
+     * @dataProvider getPluralFormDP
+     */
+    public function testGetPluralForm($a, $b, $c)
+    {
+        $obj = new _Utils();
+        $this
+            ->string($obj->getPluralForm($a, $b))
+                ->isEqualTo($c);
+    }
 }
