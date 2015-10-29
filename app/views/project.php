@@ -65,27 +65,35 @@ foreach ($status_formatted as $locale => $array_status) {
         $cell = $class = '';
 
         // This locale does not have this page
-        if ($result == 'none') {
-            $cell = '1';
-            $class = 'project_none';
-        } else {
-            // Page done
-            if ($result  == 'done') {
+        switch ($result['status']) {
+            case 'done':
+                // Page done
                 $cell = '100%';
                 $class = 'project_done';
-            // Missing
-            } elseif ($result == 'missing') {
+                break;
+            case 'errors':
+                // Errors
+                $cell = $result['message'];
+                $class = 'project_with_errors';
+                break;
+            case 'missing':
+                // Missing strings
                 $cell = '0%';
                 $class = 'project_missing';
-            // In progress
-            } else {
-                $cell = $result;
+                break;
+            case 'none':
+                $cell = '1';
+                $class = 'project_none';
+                break;
+            default:
+                // In progress
+                $cell = $result['message'];
                 $class = 'project_in_progress';
-            }
+                break;
         }
-        $content .= '<td class="' . $class . '">' . $cell . '</td>' . "\n";
+        $content .= "<td class=\"{$class}\">{$cell}</td>\n";
     }
-    $content .= '</tr>' . "\n";
+    $content .= "</tr>\n";
 }
 $content .= '</tbody>'
           . '</table>';
