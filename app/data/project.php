@@ -123,19 +123,6 @@ $firefox_os_extra = [
     ],
 ];
 
-$snippets_sep15 = [
-    [
-        'file'        => 'snippets/sep2015.lang',
-        'description' => 'Snippets - Sep 11',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'tiles/tiles_sep2015.lang',
-        'description' => 'Tiles - Sep 11',
-        'site'        => 6,
-    ],
-];
-
 $snippets_oct15 = [
     [
         'file'        => 'snippets/oct2015_a.lang',
@@ -195,60 +182,15 @@ $snippets_nov15 = [
     ],
 ];
 
-$spring15 = [
+$snippets_dec15 = [
     [
-        'file'        => 'main.lang',
-        'description' => 'Main (Shared)',
-        'site'        => 0,
+        'file'        => 'snippets/dec2015_a.lang',
+        'description' => 'Snippets A - Dec 14',
+        'site'        => 6,
     ],
     [
-        'file'        => 'download_button.lang',
-        'description' => 'Download Buttons',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/sendto.lang',
-        'description' => 'SendTo Widget',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/whatsnew_38.lang',
-        'description' => 'Whatsnew and Firstrun',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'mozorg/home/index.lang',
-        'description' => 'Home',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/android/index.lang',
-        'description' => 'Firefox for Android',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/developer.lang',
-        'description' => 'Developer Edition',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/family/index.lang',
-        'description' => 'Family Page',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/hello.lang',
-        'description' => 'Firefox Hello',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/sync.lang',
-        'description' => 'Firefox Sync',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'snippets/spring2015.lang',
-        'description' => 'Snippets',
+        'file'        => 'snippets/dec2015_b.lang',
+        'description' => 'Snippets B - Dec 14',
         'site'        => 6,
     ],
 ];
@@ -282,11 +224,6 @@ $projects = [
         'title'   => 'Fall Release 2015 - Nov 3',
         'summary' => true,
     ],
-    'snippets_sep2015' => [
-        'pages'   => $snippets_sep15,
-        'title'   => 'Snippets September 2015',
-        'summary' => false,
-    ],
     'snippets_oct2015' => [
         'pages'   => $snippets_oct15,
         'title'   => 'Snippets October 2015',
@@ -302,9 +239,9 @@ $projects = [
         'title'   => 'Snippets November 2015',
         'summary' => false,
     ],
-    'spring2015' => [
-        'pages'   => $spring15,
-        'title'   => 'Spring Release 2015 - June 2',
+    'snippets_dec2015' => [
+        'pages'   => $snippets_dec15,
+        'title'   => 'Snippets December 2015',
         'summary' => false,
     ],
 ];
