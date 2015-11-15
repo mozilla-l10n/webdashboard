@@ -84,4 +84,19 @@ class Utils
 
         return ($isarray == true) ? $sanitized : $sanitized[0];
     }
+
+    /**
+     * Return the English plural form for provided count+sentence
+     *
+     * @param int    $count    Number of items
+     * @param string $sentence Sentence associated to count
+     *
+     * @return string String "count sentence" with proper plural form
+     */
+    public static function getPluralForm($count, $sentence)
+    {
+        return $count == 1
+            ? "{$count} {$sentence}"
+            : "{$count} {$sentence}s";
+    }
 }

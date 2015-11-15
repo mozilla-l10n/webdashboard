@@ -121,15 +121,11 @@ foreach ($lang_files as $site => $site_files) {
             // Standard lang file
             $count = $details['identical'] + $details['missing'];
             if ($count > 0) {
-                $message  = "You have {$count} untranslated ";
-                $message .= $count == 1 ? 'string' : 'strings';
-                $message .= " in {$file}";
+                $message = 'You have ' . Utils::getPluralForm($count, 'untranslated string') . " in {$file}";
                 $total_missing_strings += $count;
             }
             if ($details['errors'] > 0) {
-                $message  = "You have {$details['errors']} ";
-                $message .= $details['errors'] == 1 ? 'error' : 'errors';
-                $message .= " in {$file}";
+                $message = 'You have ' . Utils::getPluralForm($details['errors'], 'error') . " in {$file}";
                 $total_errors += $details['errors'];
             }
         } else {
@@ -161,8 +157,7 @@ foreach ($lang_files as $site => $site_files) {
 }
 
 if ($total_missing_files > 0) {
-    $tmp_message  = "You need to update {$total_missing_files} ";
-    $tmp_message .= $total_missing_files == 1 ? 'file.' : 'files.';
+    $tmp_message = 'You need to update ' . Utils::getPluralForm($total_missing_files, 'file') . '.';
     array_unshift(
         $rss_data,
         ["Other files: {$tmp_message}", $link, $tmp_message]
@@ -170,8 +165,7 @@ if ($total_missing_files > 0) {
 }
 
 if ($total_missing_strings > 0) {
-    $tmp_message  = "You need to translate {$total_missing_strings} ";
-    $tmp_message .= $total_missing_strings == 1 ? 'string.' : 'strings.';
+    $tmp_message = 'You need to translate ' . Utils::getPluralForm($total_missing_strings, 'string') . '.';
     array_unshift(
         $rss_data,
         ["Missing strings: {$tmp_message}", $link, $tmp_message]
@@ -179,8 +173,7 @@ if ($total_missing_strings > 0) {
 }
 
 if ($total_errors > 0) {
-    $tmp_message  = "You need to fix {$total_errors} ";
-    $tmp_message .= $total_errors == 1 ? 'error.' : 'errors.';
+    $tmp_message = 'You need to fix ' . Utils::getPluralForm($total_errors, 'error') . '.';
     array_unshift(
         $rss_data,
         ["Errors: {$tmp_message}", $link, $tmp_message]
@@ -208,10 +201,9 @@ if (isset($webprojects['locales'][$locale])) {
         if ($webproject_incomplete || $webproject_errors) {
             // Web project is incomplete (either missing or untranslated strings)
             $tmp_message .= "<p><strong>{$webproject['name']}</strong><br/>";
-            $tmp_message .= "{$webproject['missing']} missing ";
-            $tmp_message .= $webproject['missing'] == 1 ? 'string' : 'strings';
-            $tmp_message .= ", {$webproject['untranslated']} untranslated ";
-            $tmp_message .= $webproject['untranslated'] == 1 ? 'string.' : 'strings.';
+            $tmp_message .= Utils::getPluralForm($webproject['missing'], 'missing string') . ', ';
+            $tmp_message .= Utils::getPluralForm($webproject['untranslated'], 'untranslated string') . ', ';
+            $tmp_message .= Utils::getPluralForm($webproject['fuzzy'], 'fuzzy string') . '.';
             if ($webproject_errors) {
                 $tmp_message .= '<br/>' . htmlspecialchars($webproject['error_message']);
             }
@@ -230,10 +222,10 @@ if (isset($webprojects['locales'][$locale])) {
 
 // Build a RSS feed
 $rss_feed = new FeedRSS(
-                "L10n Web Dashboard - {$locale}",
-                "https://l10n.mozilla-community.org/webdashboard/?locale={$locale}",
-                "[{$locale}] Localization Status of Web Content",
-                $rss_data
-            );
+    "L10n Web Dashboard - {$locale}",
+    "https://l10n.mozilla-community.org/webdashboard/?locale={$locale}",
+    "[{$locale}] Localization Status of Web Content",
+    $rss_data
+);
 
 include __DIR__ . '/../views/locale.php';
