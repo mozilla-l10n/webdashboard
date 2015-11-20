@@ -6,7 +6,7 @@ $locales = [
     'cy', 'da', 'de', 'dsb', 'ee', 'el', 'en-GB', 'en-ZA',
     'eo', 'es', 'es-AR', 'es-CL', 'es-ES', 'es-MX', 'et',
     'eu', 'fa', 'ff', 'fi', 'fr', 'fy-NL', 'ga-IE', 'gd',
-    'gl', 'gu-IN', 'ha', 'he', 'hi-IN', 'hr', 'hsb', 'hu',
+    'gl', 'gn', 'gu-IN', 'ha', 'he', 'hi-IN', 'hr', 'hsb', 'hu',
     'hy-AM', 'id', 'ig', 'is', 'it', 'ja', 'ka', 'kk', 'km',
     'kn', 'ko', 'kok', 'ks', 'lij', 'ln', 'lo', 'lt', 'lv', 'mai',
     'mg', 'mk', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO',
