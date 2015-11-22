@@ -194,10 +194,11 @@ if ($locale_has_web_projects) {
         $webproject = $webprojects['locales'][$locale][$product_code];
 
         // Initialize values
-        $untrans_width = 0;
-        $fuzzy_width = 0;
         $errors_width = 0;
+        $fuzzy_width = 0;
+        $identical_width = 0;
         $trans_width = 0;
+        $untrans_width = 0;
 
         if ($webproject['error_status']) {
             // File has errors
@@ -224,7 +225,6 @@ if ($locale_has_web_projects) {
             } else {
                 // Web project based on .po files (default)
                 $fuzzy_width = floor($webproject['fuzzy'] / $webproject['total'] * 100);
-                $identical_width = 0;
                 $untrans_width = floor($webproject['untranslated'] / $webproject['total'] * 100);
                 $message = "{$webproject['translated']} translated, {$webproject['untranslated']} untranslated, {$webproject['fuzzy']} fuzzy";
             }
