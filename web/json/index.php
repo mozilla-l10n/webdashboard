@@ -103,5 +103,4 @@ foreach ($locales as $locale) {
     ];
 }
 
-$json_data = new Json;
-print $json_data->outputContent($results, false, true);
+print $json_object->outputContent($results, false, true);

@@ -4,11 +4,9 @@ namespace Webdashboard;
 use Cache\Cache;
 
 // Check if the locale is working on locamotion
-$json_data = new Json;
-
 $cache_id = 'locamotion_locales';
 if (! $locamotion = Cache::getKey($cache_id)) {
-    $locamotion = $json_data
+    $locamotion = $json_object
         ->setURI(LANG_CHECKER . '?action=listlocales&project=locamotion&json')
         ->fetchContent();
     Cache::setKey($cache_id, $locamotion);
@@ -35,7 +33,7 @@ foreach ($pages as $page) {
 
     $cache_id = 'page_' . $filename . '_' . $page['site'];
     if (! $data_page = Cache::getKey($cache_id)) {
-        $data_page = $json_data
+        $data_page = $json_object
             ->setURI($json_string)
             ->fetchContent()[$filename];
         Cache::setKey($cache_id, $data_page);
@@ -58,7 +56,7 @@ foreach ($pages as $page) {
 
     $cache_id = 'page_' . $filename . '_' . $page['site'];
     if (! $data_page = Cache::getKey($cache_id)) {
-        $data_page = $json_data
+        $data_page = $json_object
             ->setURI($json_string)
             ->fetchContent()[$filename];
         Cache::setKey($cache_id, $data_page);
