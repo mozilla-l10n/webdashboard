@@ -123,34 +123,6 @@ $firefox_os_extra = [
     ],
 ];
 
-$snippets_oct15 = [
-    [
-        'file'        => 'snippets/oct2015_a.lang',
-        'description' => 'Snippets A - Oct 12',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/oct2015_b.lang',
-        'description' => 'Snippets B - Oct 12',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/oct2015_c.lang',
-        'description' => 'Snippets C - Oct 12',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/oct2015_mofo.lang',
-        'description' => 'Snippets MoFo - Oct 12',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'tiles/tiles_oct2015.lang',
-        'description' => 'Tiles - Oct 12',
-        'site'        => 6,
-    ],
-];
-
 $snippets_fall15 = [
     [
         'file'        => 'snippets/fall2015.lang',
@@ -195,6 +167,19 @@ $snippets_dec15 = [
     ],
 ];
 
+$snippets_jan16 = [
+    [
+        'file'        => 'snippets/jan2016.lang',
+        'description' => 'Snippets - Jan 15',
+        'site'        => 6,
+    ],
+    [
+        'file'        => 'tiles/tiles_jan2016.lang',
+        'description' => 'Tiles - Jan 15',
+        'site'        => 6,
+    ],
+];
+
 /*
 * Each project has a key name that will be used in the URL.
 * Value is an array with:
@@ -224,11 +209,6 @@ $projects = [
         'title'   => 'Fall Release 2015 - Nov 3',
         'summary' => true,
     ],
-    'snippets_oct2015' => [
-        'pages'   => $snippets_oct15,
-        'title'   => 'Snippets October 2015',
-        'summary' => false,
-    ],
     'snippets_fall2015' => [
         'pages'   => $snippets_fall15,
         'title'   => 'Snippets Fall Campaign 2015',
@@ -242,6 +222,11 @@ $projects = [
     'snippets_dec2015' => [
         'pages'   => $snippets_dec15,
         'title'   => 'Snippets December 2015',
+        'summary' => false,
+    ],
+    'snippets_jan2016' => [
+        'pages'   => $snippets_jan16,
+        'title'   => 'Snippets January 2016',
         'summary' => false,
     ],
 ];
