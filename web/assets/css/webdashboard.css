@@ -491,6 +491,11 @@ table th {
     background-color: #ffbd52;
 }
 
+.project_with_errors {
+    background-color: #a33b3b;
+    color: #fff;
+}
+
 .project_done {
     background-color: #92cc6e;
     color: #92cc6e;

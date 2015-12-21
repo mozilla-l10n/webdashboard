@@ -90,28 +90,37 @@ foreach ($status as $locale => $array_status) {
         'locamotion'    => in_array($locale, $locamotion),
     ];
     foreach ($array_status as $key => $result) {
+        $result_message = '';
+        $result_status = $result;
         if ($result != 'none') {
             $total_page++;
             // Update stats for this locale
             $stats[$locale]['strings_total'] += $result['Translated'] + $result['Missing'] + $result['Identical'];
             $stats[$locale]['strings_done'] += $result['Translated'];
-            if ($result['Identical'] == 0 && $result['Missing'] == 0) {
+            if ($result['Identical'] == 0 && $result['Missing'] == 0 && $result['Errors'] == 0) {
                 // Page done
                 $page_done++;
-                $result = 'done';
+                $result_status = 'done';
                 (isset($locale_done_per_page[$key]))
                     ? $locale_done_per_page[$key][] = $locale
                     : $locale_done_per_page[$key] = [$locale];
             } elseif ($result['Translated'] == 0) {
                 // Missing
-                $result = 'missing';
+                $result_status = 'missing';
             } else {
                 // In progress
                 $count = $result['Translated'] + $result['Missing'] + $result['Identical'];
-                $result = $result['Translated'] . '/' . $count;
+                $result_message = "{$result['Translated']}/{$count}";
+                if ($result['Errors'] > 0) {
+                    $result_status = 'errors';
+                    $result_message .= " ({$result['Errors']})";
+                }
             }
         }
-        $status_formatted[$locale][$key] = $result;
+        $status_formatted[$locale][$key] = [
+            'message' => $result_message,
+            'status'  => $result_status,
+        ];
     }
 
     if ($page_done == $total_page) {
