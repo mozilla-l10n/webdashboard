@@ -1,6 +1,8 @@
 <?php
 namespace Webdashboard;
 
+use Json\Json;
+
 // We always work with UTF8 encoding
 mb_internal_encoding('UTF-8');
 
@@ -19,6 +21,9 @@ if (file_exists($settings_filename)) {
     echo "<p>Rename <strong>config/settings.inc.php.ini</strong> as <strong>config/settings.inc.php</strong> to get started.</p>";
     exit;
 }
+
+// Re-usable JSON object
+$json_object = new Json;
 
 // Cache class
 define('CACHE_ENABLED', true);

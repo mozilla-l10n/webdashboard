@@ -20,15 +20,14 @@ if (! in_array($locale, $locales)) {
 }
 
 // Get lang files status from langchecker
-$json_data = new Json;
-$lang_files = $json_data
+$lang_files = $json_object
     ->setURI(LANG_CHECKER . "?locale={$locale}&json")
     ->fetchContent();
 
 // Check if the locale is working on locamotion
 $cache_id = 'locamotion_locales';
 if (! $locamotion = Cache::getKey($cache_id)) {
-    $locamotion = $json_data
+    $locamotion = $json_object
         ->setURI(LANG_CHECKER . '?action=listlocales&project=locamotion&json')
         ->fetchContent();
     Cache::setKey($cache_id, $locamotion);
@@ -101,7 +100,7 @@ if (count($bugs) > 0) {
 // Read status of external web projects, cache expires after 1 hour.
 $cache_id = 'external_webprojects';
 if (! $webprojects = Cache::getKey($cache_id, 60 * 60)) {
-    $webprojects = $json_data
+    $webprojects = $json_object
         ->setURI(WEBPROJECTS_JSON)
         ->fetchContent();
     Cache::setKey($cache_id, $webprojects);

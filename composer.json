@@ -7,16 +7,21 @@
         {
             "type": "vcs",
             "url": "https://github.com/mozilla-l10n/phpclass-cache"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/mozilla-l10n/phpclass-json"
         }
     ],
 
     "require": {
         "mozillal10n/bugzilla": "~0.1",
-        "mozillal10n/cache": "~0.1"
+        "mozillal10n/cache": "~0.1",
+        "mozillal10n/json": "~0.1"
     },
 
     "require-dev": {
-        "atoum/atoum": "~1.1",
+        "atoum/atoum": "~2.0",
         "fabpot/php-cs-fixer": "~1.4",
         "symfony/var-dumper": "~2.6"
     },
