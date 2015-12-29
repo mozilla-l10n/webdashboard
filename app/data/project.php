@@ -125,17 +125,17 @@ $firefox_os_extra = [
 
 $snippets_fall15 = [
     [
-        'file'        => 'snippets/fall2015.lang',
+        'file'        => 'snippets/2015/fall2015.lang',
         'description' => 'Snippets Fall Campaign - Nov 2',
         'site'        => 6,
     ],
     [
-        'file'        => 'snippets/nov2015_eoy_mofo.lang',
+        'file'        => 'snippets/2015/nov2015_eoy_mofo.lang',
         'description' => 'Snippets EOY - Nov 2',
         'site'        => 6,
     ],
     [
-        'file'        => 'tiles/tiles_nov2015.lang',
+        'file'        => 'tiles/2015/tiles_nov2015.lang',
         'description' => 'Tiles - Nov 2',
         'site'        => 6,
     ],
@@ -143,12 +143,12 @@ $snippets_fall15 = [
 
 $snippets_nov15 = [
     [
-        'file'        => 'snippets/nov2015_a.lang',
+        'file'        => 'snippets/2015/nov2015_a.lang',
         'description' => 'Snippets A - Nov 14',
         'site'        => 6,
     ],
     [
-        'file'        => 'snippets/nov2015_b.lang',
+        'file'        => 'snippets/2015/nov2015_b.lang',
         'description' => 'Snippets B - Nov 14',
         'site'        => 6,
     ],
@@ -156,12 +156,12 @@ $snippets_nov15 = [
 
 $snippets_dec15 = [
     [
-        'file'        => 'snippets/dec2015_a.lang',
+        'file'        => 'snippets/2015/dec2015_a.lang',
         'description' => 'Snippets A - Dec 14',
         'site'        => 6,
     ],
     [
-        'file'        => 'snippets/dec2015_b.lang',
+        'file'        => 'snippets/2015/dec2015_b.lang',
         'description' => 'Snippets B - Dec 14',
         'site'        => 6,
     ],
@@ -169,12 +169,12 @@ $snippets_dec15 = [
 
 $snippets_jan16 = [
     [
-        'file'        => 'snippets/jan2016.lang',
+        'file'        => 'snippets/2016/jan2016.lang',
         'description' => 'Snippets - Jan 15',
         'site'        => 6,
     ],
     [
-        'file'        => 'tiles/tiles_jan2016.lang',
+        'file'        => 'tiles/2016/tiles_jan2016.lang',
         'description' => 'Tiles - Jan 15',
         'site'        => 6,
     ],
