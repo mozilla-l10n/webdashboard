@@ -46,11 +46,6 @@ $fall15 = [
         'site'        => 0,
     ],
     [
-        'file'        => 'firefox/push.lang',
-        'description' => 'Push',
-        'site'        => 0,
-    ],
-    [
         'file'        => 'firefox/family/index.lang',
         'description' => 'Family Page',
         'site'        => 0,
@@ -86,11 +81,6 @@ $firefox_os = [
     [
         'file'        => 'firefox/os/faq.lang',
         'description' => 'Firefox OS FAQ',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/partners/index.lang',
-        'description' => 'Firefox OS Partners',
         'site'        => 0,
     ],
 ];
