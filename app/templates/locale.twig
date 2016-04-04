@@ -1,0 +1,156 @@
+{% extends 'default.twig' %}
+
+{% block main_content %}
+    <p class="feed">
+        <a href="?locale={{ locale }}&amp;rss">
+            <img src="./assets/images/icon-rss-48x48.png" alt="rss"/>
+            Subscribe to the RSS feed for your locale!
+        </a>
+    </p>
+    <div id="locale_page_title">
+        <a href="http://wiki.mozilla.org/L10n:Teams:{{ locale }}">{{ locale }}</a>
+        {% if locamotion %}
+            <img src="assets/images/locamotion.png" class="locamotion" />
+        {% endif %}
+    </div>
+
+    <h2 class="title_anchor" id="lang_status"><a href="#lang_status">#</a>State of your lang files <small>(data updated every 15 minutes)</small></h2>
+    {% if lang_files_status|length > 0 %}
+        {% for website, website_data in lang_files_status %}
+            {% if website_data.files|length == 0 %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="main_column">{{ website }}</th>
+                            <th><span class="all_translated">All Files translated</span></th>
+                        </tr>
+                    </thead>
+                </table>
+            {% else %}
+                {% if website_data.source_type == 'lang'  %}
+                    <table class="file_detail">
+                        <thead>
+                            <tr>
+                                <th class="main_column">{{ website }}</th>
+                                <th>Missing</th>
+                                <th>Errors</th>
+                                <th>Deadline</th>
+                                <th>Critical</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for file, file_data in website_data.files %}
+                                <tr>
+                                     <th class="main_column"><a href="{{ langchecker_url }}?locale={{ locale }}#{{ file }}">{{ file }}</a></th>
+                                     <td>{{ langcheckerLinkNumber(file_data.missing, locale, file)|raw }}</td>
+                                     <td>{{ langcheckerLinkNumber(file_data.errors, locale, file)|raw }}</td>
+                                     <td class="{{ file_data.deadline_class }}">{{ file_data.deadline }}</td>
+                                     <td>
+                                         {% if file_data.critical %}
+                                            <strong>Yes</strong>
+                                         {% else %}
+                                            No
+                                         {% endif %}
+                                     </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                <table class="file_detail">
+                    <thead>
+                        <tr>
+                            <th class="main_column">{{ website }}</th>
+                            <th>Status</th>
+                            <th>Deadline</th>
+                            <th>Critical</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file, file_data in website_data.files %}
+                            <tr>
+                                 <th class="main_column"><a href="{{ langchecker_url }}?locale={{ locale }}#{{ file }}">{{ file }}</a></th>
+                                 <td><span class="{{ file_data.status_class }}">{{ file_data.status_text }}</span></td>
+                                 <td class="{{ file_data.deadline_class }}">{{ file_data.deadline }}</td>
+                                 <td>
+                                     {% if file_data.critical %}
+                                        <strong>Yes</strong>
+                                     {% else %}
+                                        No
+                                     {% endif %}
+                                 </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if mozilla_org %}
+            <p>
+                <small>Reminder: Your staging site for mozilla.org/{{ locale }} is
+                <a href="https://www-dev.allizom.org/{{ locale }}">www-dev.allizom.org/{{ locale }}</a><br/>
+                The list of opt-in pages for mozilla.org is available <a href="{{ langchecker_url }}?action=optin&amp;locale={{ locale }}">here</a>.</small>
+            </p>
+        {% endif %}
+
+        <h2 class="title_anchor" id="lang_graph"><a href="#lang_graph">#</a>Translation progress of lang files over time</h2>
+        <div id="graphdiv"></div>
+
+        <h2 class="title_anchor" id="bugs"><a href="#bugs">#</a>Open bugs for your locale:</h2>
+        <ul>
+            {% for bug_number, bug_title in bugs %}
+                <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id={{ bug_number }}">{{ bug_number }}: {{ bug_title }}</a></li>
+            {% else %}
+                <li>No bugs. Good job!</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no files tracked for this locale at the moment.</p>
+    {% endif %}
+
+    <h2 class="title_anchor" id="web_projects"><a href="#web_projects">#</a>External Web Projects Status ({{ locale }})</h2>
+    {% if web_projects|length > 0 %}
+        <p>
+            Hover your mouse on a cell in the <em>Status</em> column to display statistics or errors for a specific project.<br/>
+            <small>Data updated about every 3 hours. Last update: {{ web_projects_update }}.</small>
+        </p>
+        <table class="web_projects">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>%</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for web_project in web_projects %}
+                    <tr>
+                        <td>{{ web_project.name }}</td>
+                        <td class="perc">{{ web_project.percentage }}</td>
+                        <td class="status" title="{{ web_project.message }}">
+                            <span class="web_projects_status web_projects_errors" style="width: {{ web_project.errors_width }}%;">error</span>
+                            <span class="web_projects_status web_projects_trans" style="width: {{ web_project.trans_width }}%;"></span>
+                            <span class="web_projects_status web_projects_untrans" style="width: {{ web_project.untrans_width }}%;"></span>
+                            <span class="web_projects_status web_projects_fuzzy" style="width: {{ web_project.fuzzy_width }}%;"></span>
+                            <span class="web_projects_status web_projects_identical" style="width: {{ web_project.identical_width }}%;"></span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p><small>An alternative view for external web projects is <a href="https://l10n.mozilla-community.org/~flod/webstatus/?locale={{ locale }}">available in this page</a>.</small></p>
+    {% else %}
+        <p>There are no external web projects available for this locale.</p>
+    {% endif %}
+{% endblock %}
+
+{% block js_footer %}
+    <script>
+        // Store locale in a variable to use it later in locale_graph.js
+        var current_locale = '{{ locale }}';
+    </script>
+    <script src="https://l10n.mozilla-community.org/~pascalc/web_l10n_stats/dygraph-combined.js"></script>
+    <script src="./assets/js/locale_graph.js"></script>
+{% endblock %}

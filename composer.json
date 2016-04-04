@@ -17,7 +17,8 @@
     "require": {
         "mozillal10n/bugzilla": "~0.1",
         "mozillal10n/cache": "~0.1",
-        "mozillal10n/json": "~0.1"
+        "mozillal10n/json": "~0.1",
+        "twig/twig": "~1.0"
     },
 
     "require-dev": {

@@ -1,0 +1,107 @@
+{% extends 'default.twig' %}
+
+{% block js_files %}
+    <script src="./assets/js/sorttable.js"></script>
+    <script src="./assets/js/toggle.js"></script>
+{% endblock %}
+
+{% block main_content %}
+    <div id="hide_buttons">
+        <button class="button" id="button_locales" onclick="toggleLocales('complete_locale', this.id)">Hide completed locales</button>
+        <button class="button" id="button_locamotion" onclick="toggleLocales('locamotion_locale', this.id)">Hide Locamotion locales</button>
+        <p id="hidden_message" class="hidden"></p>
+    </div>
+
+    <table class="sortable" id="project_data">
+        <caption>L10n Dashboard - {{ project_info.title }}</caption>
+        <thead>
+            <tr>
+                <th>Locale</th>
+                <th>Missing<br/>strings</th>
+                {% for page in pages %}
+                    <th>{{ page.description }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+                {% for filename, page_data in pages %}
+                    <td>
+                        <a href="{{ langchecker_url }}/?locale=all&amp;website={{ page_data.website }}&amp;file={{ filename }}" title="Open the status page for this file">{{ filename }}</a>
+                    </td>
+                {% endfor %}
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for row in rows %}
+                <tr class="{{ row.css_class }}">
+                    <td class="locale">
+                        <a href="?locale={{ row.locale }}">{{ row.locale }}
+                        {% if row.locamotion %}
+                            <img src="./assets/images/locamotion_16.png" class="locamotion" />
+                        {% endif %}
+                        </a>
+                    </td>
+                    <td class="project_missing_strings">{{ row.missing_strings }}</td>
+                    {% for filename, page_data in pages %}
+                        {% if attribute(row.cells, filename) is defined %}
+                            <td class="{{ attribute(row.cells, filename).css_class }}">{{ attribute(row.cells, filename).text }}</td>
+                        {% else %}
+                            <td class="project_none">1</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table id="project_results">
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Completion</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for filename, page_data in pages %}
+                <tr>
+                    <td class="results_file">{{ page_data.description }} <span class="filename">({{ filename }})</span></td>
+                    <td class="results_stats">{{ page_data.complete_locales|length }}/{{ page_data.supported_locales|length }} perfect locales ({{ page_data.coverage }}%)</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th colspan="2" class="final">Total: {{ project_info.complete_locales }}/{{ project_info.total_locales }} perfect locales ({{ project_info.complete_coverage }}%)</th>
+            </tr>
+            <tr>
+                <th colspan="2">Average: {{ project_info.average_locales }}/{{ project_info.total_locales }} perfect locales ({{ project_info.average_coverage }}%)</th>
+            </tr>
+        </body>
+    </table>
+    <p class="table_legend">Percentages between parenthesis express coverage of our l10n base.</p>
+
+    {% if project_info.summary %}
+        <table id="project_locales_summary">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Locales</th>
+                <th>On Locamotion</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for row in summary_rows %}
+                    <tr>
+                        <td class="category">
+                            <span class="title">{{ row.title }} ({{ row.count_locales }})</span>
+                            <span class="description">{{ row.description }}</span>
+                        </td>
+                        <td>{{ row.locales }}</td>
+                        <td>{{ row.locamotion_locales }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

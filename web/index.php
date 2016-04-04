@@ -1,10 +1,7 @@
 <?php
 namespace Webdashboard;
 
-require_once __DIR__ . '/../app/config/init.php';
-
-$view = 'home';
-$body_class = '';
+require_once __DIR__ . '/../app/inc/init.php';
 
 // Get query parameters
 $json = Utils::getQueryParam('json', false);
@@ -13,9 +10,9 @@ $project = Utils::getQueryParam('project');
 $rss = Utils::getQueryParam('rss', false);
 
 if ($project != '') {
-    $view = 'project';
+    include __DIR__ . '/../app/controllers/project.php';
 } elseif ($locale != '') {
-    $view = 'locale';
+    include __DIR__ . '/../app/controllers/locale.php';
+} else {
+    include __DIR__ . '/../app/controllers/home.php';
 }
-
-include __DIR__ . '/../app/models/' . $view . '.php';

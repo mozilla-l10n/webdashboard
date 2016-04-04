@@ -1,92 +1,8 @@
 <?php
-/*
- * Model for individual locale view
- */
 namespace Webdashboard;
 
-use Bugzilla\Bugzilla;
-use Cache\Cache;
-
-// Include all data about our locales
-include __DIR__ . '/../data/locales.php';
-
-// Check that this is a valid locale code called via GET
-if (! in_array($locale, $locales)) {
-    $content = "<h2 class='errortitle'>Wrong locale code: {$locale}</h2>\n" .
-               '<p>The requested language is not available on the dashboard.</p>';
-    include __DIR__ . '/../views/error.php';
-
-    return;
-}
-
-// Get lang files status from langchecker
-$lang_files = $json_object
-    ->setURI(LANG_CHECKER . "?locale={$locale}&json")
-    ->fetchContent();
-
-// Check if the locale is working on locamotion
-$cache_id = 'locamotion_locales';
-if (! $locamotion = Cache::getKey($cache_id)) {
-    $locamotion = $json_object
-        ->setURI(LANG_CHECKER . '?action=listlocales&project=locamotion&json')
-        ->fetchContent();
-    Cache::setKey($cache_id, $locamotion);
-}
-
-$locamotion = in_array($locale, $locamotion);
-
-// All open bugs for a locale in the mozilla.org/l10n component
-$bugzilla_query_mozillaorg = 'https://bugzilla.mozilla.org/buglist.cgi?'
-                           . 'f1=cf_locale'
-                           . '&o1=equals'
-                           . '&query_format=advanced'
-                           . '&v1=' . urlencode(Bugzilla::getBugzillaLocaleField($locale))
-                           . '&o2=equals'
-                           . '&f2=component'
-                           . '&v2=L10N'
-                           . '&bug_status=UNCONFIRMED'
-                           . '&bug_status=NEW'
-                           . '&bug_status=ASSIGNED'
-                           . '&bug_status=REOPENED'
-                           . '&classification=Other'
-                           . '&product=www.mozilla.org';
-
-// All open bugs for a locale in the Mozilla Localization/locale component, with "webdashboard" in the whiteboard
-$bugzilla_query_l10ncomponent = 'https://bugzilla.mozilla.org/buglist.cgi?'
-                              . '&query_format=advanced'
-                              . '&status_whiteboard_type=allwordssubstr'
-                              . '&status_whiteboard=webdashboard'
-                              . '&bug_status=UNCONFIRMED'
-                              . '&bug_status=NEW'
-                              . '&bug_status=ASSIGNED'
-                              . '&bug_status=REOPENED'
-                              . '&component=' . urlencode(Bugzilla::getBugzillaLocaleField($locale, 'l10n'))
-                              . '&classification=Client%20Software'
-                              . '&product=Mozilla%20Localizations';
-
-/* Use cached requests if available, cache expires after 1 hour
- * Note: result can be empty, so I need to check strictly for false
- */
-$cache_id = "bugs_mozillaorg_{$locale}";
-$bugs_mozillaorg = Cache::getKey($cache_id, 60 * 60);
-if ($bugs_mozillaorg === false) {
-    $csv_mozillaorg = file($bugzilla_query_mozillaorg . '&ctype=csv');
-    $bugs_mozillaorg = Bugzilla::getBugsFromCSV($csv_mozillaorg);
-    Cache::setKey($cache_id, $bugs_mozillaorg);
-}
-
-$cache_id = "bugs_l10ncomponent_{$locale}";
-$bugs_l10ncomponent = Cache::getKey($cache_id, 60 * 60);
-if ($bugs_l10ncomponent === false) {
-    $csv_l10ncomponent = file($bugzilla_query_l10ncomponent . '&ctype=csv');
-    $bugs_l10ncomponent = Bugzilla::getBugsFromCSV($csv_l10ncomponent);
-    Cache::setKey($cache_id, $bugs_l10ncomponent);
-}
-
-$bugs = $bugs_mozillaorg + $bugs_l10ncomponent;
-
+// Build RSS data
 $rss_data = [];
-
 if (count($bugs) > 0) {
     foreach ($bugs as $bug_number => $bug_description) {
         $rss_data[] = [
@@ -97,16 +13,6 @@ if (count($bugs) > 0) {
     }
 }
 
-// Read status of external web projects, cache expires after 1 hour.
-$cache_id = 'external_webprojects';
-if (! $webprojects = Cache::getKey($cache_id, 60 * 60)) {
-    $webprojects = $json_object
-        ->setURI(WEBPROJECTS_JSON)
-        ->fetchContent();
-    Cache::setKey($cache_id, $webprojects);
-}
-
-// RSS feed data
 $total_missing_strings = 0;
 $total_errors = 0;
 $total_missing_files = 0;
@@ -180,20 +86,10 @@ if ($total_errors > 0) {
 }
 
 // Add information about external web projects
-if (isset($webprojects['locales'][$locale])) {
-    $locale_has_web_projects = true;
-    $last_update_local = date('Y-m-d H:i e (O)', strtotime($webprojects['metadata']['creation_date']));
-
-    // Generate a list of products for this locale and sort them by name
-    $available_products = [];
-    foreach (array_keys($webprojects['locales'][$locale]) as $product_code) {
-        $available_products[$product_code] = $webprojects['locales'][$locale][$product_code]['name'];
-    }
-    asort($available_products);
-
+if ($locale_has_web_projects) {
     $link = "https://l10n.mozilla-community.org/webdashboard/?locale={$locale}#web_projects";
     $tmp_message = '';
-    foreach ($available_products as $product_code => $product_name) {
+    foreach ($available_web_projects as $product_code => $product_name) {
         $webproject = $webprojects['locales'][$locale][$product_code];
         $webproject_errors = $webproject['error_status'];
         $webproject_incomplete = $webproject['missing'] + $webproject['untranslated'] > 0;
@@ -215,16 +111,13 @@ if (isset($webprojects['locales'][$locale])) {
             ['Incomplete Web Projects', $link, $tmp_message]
         );
     }
-} else {
-    $locale_has_web_projects = false;
 }
 
-// Build a RSS feed
+// Build the RSS feed, print it and stop execution
 $rss_feed = new FeedRSS(
     "L10n Web Dashboard - {$locale}",
     "https://l10n.mozilla-community.org/webdashboard/?locale={$locale}",
     "[{$locale}] Localization Status of Web Content",
     $rss_data
 );
-
-include __DIR__ . '/../views/locale.php';
+print $rss_feed->buildRSS();

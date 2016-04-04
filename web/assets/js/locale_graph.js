@@ -1,14 +1,6 @@
-<h2 class="title_anchor" id="lang_graph"><a href="#lang_graph">#</a>Translation progress of lang files over time</h2>
-<div id="graphdiv">
-
-</div>
-
-<script src="https://l10n.mozilla-community.org/~pascalc/web_l10n_stats/dygraph-combined.js"></script>
-
-<script>
 graph = new Dygraph(
-    document.getElementById("graphdiv"),
-    "https://l10n.mozilla-community.org/~pascalc/web_l10n_stats/logs/<?=$locale?>.csv", // path to CSV file
+    document.getElementById('graphdiv'),
+    'https://l10n.mozilla-community.org/~pascalc/web_l10n_stats/logs/' + current_locale + '.csv',
     {
         gridLineColor: 'lightgray',
         highlightCircleSize: 5,
@@ -40,4 +32,3 @@ graph = new Dygraph(
         }
     }
 );
-</script>

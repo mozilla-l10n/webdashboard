@@ -55,7 +55,7 @@ namespace Webdashboard;
 use Bugzilla\Bugzilla;
 use Cache\Cache;
 
-require_once __DIR__ . '/../../app/config/init.php';
+require_once __DIR__ . '/../../app/inc/init.php';
 
 // Include all data about our locales
 include __DIR__ . '/../../app/data/locales.php';

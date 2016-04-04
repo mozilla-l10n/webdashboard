@@ -1,0 +1,11 @@
+{% extends 'default.twig' %}
+
+{% block main_content %}
+    <div id="locales">
+        <ul>
+            {% for locale in locales %}
+                <li><a href="./?locale={{ locale }}">{{ locale }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

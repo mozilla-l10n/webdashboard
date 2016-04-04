@@ -1,57 +1,52 @@
 /* Fonts */
 @font-face {
     font-family: 'Open Sans Light';
-    src: url(../fonts/OpenSans-Light-webfont.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/OpenSans-Light-webfont.woff) format('woff'),
-         url(../fonts/OpenSans-Light-webfont.ttf) format('truetype');
+    src: url(../fonts/OpenSans/OpenSans-Light.woff2) format('woff2'),
+         url(../fonts/OpenSans/OpenSans-Light-webfont.woff) format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Open Sans Light';
-    src: url(../fonts/OpenSans-Semibold-webfont.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/OpenSans-Semibold-webfont.woff) format('woff'),
-         url(../fonts/OpenSans-Semibold-webfont.ttf) format('truetype');
+    src: url(../fonts/OpenSans/OpenSans-Semibold.woff2) format('woff2'),
+         url(../fonts/OpenSans/OpenSans-Semibold-webfont.woff) format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Open Sans Light';
-    src: url(../fonts/OpenSans-LightItalic-webfont.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/OpenSans-LightItalic-webfont.woff) format('woff'),
-         url(../fonts/OpenSans-LightItalic-webfont.ttf) format('truetype');
+    src: url(../fonts/OpenSans/OpenSans-LightItalic.woff2) format('woff2'),
+         url(../fonts/OpenSans/OpenSans-LightItalic-webfont.woff) format('woff');
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
-font-family: 'Open Sans';
-    src: url(../fonts/OpenSans-Regular-webfont.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/OpenSans-Regular-webfont.woff) format('woff'),
-         url(../fonts/OpenSans-Regular-webfont.ttf) format('truetype');
+    font-family: 'Open Sans';
+    src: url(../fonts/OpenSans/OpenSans-Regular.woff2) format('woff2'),
+         url(../fonts/OpenSans/OpenSans-Regular-webfont.woff) format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Open Sans';
-    src: url(../fonts/OpenSans-Bold-webfont.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/OpenSans-Bold-webfont.woff) format('woff'),
-         url(../fonts/OpenSans-Bold-webfont.ttf) format('truetype');
+    src: url(../fonts/OpenSans/OpenSans-Bold.woff2) format('woff2'),
+         url(../fonts/OpenSans/OpenSans-Bold-webfont.woff) format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Open Sans';
-    src: url(../fonts/OpenSans-Italic-webfont.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/OpenSans-Italic-webfont.woff) format('woff'),
-         url(../fonts/OpenSans-Italic-webfont.ttf) format('truetype');
+    src: url(../fonts/OpenSans/OpenSans-Italic.woff2) format('woff2'),
+         url(../fonts/OpenSans/OpenSans-Italic-webfont.woff) format('woff');
     font-weight: normal;
     font-style: italic;
 }
+
 
 html,
 body {
@@ -217,7 +212,7 @@ h2 small {
 
 .locamotion {
     vertical-align: middle;
-    margin-left: 6px;
+    margin-left: 3px;
     margin-top: -3px;
 }
 
@@ -288,6 +283,10 @@ table th {
 .main_column {
     min-width: 300px;
     text-align: left;
+}
+
+.all_translated {
+    color: #808080;
 }
 
 .raw_status {
@@ -526,7 +525,6 @@ table th {
 
 #project_data tr .locale {
     text-align: left;
-    white-space: pre;
     min-width: 70px;
     line-height: 1.6;
 }
