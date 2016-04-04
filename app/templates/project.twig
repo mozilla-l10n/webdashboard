@@ -2,13 +2,13 @@
 
 {% block js_files %}
     <script src="./assets/js/sorttable.js"></script>
-    <script src="./assets/js/toggle.js"></script>
+    <script src="./assets/js/project.js"></script>
 {% endblock %}
 
 {% block main_content %}
     <div id="hide_buttons">
-        <button class="button" id="button_locales" onclick="toggleLocales('complete_locale', this.id)">Hide completed locales</button>
-        <button class="button" id="button_locamotion" onclick="toggleLocales('locamotion_locale', this.id)">Hide Locamotion locales</button>
+        <button class="button filter_buttons" id="button_locales" data-class-name="complete_locale">Hide completed locales</button>
+        <button class="button filter_buttons" id="button_locamotion" data-class-name="locamotion_locale">Hide Locamotion locales</button>
         <p id="hidden_message" class="hidden"></p>
     </div>
 
