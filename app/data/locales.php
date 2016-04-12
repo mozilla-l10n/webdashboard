@@ -13,6 +13,6 @@ $locales = [
     'ne-NP', 'nl', 'nn-NO', 'oc', 'or', 'pa-IN', 'pbb', 'pl',
     'pt-BR', 'pt-PT', 'qvi', 'rm', 'ro', 'ru', 'sat', 'si',
     'sk', 'sl', 'son', 'sq', 'sr', 'sr-Latn', 'sv-SE', 'sw',
-    'ta', 'te', 'th', 'tl', 'tn', 'tr', 'trs', 'tsz', 'uk',
+    'ta', 'te', 'th', 'tl', 'tn', 'tr', 'trs', 'uk',
     'ur', 'uz', 'vi', 'wo', 'xh', 'yo', 'zh-CN', 'zh-TW', 'zu',
 ];
