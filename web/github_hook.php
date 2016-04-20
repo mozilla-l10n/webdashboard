@@ -15,7 +15,7 @@ $header = 'HTTP_X_HUB_SIGNATURE';
 require "{$app_root}/app/config/settings.inc.php";
 
 // Logging function to output content to /github_log.txt
-function logHookResult($message, $success = false)
+function logHookResult($message, $app_root, $success = false)
 {
     $log_headers = "$message\n";
     if (! $success) {
@@ -82,10 +82,10 @@ if (isset($_SERVER[$header])) {
         }
 
         $log .= 'Last update: ' . date('d-m-Y H:i:s');
-        logHookResult($log, true);
+        logHookResult($log, $app_root, true);
     } else {
-        logHookResult('Invalid GitHub secret');
+        logHookResult('Invalid GitHub secret', $app_root);
     }
 } else {
-    logHookResult("{$header} header missing, define a secret key for your project in GitHub");
+    logHookResult("{$header} header missing, define a secret key for your project in GitHub", $app_root);
 }
