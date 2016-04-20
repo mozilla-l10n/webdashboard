@@ -56,8 +56,18 @@ if (isset($_SERVER[$header])) {
         flush();
 
         // Pull latest changes
-        $log = "Updating Git repository\n";
+        $log .= "Updating Git repository\n";
         exec("git checkout $branch; git pull origin $branch");
+
+        // Delete cache
+        $log .= "Removing existing cache\n";
+        $removed_files = 0;
+        foreach (glob("{$app_root}/cache/*.cache") as $filename) {
+            if (unlink($filename)) {
+                $removed_files++;
+            }
+        }
+        $log .= "Cache items removed from {$app_root}/cache: {$removed_files}.\n";
 
         // Install or update dependencies
         if (file_exists($composer)) {
@@ -66,7 +76,7 @@ if (isset($_SERVER[$header])) {
             // www-data does not have a HOME or COMPOSER_HOME, create one
             $cache_folder = "{$app_root}/.composer_cache";
             if (! is_dir($cache_folder)) {
-                $log = "Creating folder {$cache_folder}\n";
+                $log .= "Creating folder {$cache_folder}\n";
                 mkdir($cache_folder);
             }
 
