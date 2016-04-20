@@ -1,5 +1,7 @@
+.composer_cache
+app/config/settings.inc.php
 cache/*.cache
 composer.lock
 composer.phar
-app/config/settings.inc.php
+logs/github_log.txt
 vendor
