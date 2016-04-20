@@ -2,7 +2,7 @@
 /* exported graph */
 var graph = new Dygraph(
     document.getElementById('graphdiv'),
-    'https://l10n.mozilla-community.org/~pascalc/web_l10n_stats/logs/' + currentLocale + '.csv',
+    'https://l10n.mozilla-community.org/~flod/web_l10n_stats/csv/' + currentLocale + '.csv',
     {
         gridLineColor: 'lightgray',
         highlightCircleSize: 5,
