@@ -67,105 +67,15 @@ $fall15 = [
     ],
 ];
 
-$firefox_os = [
+$snippets_may16 = [
     [
-        'file'        => 'firefox/os/index.lang',
-        'description' => 'Firefox OS Index',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/os/devices.lang',
-        'description' => 'Firefox OS Devices',
-        'site'        => 0,
-    ],
-    [
-        'file'        => 'firefox/os/faq.lang',
-        'description' => 'Firefox OS FAQ',
-        'site'        => 0,
-    ],
-];
-
-$firefox_os_extra = [
-    [
-        'file'        => 'marketplace_l10n_feed.lang',
-        'description' => 'Marketplace Feed',
-        'site'        => 9,
-    ],
-    [
-        'file'        => 'screenshots.lang',
-        'description' => 'Screenshots 1.1',
-        'site'        => 9,
-    ],
-    [
-        'file'        => 'screenshots_2_0.lang',
-        'description' => 'Screenshots 2.0',
-        'site'        => 9,
-    ],
-    [
-        'file'        => 'screenshots_tarako.lang',
-        'description' => 'Screenshots Tarako',
-        'site'        => 9,
-    ],
-    [
-        'file'        => 'screenshots_dolphin.lang',
-        'description' => 'Screenshots Dolphin',
-        'site'        => 9,
-    ],
-];
-
-$snippets_fall15 = [
-    [
-        'file'        => 'snippets/2015/fall2015.lang',
-        'description' => 'Snippets Fall Campaign - Nov 2',
+        'file'        => 'snippets/2016/may2016_a.lang',
+        'description' => 'Snippets - May 9',
         'site'        => 6,
     ],
     [
-        'file'        => 'snippets/2015/nov2015_eoy_mofo.lang',
-        'description' => 'Snippets EOY - Nov 2',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'tiles/2015/tiles_nov2015.lang',
-        'description' => 'Tiles - Nov 2',
-        'site'        => 6,
-    ],
-];
-
-$snippets_nov15 = [
-    [
-        'file'        => 'snippets/2015/nov2015_a.lang',
-        'description' => 'Snippets A - Nov 14',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/2015/nov2015_b.lang',
-        'description' => 'Snippets B - Nov 14',
-        'site'        => 6,
-    ],
-];
-
-$snippets_dec15 = [
-    [
-        'file'        => 'snippets/2015/dec2015_a.lang',
-        'description' => 'Snippets A - Dec 14',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'snippets/2015/dec2015_b.lang',
-        'description' => 'Snippets B - Dec 14',
-        'site'        => 6,
-    ],
-];
-
-$snippets_jan16 = [
-    [
-        'file'        => 'snippets/2016/jan2016.lang',
-        'description' => 'Snippets - Jan 15',
-        'site'        => 6,
-    ],
-    [
-        'file'        => 'tiles/2016/tiles_jan2016.lang',
-        'description' => 'Tiles - Jan 15',
+        'file'        => 'snippets/2016/may2016_b.lang',
+        'description' => 'Snippets - May 9',
         'site'        => 6,
     ],
 ];
@@ -184,39 +94,14 @@ $projects = [
         'title'   => 'Default',
         'summary' => true,
     ],
-    'firefox_os' => [
-        'pages'   => $firefox_os,
-        'title'   => 'Firefox OS',
-        'summary' => true,
-    ],
-    'firefox_os_all' => [
-        'pages'   => array_merge($firefox_os, $firefox_os_extra),
-        'title'   => 'Firefox OS Complete',
-        'summary' => true,
-    ],
     'fall2015' => [
         'pages'   => $fall15,
         'title'   => 'Fall Release 2015 - Nov 3',
         'summary' => true,
     ],
-    'snippets_fall2015' => [
-        'pages'   => $snippets_fall15,
-        'title'   => 'Snippets Fall Campaign 2015',
-        'summary' => false,
-    ],
-    'snippets_nov2015' => [
-        'pages'   => $snippets_nov15,
-        'title'   => 'Snippets November 2015',
-        'summary' => false,
-    ],
-    'snippets_dec2015' => [
-        'pages'   => $snippets_dec15,
-        'title'   => 'Snippets December 2015',
-        'summary' => false,
-    ],
-    'snippets_jan2016' => [
-        'pages'   => $snippets_jan16,
-        'title'   => 'Snippets January 2016',
+    'snippets_may2016' => [
+        'pages'   => $snippets_may16,
+        'title'   => 'Snippets May 2016',
         'summary' => false,
     ],
 ];
