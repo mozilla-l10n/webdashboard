@@ -97,15 +97,15 @@ foreach ($pages as $page) {
             }
         }
 
-        $done_strings  = $locale_data['Translated'];
+        $done_strings = $locale_data['Translated'];
         $total_strings = $done_strings + $locale_data['Missing'] + $locale_data['Identical'];
 
         // Store stats for this locale+page
         $status[$locale][$filename] = [
-            'done_strings'   => $done_strings,
-            'message'        => $result_message,
-            'status'         => $result_status,
-            'total_strings'  => $total_strings,
+            'done_strings'  => $done_strings,
+            'message'       => $result_message,
+            'status'        => $result_status,
+            'total_strings' => $total_strings,
         ];
 
         // Update general stats for this locale
@@ -125,7 +125,7 @@ $locales_summary = [
         'locales'            => [],
         'locamotion_locales' => [],
     ],
-    'good'    => [
+    'good' => [
         'title'              => 'Good',
         'description'        => 'Less than 10% missing',
         'locales'            => [],
@@ -137,7 +137,7 @@ $locales_summary = [
         'locales'            => [],
         'locamotion_locales' => [],
     ],
-    'bad'     => [
+    'bad' => [
         'title'              => 'Bad',
         'description'        => 'Between 40% and 70% missing',
         'locales'            => [],
@@ -282,10 +282,10 @@ if ($project_data['summary']) {
 print $twig->render(
     'project.twig',
     [
-        'body_class'          => 'project_view',
-        'project_info'        => $project_info,
-        'pages'               => $project_pages,
-        'rows'                => $maintable_rows,
-        'summary_rows'        => $summary_rows,
+        'body_class'   => 'project_view',
+        'project_info' => $project_info,
+        'pages'        => $project_pages,
+        'rows'         => $maintable_rows,
+        'summary_rows' => $summary_rows,
     ]
 );
