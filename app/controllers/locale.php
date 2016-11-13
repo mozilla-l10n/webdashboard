@@ -130,8 +130,8 @@ foreach ($available_web_projects as $product_code => $product_name) {
         // File is empty
         $message = "File is empty (no strings)";
     } else {
-        if ($webproject['source_type'] == 'properties') {
-            // Web project based on .properties
+        if (in_array($webproject['source_type'], ['l20n', 'properties'])) {
+            // Web project based on .properties or .ftl (l20n)
             $fuzzy_width = 0;
             $identical_width = floor($webproject['identical'] / $webproject['total'] * 100);
             $untrans_width = floor($webproject['missing'] / $webproject['total'] * 100);
