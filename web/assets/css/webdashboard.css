@@ -119,6 +119,18 @@ h2 {
     margin-top: 5px;
 }
 
+#masthead h2 {
+    height: 80px;
+}
+
+#masthead h2 img {
+    position: relative;
+    top: 16px;
+    width: 178px;
+    height: 56px;
+    padding-right: 6px;
+}
+
 h3 {
     font-size: 28px;
     letter-spacing: -0.5px;
@@ -141,18 +153,6 @@ h2 small {
 
 .errortitle {
     margin-top: 40px;
-}
-
-#tabzilla {
-    display: block;
-    background: transparent url(../images/tabzilla.png) repeat scroll 0 0;
-    height: 42px;
-    width: 150px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    text-indent: -2000px;
-    overflow: hidden;
 }
 
 .feed {
@@ -236,6 +236,11 @@ h2 small {
     float: left;
     width: 140px;
     margin: 0 10px;
+}
+
+#colophon .footer-logo img {
+    width: 93px;
+    height: 30px;
 }
 
 #colophon .footer-license {
@@ -619,11 +624,6 @@ table th {
         padding-top: 60px;
     }
 
-    #masthead h2 img {
-        display: block;
-        padding-bottom: 6px;
-    }
-
     #hidden_message {
        top: 220px;
     }
@@ -656,16 +656,13 @@ table th {
     }
 
     #masthead h2 img {
+        position: static;
         display: block;
         padding-bottom: 6px;
     }
 
     #hidden_message {
        top: 165px;
-    }
-
-    #tabzilla {
-        right: 30px;
     }
 
     .feed {
@@ -712,16 +709,14 @@ table th {
 
     #masthead h2 {
         padding-top: 10px;
+        padding-left: 5px;
         font-size: 20px;
     }
 
     #masthead h2 img {
+        position: static;
         display: block;
         padding-bottom: 6px;
-    }
-
-    #tabzilla {
-        right: 30px;
     }
 
     .feed {
