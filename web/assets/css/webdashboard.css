@@ -322,6 +322,52 @@ table th {
     font-weight: bold;
 }
 
+.priority {
+    min-width: 70px;
+    position: relative;
+}
+
+.priority em {
+    display: none;
+}
+
+.stars_bg {
+    height: 20px;
+    position: absolute;
+    background: 0 2px url(../images/star_inactive.svg) repeat-x;
+    top: 0;
+    left: 5px;
+    width: 80px;
+}
+
+.stars {
+    height: 20px;
+    background: 0 2px url(../images/star_active.svg) repeat-x;
+    position: absolute;
+    top: 0;
+    left: 5px;
+}
+
+.p1 {
+    width: 80px;
+}
+
+.p2 {
+    width: 64px;
+}
+
+.p3 {
+    width: 48px;
+}
+
+.p4 {
+    width: 32px;
+}
+
+.p5 {
+    width: 16px;
+}
+
 .web_projects td {
     text-align: left;
 }

@@ -185,8 +185,8 @@ foreach ($lang_files as $site => $site_files) {
     ];
 
     foreach ($site_files as $file => $details) {
-        // Determine critical status
-        $critical = isset($details['critical']) && $details['critical'];
+        // Determine priority
+        $priority = $details['priority'];
 
         // Determine deadline
         $deadline_class = '';
@@ -208,7 +208,8 @@ foreach ($lang_files as $site => $site_files) {
         if ($details['data_source'] == 'lang') {
             if ($details['errors'] + $details['identical'] + $details['missing'] > 0) {
                 $lang_files_status[$site]['files'][$file] = [
-                    'critical'       => $critical,
+                    'priority'       => $priority,
+                    'priority_desc'  => Utils::getPriorityDesc($priority),
                     'deadline_class' => $deadline_class,
                     'deadline'       => $deadline,
                     'errors'         => $details['errors'],
@@ -235,7 +236,8 @@ foreach ($lang_files as $site => $site_files) {
 
             if (! $hide_file) {
                 $lang_files_status[$site]['files'][$file] = [
-                    'critical'       => $critical,
+                    'priority'       => $priority,
+                    'priority_desc'  => Utils::getPriorityDesc($priority),
                     'deadline_class' => $deadline_class,
                     'deadline'       => $deadline,
                     'status_class'   => "raw_status raw_{$cmp_status}",

@@ -35,7 +35,7 @@
                                 <th>Missing</th>
                                 <th>Errors</th>
                                 <th>Deadline</th>
-                                <th>Critical</th>
+                                <th>Priority</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,12 +45,10 @@
                                      <td>{{ langcheckerLinkNumber(file_data.missing, locale, file)|raw }}</td>
                                      <td>{{ langcheckerLinkNumber(file_data.errors, locale, file)|raw }}</td>
                                      <td class="{{ file_data.deadline_class }}">{{ file_data.deadline }}</td>
-                                     <td>
-                                         {% if file_data.critical %}
-                                            <strong>Yes</strong>
-                                         {% else %}
-                                            No
-                                         {% endif %}
+                                     <td class="priority">
+                                         <em>{{ file_data.priority_desc }}</em>
+                                         <div class="stars_bg"></div>
+                                         <div class="stars p{{file_data.priority}}" title="{{ file_data.priority_desc }}"></div>
                                      </td>
                                 </tr>
                             {% endfor %}
@@ -63,7 +61,7 @@
                             <th class="main_column">{{ website }}</th>
                             <th>Status</th>
                             <th>Deadline</th>
-                            <th>Critical</th>
+                            <th>Priority</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,12 +70,10 @@
                                  <th class="main_column"><a href="{{ langchecker_url }}?locale={{ locale }}#{{ file }}">{{ file }}</a></th>
                                  <td><span class="{{ file_data.status_class }}">{{ file_data.status_text }}</span></td>
                                  <td class="{{ file_data.deadline_class }}">{{ file_data.deadline }}</td>
-                                 <td>
-                                     {% if file_data.critical %}
-                                        <strong>Yes</strong>
-                                     {% else %}
-                                        No
-                                     {% endif %}
+                                 <td class="priority">
+                                     <em>{{ file_data.priority_desc }}</em>
+                                     <div class="stars_bg"></div>
+                                     <div class="stars p{{file_data.priority}}" title="{{ file_data.priority_desc }}"></div>
                                  </td>
                             </tr>
                         {% endfor %}

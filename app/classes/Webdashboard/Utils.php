@@ -99,4 +99,34 @@ class Utils
             ? "{$count} {$sentence}"
             : "{$count} {$sentence}s";
     }
+
+    /**
+     * Return a priority description
+     *
+     * @param int $priority Priority level
+     *
+     * @return string Priority description
+     */
+    public static function getPriorityDesc($priority)
+    {
+        switch ($priority) {
+            case 1:
+                $priority_desc = 'Highest Priority (1)';
+                break;
+            case 2:
+                $priority_desc = 'High Priority (2)';
+                break;
+            case 3:
+                $priority_desc = 'Medium Priority (3)';
+                break;
+            case 4:
+                $priority_desc = 'Low Priority (4)';
+                break;
+            case 5:
+                $priority_desc = 'Lowest Priority (5)';
+                break;
+        }
+
+        return $priority_desc;
+    }
 }

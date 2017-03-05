@@ -49,9 +49,7 @@ foreach ($lang_files as $site => $site_files) {
         }
 
         if ($message != '') {
-            $status = (isset($details['critical']) && $details['critical'])
-                      ? 'Priority file'
-                      : 'Nice to have';
+            $status = Utils::getPriorityDesc($details['priority']);
             if (isset($details['deadline']) && $details['deadline']) {
                 $deadline = date('F d', (new \DateTime($details['deadline']))->getTimestamp());
                 $status .= ' (deadline is ' . $deadline . ')';
