@@ -128,7 +128,7 @@ foreach ($available_web_projects as $product_code => $product_name) {
         $message = str_replace('\'', '"', htmlspecialchars($webproject['error_message']));
     } elseif ($webproject['total'] === 0) {
         // File is empty
-        $message = "File is empty (no strings)";
+        $message = 'File is empty (no strings)';
     } else {
         if (in_array($webproject['source_type'], ['l20n', 'properties'])) {
             // Web project based on .properties or .ftl (l20n)

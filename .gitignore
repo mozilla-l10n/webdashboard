@@ -1,4 +1,5 @@
 .composer_cache
+.php_cs.cache
 app/config/settings.inc.php
 cache/*.cache
 composer.lock

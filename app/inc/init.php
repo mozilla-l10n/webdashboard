@@ -17,9 +17,9 @@ $settings_filename = __DIR__ . '/../config/settings.inc.php';
 if (file_exists($settings_filename)) {
     require $settings_filename;
 } else {
-    echo "<h1>Error: missing config file</h1>";
+    echo '<h1>Error: missing config file</h1>';
     echo "<p>Config file is missing: <code>{$settings_filename}</code></p>";
-    echo "<p>Rename <strong>app/config/settings.inc.php.ini</strong> as <strong>app/config/settings.inc.php</strong> to get started.</p>";
+    echo '<p>Rename <strong>app/config/settings.inc.php.ini</strong> as <strong>app/config/settings.inc.php</strong> to get started.</p>';
     exit;
 }
 
@@ -39,8 +39,8 @@ if (! $locales = Cache::getKey($cache_id, 60 * 60)) {
 }
 unset($json_locales);
 if (empty($locales)) {
-    echo "<h1>Error: missing list of supported locales</h1>";
-    echo "<p>There was an error retrieving the list of supported locales from Langchecker. Please check the configuration file.</p>";
+    echo '<h1>Error: missing list of supported locales</h1>';
+    echo '<p>There was an error retrieving the list of supported locales from Langchecker. Please check the configuration file.</p>';
     exit;
 }
 
