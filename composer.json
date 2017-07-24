@@ -2,15 +2,18 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/mozilla-l10n/phpclass-bugzilla"
+            "url": "https://github.com/mozilla-l10n/phpclass-bugzilla",
+            "no-api": true
         },
         {
             "type": "vcs",
-            "url": "https://github.com/mozilla-l10n/phpclass-cache"
+            "url": "https://github.com/mozilla-l10n/phpclass-cache",
+            "no-api": true
         },
         {
             "type": "vcs",
-            "url": "https://github.com/mozilla-l10n/phpclass-json"
+            "url": "https://github.com/mozilla-l10n/phpclass-json",
+            "no-api": true
         }
     ],
 
@@ -28,7 +31,11 @@
     },
 
     "autoload": {
-        "psr-0": {"Webdashboard": "app/classes/"},
-        "files": ["app/helpers/debug.php"]
+        "psr-0": {
+            "Webdashboard": "app/classes/"
+        },
+        "files": [
+            "app/helpers/debug.php"
+        ]
     }
 }

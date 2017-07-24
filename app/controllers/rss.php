@@ -16,6 +16,7 @@ if (count($bugs) > 0) {
 $total_missing_strings = 0;
 $total_errors = 0;
 $total_missing_files = 0;
+$total_missing_words = 0;
 $link = LANG_CHECKER . "?locale={$locale}";
 
 foreach ($lang_files as $site => $site_files) {
@@ -26,8 +27,12 @@ foreach ($lang_files as $site => $site_files) {
             // Standard lang file
             $count = $details['identical'] + $details['missing'];
             if ($count > 0) {
-                $message = 'You have ' . Utils::getPluralForm($count, 'untranslated string') . " in {$file}";
+                $message = 'You have ' .
+                    Utils::getPluralForm($count, 'untranslated string') .
+                    ' (' . Utils::getPluralForm($details['missing_words'], 'word') .
+                    ") in {$file}";
                 $total_missing_strings += $count;
+                $total_missing_words += $details['missing_words'];
             }
             if ($details['errors'] > 0) {
                 $message = 'You have ' . Utils::getPluralForm($details['errors'], 'error') . " in {$file}";
@@ -68,7 +73,10 @@ if ($total_missing_files > 0) {
 }
 
 if ($total_missing_strings > 0) {
-    $tmp_message = 'You need to translate ' . Utils::getPluralForm($total_missing_strings, 'string') . '.';
+    $tmp_message = 'You need to translate ' .
+        Utils::getPluralForm($total_missing_strings, 'string') .
+        ' (' . Utils::getPluralForm($total_missing_words, 'word') .
+        ').';
     array_unshift(
         $rss_data,
         ["Missing strings: {$tmp_message}", $link, $tmp_message]

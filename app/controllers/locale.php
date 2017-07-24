@@ -214,6 +214,7 @@ foreach ($lang_files as $site => $site_files) {
                     'deadline'       => $deadline,
                     'errors'         => $details['errors'],
                     'missing'        => $details['identical'] + $details['missing'],
+                    'missing_words'  => $details['missing_words'],
                 ];
             }
         } else {

@@ -32,7 +32,8 @@
                         <thead>
                             <tr>
                                 <th class="main_column">{{ website }}</th>
-                                <th>Missing</th>
+                                <th>Missing<br>Strings</th>
+                                <th>Missing<br>Words</th>
                                 <th>Errors</th>
                                 <th>Deadline</th>
                                 <th>Priority</th>
@@ -43,6 +44,7 @@
                                 <tr>
                                      <th class="main_column"><a href="{{ langchecker_url }}?locale={{ locale }}#{{ file }}">{{ file }}</a></th>
                                      <td>{{ langcheckerLinkNumber(file_data.missing, locale, file)|raw }}</td>
+                                     <td>{{ langcheckerLinkNumber(file_data.missing_words, locale, file)|raw }}</td>
                                      <td>{{ langcheckerLinkNumber(file_data.errors, locale, file)|raw }}</td>
                                      <td class="{{ file_data.deadline_class }}">{{ file_data.deadline }}</td>
                                      <td class="priority">
