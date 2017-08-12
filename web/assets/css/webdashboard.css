@@ -322,6 +322,14 @@ table th {
     font-weight: bold;
 }
 
+.pontoon_edit {
+    width: 16px;
+    display: block;
+    float: left;
+    margin-right: 8px;
+    background: 0 2px url(../images/pontoon.png) no-repeat;
+}
+
 .priority {
     min-width: 70px;
     position: relative;

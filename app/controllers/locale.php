@@ -215,6 +215,7 @@ foreach ($lang_files as $site => $site_files) {
                     'errors'         => $details['errors'],
                     'missing'        => $details['identical'] + $details['missing'],
                     'missing_words'  => $details['missing_words'],
+                    'pontoon_link'   => $details['pontoon_link'],
                 ];
             }
         } else {
