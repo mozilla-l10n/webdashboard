@@ -22,16 +22,6 @@ $lang_files = $json_object
     ->setURI(LANG_CHECKER . "?locale={$locale}&json")
     ->fetchContent();
 
-// Check if the locale is working on Locamotion
-$cache_id = 'locamotion_locales';
-if (! $locamotion = Cache::getKey($cache_id)) {
-    $locamotion = $json_object
-        ->setURI(LANG_CHECKER . '?action=listlocales&project=locamotion&json')
-        ->fetchContent();
-    Cache::setKey($cache_id, $locamotion);
-}
-$locamotion = in_array($locale, $locamotion);
-
 // All open bugs for this locale in the mozilla.org/l10n component
 $bugzilla_query_mozillaorg = 'https://bugzilla.mozilla.org/buglist.cgi?'
                            . 'f1=cf_locale'
@@ -215,7 +205,7 @@ foreach ($lang_files as $site => $site_files) {
                     'errors'         => $details['errors'],
                     'missing'        => $details['identical'] + $details['missing'],
                     'missing_words'  => $details['missing_words'],
-                    'pontoon_link'   => $details['pontoon_link'],
+                    'pontoon_link'   => isset($details['pontoon_link']) ? $details['pontoon_link'] : '',
                 ];
             }
         } else {
@@ -257,7 +247,6 @@ print $twig->render(
         'bugs'                => $bugs,
         'lang_files_status'   => $lang_files_status,
         'locale'              => $locale,
-        'locamotion'          => $locamotion,
         'mozilla_org'         => isset($lang_files['www.mozilla.org']),
         'web_projects'        => $locale_web_projects,
         'web_projects_update' => $last_update_web_projects,

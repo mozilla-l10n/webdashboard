@@ -8,7 +8,6 @@
 {% block main_content %}
     <div id="hide_buttons">
         <button class="button filter_buttons" id="button_locales" data-class-name="complete_locale">Hide completed locales</button>
-        <button class="button filter_buttons" id="button_locamotion" data-class-name="locamotion_locale">Hide Locamotion locales</button>
         <p id="hidden_message" class="hidden"></p>
     </div>
 
@@ -37,11 +36,7 @@
             {% for row in rows %}
                 <tr class="{{ row.css_class }}">
                     <td class="locale">
-                        <a href="?locale={{ row.locale }}">{{ row.locale }}
-                        {% if row.locamotion %}
-                            <img src="./assets/images/locamotion_16.png" class="locamotion" />
-                        {% endif %}
-                        </a>
+                        <a href="?locale={{ row.locale }}">{{ row.locale }}</a>
                     </td>
                     <td class="project_missing_strings">{{ row.missing_strings }}</td>
                     {% for filename, page_data in pages %}
@@ -86,7 +81,6 @@
               <tr>
                 <th>Status</th>
                 <th>Locales</th>
-                <th>On Locamotion</th>
               </tr>
             </thead>
             <tbody>
@@ -97,7 +91,6 @@
                             <span class="description">{{ row.description }}</span>
                         </td>
                         <td>{{ row.locales }}</td>
-                        <td>{{ row.locamotion_locales }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

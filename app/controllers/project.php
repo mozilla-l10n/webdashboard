@@ -3,15 +3,6 @@ namespace Webdashboard;
 
 use Cache\Cache;
 
-// Get the list of locales working on Locamotion
-$cache_id = 'locamotion_locales';
-if (! $locamotion = Cache::getKey($cache_id)) {
-    $locamotion = $json_object
-        ->setURI(LANG_CHECKER . '?action=listlocales&project=locamotion&json')
-        ->fetchContent();
-    Cache::setKey($cache_id, $locamotion);
-}
-
 // Base for the query to get external data
 $langchecker_query = LANG_CHECKER . '?locale=all&json';
 $locales_done = [];
@@ -70,7 +61,6 @@ foreach ($pages as $page) {
                 'complete_pages' => 0,
                 'complete'       => false,
                 'done_strings'   => 0,
-                'locamotion'     => in_array($locale, $locamotion),
                 'total_pages'    => 0,
                 'total_strings'  => 0,
             ];
@@ -123,31 +113,26 @@ $locales_summary = [
         'title'              => 'Perfect',
         'description'        => 'No missing strings',
         'locales'            => [],
-        'locamotion_locales' => [],
     ],
     'good' => [
         'title'              => 'Good',
         'description'        => 'Less than 10% missing',
         'locales'            => [],
-        'locamotion_locales' => [],
     ],
     'average' => [
         'title'              => 'Average',
         'description'        => 'Between 10% and 40% missing',
         'locales'            => [],
-        'locamotion_locales' => [],
     ],
     'bad' => [
         'title'              => 'Bad',
         'description'        => 'Between 40% and 70% missing',
         'locales'            => [],
-        'locamotion_locales' => [],
     ],
     'verybad' => [
         'title'              => 'Very Bad',
         'description'        => 'Over 70% missing',
         'locales'            => [],
-        'locamotion_locales' => [],
     ],
 ];
 
@@ -159,9 +144,6 @@ foreach ($status as $locale => $locale_status) {
         $status[$locale]['general']['complete'] = true;
         $status[$locale]['general']['percentage'] = 100;
         $locales_summary['perfect']['locales'][] = $locale;
-        if ($stats['locamotion']) {
-            $locales_summary['perfect']['locamotion_locales'][] = $locale;
-        }
         $complete_locales[] = $locale;
     } else {
         $percentage = round($stats['done_strings'] / $stats['total_strings'] * 100, 2);
@@ -176,9 +158,6 @@ foreach ($status as $locale => $locale_status) {
             $category = 'verybad';
         }
         $locales_summary[$category]['locales'][] = $locale;
-        if ($stats['locamotion']) {
-            $locales_summary[$category]['locamotion_locales'][] = $locale;
-        }
     }
 }
 
@@ -195,12 +174,8 @@ foreach ($project_pages as $filename => $project) {
 // Create data for main table
 $maintable_rows = [];
 foreach ($status as $locale => $locale_status) {
-    $working_on_locamotion = in_array($locale, $locamotion);
     // Add extra class if locale is complete
     $row_class = $locale_status['general']['complete'] ? 'complete_locale' : '';
-    if ($working_on_locamotion) {
-        $row_class .= ' locamotion_locale';
-    }
 
     $missing_strings = $locale_status['general']['total_strings'] - $locale_status['general']['done_strings'];
     if ($missing_strings == 0) {
@@ -246,7 +221,6 @@ foreach ($status as $locale => $locale_status) {
     $maintable_rows[] = [
         'css_class'       => $row_class,
         'locale'          => $locale,
-        'locamotion'      => $working_on_locamotion,
         'missing_strings' => $missing_strings,
         'cells'           => $cells,
     ];
@@ -274,7 +248,6 @@ if ($project_data['summary']) {
             'count_locales'      => count($stats['locales']),
             'description'        => $stats['description'],
             'locales'            => implode(', ', $stats['locales']),
-            'locamotion_locales' => implode(', ', $stats['locamotion_locales']),
         ];
     }
 }
