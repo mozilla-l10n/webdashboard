@@ -33,7 +33,6 @@ notifications:
     on_success: always
     on_failure: always
     use_notice: true
-    skip_join: true
     template:
       - "%{repository} ; %{commit} (%{author}) : %{message} "
       - "Build details: %{build_url} ; changes: %{compare_url}"
